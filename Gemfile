@@ -33,6 +33,9 @@ gem 'foreman'
 
 gem "devise"
 
+# Awesome Fontのgem
+gem 'font-awesome-sass'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

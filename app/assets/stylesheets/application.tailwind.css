@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* Font Awesomeを使えるようにする */
+@import "font-awesome-sprockets";
+@import "font-awesome";
 /*
 
 @layer components {
