@@ -1,0 +1,17 @@
+<header class="bg-stone-50 h-20 flex shadow-md justify-between">
+    <%= link_to root_path ,class:"flex items-center" do %>
+        <h1 class="text-4xl font-bold text-black inline-flex pl-64">Members Hub</h1>
+    <% end %>   
+
+    <% if user_signed_in? %>
+        <div class="p-3 pr-32">
+            <div class="relative w-14 h-14 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                <svg class="absolute w-16 h-16 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+            </div>
+        </div>
+    <% else %>
+        <div class="flex items-center pr-32">
+            <%= link_to 'ログイン', new_user_registration_path ,class:"btn bg-blue-500 rounded p-2 px-4  text-white"%>
+        </div>
+    <% end %>
+</header>

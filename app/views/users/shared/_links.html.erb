@@ -1,0 +1,19 @@
+<%- if controller_name != 'sessions' %>
+  <p class="mb-3">アカウントをお持ちですか？</p>
+  <%= link_to "ログイン", new_session_path(resource_name) ,class:"btn bg-blue-500 rounded p-2 px-4  text-white"%><br />
+<% end %>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <p class="mb-3">アカウントを登録していないですか？</p>
+  <%= link_to "新規登録", new_registration_path(resource_name),class:"btn bg-blue-500 rounded p-2 px-4  text-white" %><br />
+<% end %>
+
+<%#- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%#= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+<%# end %>
+
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
+  <% end %>
+<% end %>

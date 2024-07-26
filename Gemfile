@@ -32,8 +32,9 @@ gem "jbuilder"
 gem 'foreman'
 
 gem "devise"
+gem 'devise-i18n'
 
-# Awesome Fontのgem
+# Font Awesomeのgem
 gem 'font-awesome-sass'
 
 # Use Redis adapter to run Action Cable in production
@@ -58,6 +59,10 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
   gem 'sqlite3', '~> 1.4.2'
+  gem 'rspec-rails', '~> 6.1.0'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem "letter_opener_web"
 end
 
 group :development do

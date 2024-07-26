@@ -9,11 +9,22 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%# FontAwesomeを使うためのコード%>
+    <script src="https://kit.fontawesome.com/001a14c1b8.js" crossorigin="anonymous"></script>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="bg-stone-50">
+    <%=render "layouts/header"%>
+    <div class="flex flex-wrap">
+        <div class="w-2/12">
+          <%=render "layouts/sidebar"%>
+        </div>
+      <div class="w-10/12">
+        <%= render "shared/flash"%>
+        <main class="container mx-auto mt-28 px-5">
+          <%= yield %>
+        </main>
+      </div>
+    </div>
   </body>
 </html>
