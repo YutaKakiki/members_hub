@@ -30,5 +30,11 @@ services:
     stdin_open: true # サービス コンテナに標準入力を割り当てて実行するよう設定(https://docs.docker.jp/compose/compose-file/index.html#stdin-open)。
     depends_on:
       - db
+      - selenium_chrome
+  selenium_chrome:
+    image: selenium/standalone-chrome:latest
+    platform: linux/amd64
+    ports:
+      - 4444:4444
 volumes:
   postgres_volume:

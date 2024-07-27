@@ -16,12 +16,12 @@
   <body class="bg-stone-50">
     <%=render "layouts/header"%>
     <div class="flex flex-wrap">
-        <div class="w-2/12">
+        <div class="w-1/6">
           <%=render "layouts/sidebar"%>
         </div>
-      <div class="w-10/12">
+      <div class="w-5/6">
         <%= render "shared/flash"%>
-        <main class="container mx-auto mt-28 px-5">
+        <main class="container mx-auto mt-16 px-5">
           <%= yield %>
         </main>
       </div>
