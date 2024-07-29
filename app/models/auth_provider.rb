@@ -6,11 +6,14 @@ class AuthProvider < ApplicationRecord
     provider = auth.provider
     auth_provider = AuthProvider.find_by(uid: uid, provider: provider)
 
+    # providerが既にあって、ユーザーが登録されていない時（あんまりないと思うけど）
     if auth_provider.present?
       user = User.find_by(id: auth_provider.user_id)
+      #ユーザーが見つかったらuserに格納し、なければ作成・保存
       user ||= create_user_via_provider(auth)
-    else
+    else #providerを持っていないとき
       user = User.find_by(email: auth.info.email)
+      #既に新規登録（普通の）がしてあったら、provider情報のみ保存する
       if user.present?
         # provider情報を保存
         AuthProvider.create({
@@ -18,7 +21,7 @@ class AuthProvider < ApplicationRecord
           provider: provider,
           user_id: user.id
         })
-      else
+      else #全くの新規ユーザーであれば、ユーザー＆プロバイダの両方を保存する
         user = create_user_and_provider(auth)
       end
     end
