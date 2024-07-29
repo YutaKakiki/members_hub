@@ -73,4 +73,7 @@ RSpec.configure do |config|
   # deviseのヘルパーメソッドを呼び出せるようにする
   config.include Devise::Test::IntegrationHelpers, type: :system
 
+  #各プロバイダのモックを作成するモジュールを読み込む
+  config.include OmniauthMock, type: :system
+
 end

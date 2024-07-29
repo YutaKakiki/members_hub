@@ -63,4 +63,7 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # Cannot render console from <IPアドレス>!に対応
+  config.web_console.allowed_ips = '0.0.0.0/0'
 end

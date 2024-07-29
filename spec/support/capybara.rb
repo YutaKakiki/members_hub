@@ -16,3 +16,9 @@ Capybara.register_driver :selenium_chrome_headless do |app|
 end
 #jsを使用するテストには自動でヘッドレスモードのChromeが使用される
 Capybara.javascript_driver = :selenium_chrome_headless
+
+Capybara.configure do |config|
+  config.default_driver = :selenium_chrome
+  # または
+  # config.default_driver = :rack_test
+end

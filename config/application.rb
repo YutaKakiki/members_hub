@@ -41,5 +41,7 @@ module Myapp
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.web_console.development_only = false
   end
 end
