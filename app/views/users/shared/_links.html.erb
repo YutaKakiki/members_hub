@@ -15,7 +15,16 @@
 
 
 <div>
-<%= button_to "Googleで登録/ログイン", user_google_oauth2_omniauth_authorize_path, method: :post,data:{turbo:false} %>
+<%= button_to  user_google_oauth2_omniauth_authorize_path, method: :post,data:{turbo:false},class:"btn rounded p-2 px-4" do%>
+  <i class="fab fa-google"></i>
+   Googleで登録/ログイン
+<% end %>
+
+<%= button_to  user_line_omniauth_authorize_path, method: :post,data:{turbo:false},class:"btn rounded p-2 px-4" do%>
+  <i class="fab fa-line"></i>
+   LINEで登録/ログイン
+<% end %>
+
 
 
 

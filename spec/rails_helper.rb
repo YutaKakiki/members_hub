@@ -60,14 +60,19 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-
   # デフォルト（普通）は、高速なRack::Testドライバを使用
   config.before(:each, type: :system) do
     driven_by :rack_test
   end
+
   # jsを使用するテストの場合は、chromeのヘッドレスドライバ使用
   config.before(:each, type: :system, js: true) do
     driven_by :selenium_chrome_headless
+  end
+
+  # js: true でない場合のデフォルトドライバを selenium_chrome に変更
+  config.before(:each, type: :system, js: true) do
+    Capybara.current_driver = :selenium_chrome
   end
 
   # deviseのヘルパーメソッドを呼び出せるようにする

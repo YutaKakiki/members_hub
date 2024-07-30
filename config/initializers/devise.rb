@@ -274,6 +274,12 @@ Devise.setup do |config|
                   Rails.application.credentials.google[:client_secret],
                   skip_jwt: true
 
+  config.omniauth :line,
+                  Rails.application.credentials.line[:client_id],
+                  Rails.application.credentials.line[:client_secret],
+                  skip_jwt: true
+
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  protect_from_forgery
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
 
@@ -32,12 +33,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     callback_for(:google)
   end
 
+  def line
+    callback_for(:line)
+  end
+
   private
 
     def callback_for(provider)
-
-
-
       auth=request.env["omniauth.auth"]
       @user=AuthProvider.from_omniauth(auth)
       if @user.persisted?

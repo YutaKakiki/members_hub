@@ -14,11 +14,12 @@ RSpec.describe "Registrations", type: :system do
     end
 
     it "新規登録ができる" do
+
       expect(page).to have_current_path(new_user_registration_path)
       expect(page).to have_selector "form"
       expect{click_button "登録"}.to change{User.count}.by(1)
       # #なぜ失敗するのか...
-      # expect(page).to have_content "本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。"
+      # expect(page).to have_content("本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。")
       expect(page).to have_http_status(:success)
       expect(page).to have_current_path(root_path)
       # まだユーザーは有効化されていない
