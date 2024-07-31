@@ -361,7 +361,7 @@ DEPENDENCIES
   debug
   devise
   devise-i18n
-  email_spec
+  email_spec (~> 2.3.0)
   factory_bot_rails
   faker
   font-awesome-sass

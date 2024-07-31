@@ -1,5 +1,2 @@
-# rails_helperは、spec_helperを読み込んでいるため
-# 実質両方読み込んでいることになる
 --require rails_helper
-# test時のログが閲覧しやすくなる
 --format documentation

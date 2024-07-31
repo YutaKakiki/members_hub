@@ -4,14 +4,17 @@
     <% end %>   
 
     <% if user_signed_in? %>
-        <div class="p-3 pr-32">
-            <div class="relative w-14 h-14 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                <svg class="absolute w-16 h-16 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-            </div>
-        </div>
+        <%= render 'layouts/components/icon' %>
     <% else %>
-        <div class="flex items-center pr-32">
-            <%= link_to 'ログイン', new_user_session_path ,class:"btn bg-blue-500 rounded p-2 px-4  text-white"%>
-        </div>
+        <%#ログインページにいる場合はボタンを無効にする%>
+        <% if current_page?(new_user_session_path) %> 
+            <div class="flex items-center pr-32">
+                <%= link_to 'ログイン', new_user_session_path ,class:"btn bg-gray-300 rounded p-2 px-4 text-white disabled cursor-not-allowed" %>
+            </div>
+        <% else %>
+            <div class="flex items-center pr-32">
+                <%= link_to 'ログイン', new_user_session_path ,class:"btn bg-blue-500 rounded p-2 px-4 text-white"%>
+            </div>
+        <% end %>
     <% end %>
 </header>

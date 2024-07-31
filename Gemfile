@@ -73,7 +73,7 @@ end
 group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'email_spec'
+  gem 'email_spec', '~> 2.3.0'
   gem 'launchy'
 end
 
