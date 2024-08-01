@@ -3,7 +3,7 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'factory_bot'
 require 'capybara/rspec'
@@ -74,7 +74,6 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :system
   config.include Devise::Test::IntegrationHelpers, type: :request
 
-  #各プロバイダのモックを作成するモジュールを読み込む
+  # 各プロバイダのモックを作成するモジュールを読み込む
   config.include OmniauthMock, type: :system
-
 end

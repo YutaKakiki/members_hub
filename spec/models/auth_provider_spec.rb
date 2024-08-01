@@ -39,7 +39,7 @@ RSpec.describe AuthProvider, type: :model do
     end
   end
 
-  describe "from_omniauth(:line)" do
+  describe 'from_omniauth(:line)' do
     let(:line) { build(:line) } # OmniAuthデータを生成
     let(:existing_user) { create(:user) }
 

@@ -1,7 +1,7 @@
 # spec/factories/omniauth_auth_hash.rb
 FactoryBot.define do
   factory :google_oauth2, class: OmniAuth::AuthHash do
-    #データを動的に生成するためのパラメータを一時定義
+    # データを動的に生成するためのパラメータを一時定義
     transient do
       provider { 'google_oauth2' }
       uid { '111111111' }
@@ -11,13 +11,13 @@ FactoryBot.define do
     # データ作成
     initialize_with do
       new({
-        'provider' => provider,
-        'uid' => uid,
-        'info' => {
-          'name' => name,
-          'email' => email
-        }
-      })
+            'provider' => provider,
+            'uid' => uid,
+            'info' => {
+              'name' => name,
+              'email' => email
+            }
+          })
     end
   end
 
@@ -31,13 +31,13 @@ FactoryBot.define do
 
     initialize_with do
       new({
-        'provider' => provider,
-        'uid' => uid,
-        'info' => {
-          'name' => name,
-          'email' => email
-        }
-      })
+            'provider' => provider,
+            'uid' => uid,
+            'info' => {
+              'name' => name,
+              'email' => email
+            }
+          })
     end
   end
 end

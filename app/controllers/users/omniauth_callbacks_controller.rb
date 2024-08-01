@@ -39,15 +39,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   private
 
-    def callback_for(provider)
-      auth=request.env["omniauth.auth"]
-      @user=AuthProvider.from_omniauth(auth)
-      if @user.persisted?
-        sign_in_and_redirect @user, event: :authentication
-        set_flash_message(:notice, :success, kind: "#{provider}".capitalize) if is_navigational_format?
-      else
-        flash[:alert]="ログインに失敗しました"
-        render template: "devise/registrations/new"
-      end
+  def callback_for(provider)
+    auth = request.env['omniauth.auth']
+    @user = AuthProvider.from_omniauth(auth)
+    if @user.persisted?
+      sign_in_and_redirect @user, event: :authentication
+      set_flash_message(:notice, :success, kind: provider.to_s.capitalize) if is_navigational_format?
+    else
+      flash[:alert] = I18n.t('omniauth_callbackss.failure')
+      render template: 'devise/registrations/new'
     end
+  end
 end
