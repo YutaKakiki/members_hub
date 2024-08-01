@@ -18,9 +18,9 @@ RSpec.describe "OmniauthSignins", type: :system do
       user=User.last
       expect(user.confirmed_at).to be_present
       expect(user.name).to eq "Example User"
-      # # 以下、手動での挙動は正しいがテストが失敗する
-      # expect(page).to have_content "Google アカウントによる認証に成功しました。"
-      # expect(page).to have_no_link "ログイン"
+      # 以下、手動での挙動は正しいがテストが失敗する
+      expect(page).to have_content "Google アカウントによる認証に成功しました。"
+      expect(page).to have_no_link "ログイン"
     end
   end
 
@@ -40,9 +40,8 @@ RSpec.describe "OmniauthSignins", type: :system do
       user=User.last
       expect(user.confirmed_at).to be_present
       expect(user.name).to eq "Example User"
-      # # 以下、手動での挙動は正しいがテストが失敗する
-      # expect(page).to have_content "Google アカウントによる認証に成功しました。"
-      # expect(page).to have_no_link "ログイン"
+      expect(page).to have_content "Line アカウントによる認証に成功しました。"
+      expect(page).to have_no_link "ログイン"
     end
   end
 

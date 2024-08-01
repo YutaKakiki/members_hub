@@ -70,13 +70,9 @@ RSpec.configure do |config|
     driven_by :selenium_chrome_headless
   end
 
-  # js: true でない場合のデフォルトドライバを selenium_chrome に変更
-  config.before(:each, type: :system, js: true) do
-    Capybara.current_driver = :selenium_chrome
-  end
-
   # deviseのヘルパーメソッドを呼び出せるようにする
   config.include Devise::Test::IntegrationHelpers, type: :system
+  config.include Devise::Test::IntegrationHelpers, type: :request
 
   #各プロバイダのモックを作成するモジュールを読み込む
   config.include OmniauthMock, type: :system

@@ -24,8 +24,7 @@ RSpec.describe "Confirmations", type: :system do
       open_email(user.email)
       visit_in_email("アカウント確認",user.email)
       expect(page).to have_current_path(root_path)
-      # # 以下、手動では正常するものの失敗
-      # expect(page).to have_no_link "ログイン"
+      expect(page).to have_no_link "ログイン"
     end
   end
 

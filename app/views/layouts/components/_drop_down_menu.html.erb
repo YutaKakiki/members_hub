@@ -2,8 +2,7 @@
 <div data-dropdown-target="menu" class="hidden absolute">
     <div class="text-sm bg-white shadow-lg rounded border overflow-hidden absolute right-0 w-52 mt-1 -mr-9">
         <div data-dropdown-target="menuItem" href="#" class='no-underline block p-4 text-gray-900 bg-white font-semibold'>
-            <%#=user.name%>
-            <p>柿木優汰</p>
+            <%=current_user.name%>
         </div>
         <hr class="border-t" />
         <div data-dropdown-target="menuItem">
@@ -20,7 +19,7 @@
         </div>
         <hr class="border-t" />
         <div data-dropdown-target="menuItem">
-            <%= link_to  destroy_user_session_path ,data:{turbo_method: :delete},class:"no-underline block p-3 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100" do%>
+            <%= link_to  destroy_user_session_path ,data:{turbo_method: :delete},class:"no-underline block p-3 text-gray-900 bg-white hover:bg-gray-100 whitespace-nowrap focus:bg-gray-100" ,id:"logout_link" do%>
                 <i class="fas fa-sign-out-alt"></i>
                 ログアウト
             <% end %>
