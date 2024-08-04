@@ -1,12 +1,12 @@
 <div class="mt-20">
   <%- if controller_name != 'sessions' %>
     <p class="mb-3">アカウントをお持ちですか？</p>
-    <%= link_to "ログイン", new_session_path(resource_name) ,class:"btn bg-blue-500 rounded p-2 px-4  text-white"%><br />
+    <%= link_to "ログイン", new_session_path(resource_name) ,class:"btn bg-blue-500 rounded p-2 px-4  text-white",data:{frame_tag:"modal"}%><br />
   <% end %>
 
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
     <p class="mb-3">アカウントを登録していないですか？</p>
-    <%= link_to "新規登録", new_registration_path(resource_name),class:"btn bg-blue-500 rounded p-2 px-4  text-white" %><br />
+    <%= link_to "新規登録", new_registration_path(resource_name),class:"btn bg-blue-500 rounded p-2 px-4  text-white",data:{frame_tag:"modal"} %><br />
   <% end %>
 
   <%#- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>

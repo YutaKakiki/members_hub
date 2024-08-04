@@ -13,3 +13,6 @@ eagerLoadControllersFrom("controllers", application)
 // tailwind-stimulus-componentsからDropdownをインポート
 import { Dropdown } from "tailwindcss-stimulus-components"
 application.register('dropdown', Dropdown)
+
+import { Modal } from "tailwindcss-stimulus-components"
+application.register('modal', Modal)

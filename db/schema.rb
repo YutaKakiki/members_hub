@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_28_120036) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_04_144829) do
+  create_table "admins", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_admins_on_team_id"
+    t.index ["user_id"], name: "index_admins_on_user_id"
+  end
+
   create_table "auth_providers", force: :cascade do |t|
     t.string "provider"
     t.string "uid"
@@ -18,6 +27,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_28_120036) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_auth_providers_on_user_id"
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "team_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_members_on_team_id"
+    t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,5 +64,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_28_120036) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "admins", "teams"
+  add_foreign_key "admins", "users"
   add_foreign_key "auth_providers", "users"
+  add_foreign_key "members", "teams"
+  add_foreign_key "members", "users"
 end

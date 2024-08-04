@@ -45,7 +45,7 @@ RSpec.describe 'Registrations', type: :system do
       click_button '登録'
       expect(page).to have_http_status(:unprocessable_entity)
       expect(User.count).to eq 0
-      expect(page).to have_content 'メールアドレス は有効でありません。'
+      expect(page).to have_content 'メールアドレスは有効でありません。'
     end
   end
 end
