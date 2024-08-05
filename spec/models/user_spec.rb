@@ -4,7 +4,6 @@ RSpec.describe User, type: :model do
   let(:user){create(:user)}
   let(:team){create(:team)}
   context "ユーザーがチームのメンバーとなると" do
-    # let(:member){create(:member,user:user,team:team)}
     before do
       @member=user.members.create({team_id:team.id})
     end
