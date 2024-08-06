@@ -15,17 +15,18 @@
 
   <body class="bg-stone-50">
     <%=render "layouts/header"%>
-    <div class="flex flex-wrap">
       <%#ログインしているかどうかでレイアウトを変更%>
       <% if user_signed_in? %>
-        <div class="w-1/6">
-          <%=render "layouts/sidebar"%>
-        </div> 
-        <div class="w-5/6">
-          <%= render "shared/flash"%>
-          <main class="container mx-auto mt-16 px-5">
-            <%= yield %>
-          </main>
+        <div class="flex flex-wrap">
+          <div class="w-1/6">
+            <%=render "layouts/sidebar"%>
+          </div> 
+          <div class="w-5/6">
+            <%= render "shared/flash"%>
+            <main class="container mx-auto mt-16 px-5">
+              <%= yield %>
+            </main>
+          </div>
         </div>
       <% else %>
           <%= render "shared/flash"%>
@@ -33,6 +34,5 @@
             <%= yield %>
           </main>
       <% end %>
-    </div>
   </body>
 </html>

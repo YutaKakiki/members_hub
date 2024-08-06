@@ -7,7 +7,7 @@
         <%= render 'layouts/components/icon' %>
     <% else %>
         <div class="flex items-center pr-32">
-            <%= link_to 'ログイン', new_user_session_path ,class:"btn bg-blue-500 rounded p-2 px-4 text-white" ,data: {turbo_frame:"signin/up"}%>
+            <%= link_to 'ログイン', new_user_session_path ,class:"btn bg-blue-500 rounded p-2 px-4 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" ,data: {turbo_frame:"signin/up"}%>
         </div>
     <% end %>
 </header>
