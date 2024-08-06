@@ -16,3 +16,6 @@ application.register('dropdown', Dropdown)
 
 import { Modal } from "tailwindcss-stimulus-components"
 application.register('modal', Modal)
+
+import { Toggle } from "tailwindcss-stimulus-components"
+application.register('toggle', Toggle)

@@ -10,8 +10,8 @@ FactoryBot.define do
       confirmed_at { Time.zone.now }
     end
     trait :multiple do
-      sequence(:name){|n|"Example User#{n}"}
-      sequence(:email){|n| "test#{n}@example.com"}
+      sequence(:name) { |n| "Example User#{n}" }
+      sequence(:email) { |n| "test#{n}@example.com" }
     end
   end
 end

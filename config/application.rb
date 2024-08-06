@@ -43,5 +43,7 @@ module Myapp
     config.generators.system_tests = nil
 
     config.web_console.development_only = false
+
+    config.active_storage.variant_processsor = :vips
   end
 end

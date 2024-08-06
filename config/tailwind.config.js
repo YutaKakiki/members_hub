@@ -12,6 +12,9 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        'custom-gray': '#3b3d44',
+      },
       keyframes: {
         flashFade: {
           "0%": { transform: "translateX(180px)", opacity: 0 },

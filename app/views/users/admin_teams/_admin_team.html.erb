@@ -1,0 +1,9 @@
+<div class="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex">
+  <% if admin_team.logo.attached? %>
+     <%= image_tag admin_team.logo.variant(resize_to_limit:[100,100]),class:"rounded-md mr-5" %>
+  <% end %>
+  <div>
+    <p class="text-xl font-semibold mb-2"><%= admin_team.name %></p>
+    <p class="text-gray-600">ID: <%= admin_team.uuid %></p>
+  </div>
+</div>

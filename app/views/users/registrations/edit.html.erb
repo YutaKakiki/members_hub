@@ -7,7 +7,7 @@
 <div class='flex flex-wrap justify-center mb-6'>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "w-11/12 md:w-10/12 xl:w-8/12" }, data: { turbo: false }) do |f| %>
 
-    <%= render "users/shared/error_messages", resource: resource %>
+    <%= render "shared/error_messages", resource: resource %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
