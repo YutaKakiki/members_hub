@@ -12,7 +12,7 @@ RSpec.describe 'Members', type: :system do
       expect(current_path).to eq new_members_joins_path
       expect(page).to have_selector "form"
       fill_in "チームID",	with: team.uuid
-      fill_in "チームパスワード",	with: team.password
+      fill_in "チームパスワード",	with: "password"
       click_button "次へ"
       # member/new.member_profile.html.erbにリダイレクト
       expect(current_path).to eq new_members_profiles_path
