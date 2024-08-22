@@ -13,7 +13,8 @@ ja:
       team:
         name: "チーム名"
         logo: "チームのロゴ"
-        password: "パスワード"
+        uuid: "チームID"
+        password: "チームパスワード"
         password_confirmation: "確認用パスワード"
   date:
     abbr_day_names:

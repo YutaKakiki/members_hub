@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     namespace :admins do
       resources :teams,only: :index
     end
+    resources :members
+    namespace :members do
+      resources :profiles
+    end
   end
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end

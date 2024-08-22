@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_05_121258) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_22_080317) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -66,6 +66,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_121258) do
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
+  create_table "profile_fields", force: :cascade do |t|
+    t.integer "team_id", null: false
+    t.string "field"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_profile_fields_on_team_id"
+  end
+
+  create_table "profile_values", force: :cascade do |t|
+    t.integer "profile_field_id", null: false
+    t.string "value"
+    t.integer "member_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_profile_values_on_member_id"
+    t.index ["profile_field_id"], name: "index_profile_values_on_profile_field_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
@@ -101,4 +119,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_121258) do
   add_foreign_key "auth_providers", "users"
   add_foreign_key "members", "teams"
   add_foreign_key "members", "users"
+  add_foreign_key "profile_fields", "teams"
+  add_foreign_key "profile_values", "members"
+  add_foreign_key "profile_values", "profile_fields"
 end

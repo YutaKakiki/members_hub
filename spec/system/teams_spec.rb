@@ -9,7 +9,7 @@ RSpec.describe 'Teams', type: :system do
       visit root_path
       click_link 'チームを作成'
       fill_in 'チーム名',	with: 'Example Team'
-      fill_in 'パスワード', with: 'password'
+      fill_in 'チームパスワード', with: 'password'
       fill_in '確認用パスワード', with: 'password'
     end
     it 'チームが正常に作成されている' do

@@ -13,4 +13,18 @@ class Team < ApplicationRecord
   has_secure_password
 
   validates :name, presence: true
+
+  # 認証情報に合致するチームがあれば返す
+  def self.authenticate_team(params)
+    if params[:team]
+      uuid=params[:team][:uuid]
+      password=params[:team][:password]
+        if team=Team.find_by(uuid:)
+          team.authenticate(password) ? team : false
+        else
+          return false
+        end
+    end
+  end
+
 end
