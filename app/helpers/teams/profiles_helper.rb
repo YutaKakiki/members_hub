@@ -1,0 +1,2 @@
+module Teams::ProfilesHelper
+end

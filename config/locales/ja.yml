@@ -16,6 +16,8 @@ ja:
         uuid: "チームID"
         password: "チームパスワード"
         password_confirmation: "確認用パスワード"
+      profile_field:
+        field: "項目"
   date:
     abbr_day_names:
     - 日

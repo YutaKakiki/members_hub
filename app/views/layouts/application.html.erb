@@ -22,8 +22,10 @@
             <%=render "layouts/sidebar"%>
           </div> 
           <div class="w-5/6">
-            <%= render "shared/flash"%>
-            <main class="container mx-auto mt-16 px-5">
+            <div id="flash"> 
+             <%= render "shared/flash"%>
+            </div>
+            <main class="container mx-auto mt-5 px-5">
               <%= yield %>
             </main>
           </div>

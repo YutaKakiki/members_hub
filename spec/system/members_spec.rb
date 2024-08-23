@@ -20,7 +20,7 @@ RSpec.describe 'Members', type: :system do
       # membersテーブルへの登録が行われている
       expect(last_member.user.name).to eq user.name
       # プロフィール作成ページにリダイレクトする
-      expect(current_path).to eq new_users_members_profile_path
+      expect(current_path).to eq new_users_members_profile_value_path
       expect(page).to have_content "プロフィールを入力"
       expect(page).to have_content team.name
     end
@@ -30,7 +30,7 @@ RSpec.describe 'Members', type: :system do
       fill_in "チームID",	with: team.uuid
       fill_in "パスワード",	with: "password"
       expect { click_button '次へ' }.to change {Member.count }.by(1)
-      expect(current_path).to eq new_users_members_profile_path
+      expect(current_path).to eq new_users_members_profile_value_path
       # プロフィールを作成せずにroot_pathへ意図的に移動
       click_link "Members Hub"
       last_member=Member.last

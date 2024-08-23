@@ -1,4 +1,4 @@
-class EnsureProfileExists
+class EnsureMemberProfileExists
   # before_actionで使い、ApplicationControllerに置く
   # profileが登録されていないmemberの登録は削除される
   # memberとprofileの作成は、トランザクションとして管理する

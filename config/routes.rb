@@ -8,15 +8,19 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+  namespace :teams do
+    resources :profile_fields
+  end
   resources :teams
   namespace :users do
     namespace :admins do
       resources :teams,only: :index
     end
-    resources :members
     namespace :members do
-      resources :profiles
+      resources :teams,only: :index
+      resources :profile_values
     end
+    resources :members
   end
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end

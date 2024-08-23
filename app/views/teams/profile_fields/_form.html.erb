@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "form" do%>
+    <%= form_with(model: @profile_field, url: teams_profile_fields_path, local: true,data: { controller: "form", action: "turbo:submit-end->form#clearForm" }) do |f| %>
+        <%= render 'shared/error_messages', resource: @profile_field %>
+        <%= f.label :field, class: "block text-gray-700 text-sm font-medium mb-1" %>
+        <div class="flex items-center">
+        <%= f.text_field :field, class: "block border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm w-1/3",data:{form_target:"input"}%>
+        <%= f.submit "追加", class: "bg-blue-500 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ml-2 h-9.5" %>
+        </div>
+    <% end %>
+<% end %>
+
+
