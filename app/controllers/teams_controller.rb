@@ -1,5 +1,4 @@
 class TeamsController < ApplicationController
-
   def new
     @team = Team.new
   end
@@ -13,10 +12,8 @@ class TeamsController < ApplicationController
       Admin.set_as_admin(current_user, @team)
       # EnsureTeamProfileExistsコールバックオブジェクトにて使用
       # 遷移先でチームを参照できるようにするため
-      session[:team_id]=@team.id
+      session[:team_id] = @team.id
       redirect_to new_teams_profile_field_path
-      # redirect_to teams_path
-      # flash[:notice] = "新しくチーム #{@team.name} が作成されました"
     else
       render :new, status: :unprocessable_entity
     end

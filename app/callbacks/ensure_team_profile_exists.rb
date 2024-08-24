@@ -1,16 +1,15 @@
 class EnsureTeamProfileExists
-  def initialize(session,controller)
-    @controller=controller
+  def initialize(session, controller)
+    @controller = controller
     @session = session
   end
 
   def callback
-    team=Team.find_by(id:@session)
-    if team
-      unless team.is_team_has_profile_values_more_than_3
-        team.destroy
-        @controller.flash[:alert]="プロフィールを追加登録しなかったため、チームの作成を取消しました"
-      end
-    end
+    team = Team.find_by(id: @session)
+    return unless team
+    return if team.team_has_profile_values_more_than_three?
+
+    team.destroy
+    @controller.flash[:alert] = I18n.t('alerts.callbacks.team_has_profile_fields_less_than_two')
   end
 end
