@@ -46,7 +46,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: provider.to_s.capitalize) if is_navigational_format?
     else
-      flash[:alert] = I18n.t('omniauth_callbackss.failure')
+      flash[:alert] = I18n.t('omniauth_callbacks.failure')
       render template: 'devise/registrations/new'
     end
   end

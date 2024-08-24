@@ -1,8 +1,8 @@
 <h1 class="text-2xl font-bold mb-4">管理中のチーム</h1>
 
-<% if @admin_teams.present? %>
+<% if @teams.present? %>
   <div class="space-y-4">
-    <%= render partial: 'admin_team', collection: @admin_teams %>
+    <%= render partial: 'teams/team', collection: @teams %>
   </div>
 <% else %>
   <p class="text-gray-500">現在あなたが管理しているチームはありません</p>

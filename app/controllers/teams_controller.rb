@@ -1,8 +1,4 @@
 class TeamsController < ApplicationController
-  def index
-    @teams = current_user.teams
-  end
-
   def new
     @team = Team.new
   end
@@ -14,8 +10,10 @@ class TeamsController < ApplicationController
     @team.logo.attach(params[:logo]) if params[:logo]
     if @team.save
       Admin.set_as_admin(current_user, @team)
-      redirect_to teams_path
-      flash[:notice] = "新しくチーム #{@team.name} が作成されました"
+      # EnsureTeamProfileExistsコールバックオブジェクトにて使用
+      # 遷移先でチームを参照できるようにするため
+      session[:team_id] = @team.id
+      redirect_to new_teams_profile_field_path
     else
       render :new, status: :unprocessable_entity
     end

@@ -1,0 +1,15 @@
+<h1 class="text-2xl font-bold mb-6">チームに参加</h1>
+
+<%= form_with(url: users_members_path, scope: :team) do |f| %>
+  <div class="mb-4">
+    <%= f.label :uuid, "チームID", class: "block text-gray-700 text-sm font-medium mb-1" %>
+    <%= f.text_field :uuid, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :password, "パスワード", class: "block text-gray-700 text-sm font-medium mb-1" %>
+    <%= f.password_field :password, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
+  </div>
+
+  <%= f.submit "次へ", class: "bg-blue-500 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+<% end %>

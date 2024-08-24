@@ -1,0 +1,6 @@
+<%=turbo_stream.remove @profile_field%>
+
+<%= turbo_stream.update "complete-button" do %>
+  <%= render 'teams/profile_fields/complete_button'%>
+<% end %>
+

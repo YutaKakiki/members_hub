@@ -3,6 +3,7 @@ ja:
   activerecord:
     models:
       team: "チーム"
+      profile_field: "プロフィール項目"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
@@ -13,8 +14,11 @@ ja:
       team:
         name: "チーム名"
         logo: "チームのロゴ"
-        password: "パスワード"
+        uuid: "チームID"
+        password: "チームパスワード"
         password_confirmation: "確認用パスワード"
+      profile_field:
+        name: "項目"
   date:
     abbr_day_names:
     - 日
@@ -189,3 +193,9 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  alerts:
+    callbacks:
+      member_without_profile: "プロフィールを追加登録しなかったため、チームの作成を取消しました"
+      team_has_profile_fields_less_than_two: "プロフィールを追加登録しなかったため、チームの作成を取消しました"
+    teams:
+      invalid_team_id/password_combination: "チームID/パスワードの組み合わせに誤りがあります" 
