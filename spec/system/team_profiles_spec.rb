@@ -51,7 +51,7 @@ RSpec.describe 'TeamProfiles', type: :system do
       visit new_teams_profile_field_path
       expect(page).to have_no_content '後から削除する項目'
       visit root_path
-      expect(page).to have_content 'プロフィールを追加登録しなかったため、チームの作成を取消しました'
+      expect(page).to have_content 'プロフィール項目を追加登録しなかったため、チームの作成を取消しました'
     end
   end
   context '空文字で追加ボタンを押した時' do

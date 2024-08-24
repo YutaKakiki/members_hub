@@ -14,7 +14,7 @@ class EnsureMemberProfileExists
     return if member_has_profile_values?(member)
 
     member.destroy
-    @controller.flash[:alert] = I18n.t('alerts.callbacks.members_without_profile')
+    @controller.flash[:alert] = I18n.t('alerts.callbacks.member_without_profile')
   end
 
   def member_has_profile_values?(member)

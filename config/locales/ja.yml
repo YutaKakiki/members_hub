@@ -195,7 +195,7 @@ ja:
     pm: 午後
   alerts:
     callbacks:
-      member_without_profile: "プロフィールを追加登録しなかったため、チームの作成を取消しました"
-      team_has_profile_fields_less_than_two: "プロフィールを追加登録しなかったため、チームの作成を取消しました"
+      member_without_profile: "プロフィールを登録しなかったため、チームへの参加を取消しました"
+      team_has_profile_fields_less_than_two: "プロフィール項目を追加登録しなかったため、チームの作成を取消しました"
     teams:
       invalid_team_id/password_combination: "チームID/パスワードの組み合わせに誤りがあります" 
