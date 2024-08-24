@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_22_080317) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_24_094808) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -68,7 +68,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_080317) do
 
   create_table "profile_fields", force: :cascade do |t|
     t.integer "team_id", null: false
-    t.string "field"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_profile_fields_on_team_id"
@@ -76,7 +76,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_080317) do
 
   create_table "profile_values", force: :cascade do |t|
     t.integer "profile_field_id", null: false
-    t.string "value"
+    t.string "content"
     t.integer "member_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

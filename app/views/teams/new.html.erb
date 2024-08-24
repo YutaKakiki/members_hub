@@ -1,5 +1,6 @@
 <h1 class="text-2xl font-bold mb-6">チームを作成</h1>
 
+
 <%= form_with(model: @team, local: true) do |f| %>
     <%= render 'shared/error_messages',resource: @team %>
   <div class="mb-4">
@@ -16,7 +17,7 @@
     <%= f.label :password_confirmation, class: "block text-gray-700 text-sm font-medium mb-1" %>
     <%= f.password_field :password_confirmation, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" %>
   </div>
-    
+
     <%= render '/teams/logo_image_preview',team:@team,f:f %>
 
 

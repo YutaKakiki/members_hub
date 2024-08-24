@@ -3,6 +3,7 @@ ja:
   activerecord:
     models:
       team: "チーム"
+      profile_field: "プロフィール項目"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
@@ -17,7 +18,7 @@ ja:
         password: "チームパスワード"
         password_confirmation: "確認用パスワード"
       profile_field:
-        field: "項目"
+        name: "項目"
   date:
     abbr_day_names:
     - 日

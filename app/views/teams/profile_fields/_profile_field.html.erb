@@ -1,15 +1,17 @@
-<%= turbo_frame_tag profile_field do %>
+<%# 以下の通りprofile_idがあることを保証しないと、エラーになる%>
+<% if is_profile_field_present?(profile_field) %>
+    <%= turbo_frame_tag profile_field do %>
     <div class="bg-white border border-gray-200 rounded-lg p-4 w-2/5 mt-2">
-    <p class="text-lg font-semibold text-gray-800">
-        <div class="flex items-center justify-between">
-            <%= profile_field.field %>
-            <%#TODO:ヘルパーメソッドに切り出す  %>
-            <%#デフォルトの項目以外は削除できる  %>
-            <% unless profile_field.field == "名前" || profile_field.field == "生年月日" %>       
-                <%= link_to '削除', teams_profile_field_path(profile_field), data: { turbo_method: :delete }, class: "bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 font-medium " %>
-            <% end %>
-        </div>
-    </p>
+        <p class="text-lg font-semibold text-gray-800">
+            <div class="flex items-center justify-between">
+                <%= profile_field.name %>
+                <%#デフォルトの項目以外は削除できる  %>
+                <%if is_not_default_field?(profile_field)%>
+                    <%= link_to '削除', teams_profile_field_path(profile_field), data: { turbo_method: :delete }, class: "bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 font-medium "%>
+                <% end %> 
+            </div>
+        </p>
     </div>
+    <% end %>
 <% end %>
 

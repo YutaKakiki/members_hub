@@ -1,16 +1,24 @@
 <h1 class="text-2xl font-bold mb-6">チームのプロフィール項目を設定</h1>
 
-<%= turbo_frame_tag "form" do %>
-  <%= render 'teams/profile_fields/form' %>
-<% end %>
+
+<%= render 'teams/profile_fields/form' %>
+
 
 <div id="profile_fields" class="mt-10">
+   <div class="bg-white border border-gray-200 rounded-lg p-4 w-2/5 mt-2">
+        <p class="text-lg font-semibold text-gray-800">
+            <div class="flex items-center justify-between">
+               プロフィール画像
+            </div>
+        </p>
+    </div>
   <% if @team %>
     <%= render @team.profile_fields %>
   <% end %>
 </div>
 
-
 <div class="mt-40">
-  <%= link_to '完了', users_admins_teams_path,class: "bg-blue-500 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+<%= turbo_frame_tag "complete-button" do %> 
+  <%= render 'teams/profile_fields/complete_button' %>
+<% end %>
 </div>

@@ -29,4 +29,8 @@ class Team < ApplicationRecord
     end
   end
 
+  def is_team_has_profile_values_more_than_3
+    self.profile_fields.count >= 3
+  end
+
 end

@@ -11,8 +11,10 @@ class Teams::ProfileFieldsController < ApplicationController
     return false unless @team
     @profile_field=@team.profile_fields.build(team_profile_params)
     if @profile_field.save
-      last_profile_field=@team.profile_fields.last
+    else
+      render :new,status: :unprocessable_entity
     end
+
   end
 
   def destroy
@@ -24,16 +26,16 @@ class Teams::ProfileFieldsController < ApplicationController
 
   private
   def team_profile_params
-    params.require(:profile_field).permit(:field)
+    params.require(:profile_field).permit(:name)
   end
 
   # 最初の項目追加
   def create_default_fields
     @team=Team.find_by(id:session[:team_id])
     return false unless @team
-    unless @team.profile_fields.exists?(field: "名前") && @team.profile_fields.exists?(field: "生年月日")
-      @team.profile_fields.create(field:"名前")
-      @team.profile_fields.create(field:"生年月日")
+    unless @team.profile_fields.exists?(name: "名前") && @team.profile_fields.exists?(name: "生年月日")
+      @team.profile_fields.create(name:"名前")
+      @team.profile_fields.create(name:"生年月日")
     end
   end
 end
