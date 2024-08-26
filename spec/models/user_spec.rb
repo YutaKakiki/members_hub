@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
       expect(@member.user.name).to eq 'Example User'
       expect(@member.team.name).to eq 'Example Team'
     end
-    it 'ユーザーから所属チームを取得できる' do
+    it 'ユーザーから参加チームを取得できる' do
       expect(user.teams.last.name).to eq 'Example Team'
     end
   end

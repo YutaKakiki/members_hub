@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Team, type: :model do
   let(:team) { create(:team) }
-  context 'Teamは、メンバー（ユーザー）が所属していれば' do
+  context 'Teamは、メンバー（ユーザー）が参加していれば' do
     before do
       # ユーザーを十人用意
       10.times do

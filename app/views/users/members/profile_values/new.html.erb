@@ -1,9 +1,20 @@
-<h1 class="text-2xl font-bold mb-6">プロフィールを入力</h1>
+<h1 class="text-2xl font-bold mb-6">プロフィールを登録</h1>
 
-<div class="flex items-center bg-white  rounded-lg p-2 border border-gray-200 w-3/6 ">
-    <% if @team.logo.attached? %>
-        <%= image_tag @team.logo.variant(resize_to_limit:[80,80]),class:"rounded-md mr-3" %>
+<div class="flex items-center bg-white  rounded-lg p-2 border border-gray-200 w-3/6 mb-10">
+    <% if @team %>
+        <% if @team.logo.attached? %>
+            <%= image_tag @team.logo.variant(resize_to_limit:[80,80]),class:"rounded-md mr-5" %>
+        <% end %>
+
+        <p class="text-2xl font-semibold"><%= @team.name %></p>
     <% end %>
-
-    <p class="text-xl font-semibold"><%= @team.name %></p>
 </div>
+
+<% if @profile_value %>
+    <%= form_with(model: @profile_value,url:users_members_profile_values_path, local: true) do |f| %>
+        <%= render 'shared/error_messages', resource: @profile_value %>
+        <%= render "users/members/profile_values/profile_field_form",f:f,profile_fields:@profile_fields%>
+
+        <%= f.submit "登録", class: "bg-blue-500 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-10" %>
+    <% end %> 
+<% end %>

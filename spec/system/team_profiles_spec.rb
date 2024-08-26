@@ -23,7 +23,7 @@ RSpec.describe 'TeamProfiles', type: :system do
       expect(page).to have_button '追加'
       # 項目を追加していないと、「完了」ボタンがない
       expect(page).to have_no_link '完了'
-      # 上記項目以外は追加項目として登録
+      # 上記項目以外は追加項目として設定
       fill_in '項目', with: 'ニックネーム'
       click_button '追加'
       expect(page).to have_content 'ニックネーム'
@@ -51,7 +51,7 @@ RSpec.describe 'TeamProfiles', type: :system do
       visit new_teams_profile_field_path
       expect(page).to have_no_content '後から削除する項目'
       visit root_path
-      expect(page).to have_content 'プロフィール項目を追加登録しなかったため、チームの作成を取消しました'
+      expect(page).to have_content 'プロフィール項目を設定しなかったため、チームの作成を取消しました'
     end
   end
   context '空文字で追加ボタンを押した時' do

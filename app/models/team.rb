@@ -22,6 +22,7 @@ class Team < ApplicationRecord
 
     uuid = params[:team][:uuid]
     password = params[:team][:password]
+    # チームIDで検索s
     if (team = Team.find_by(uuid:))
       team.authenticate(password) ? team : false
     else
@@ -29,6 +30,7 @@ class Team < ApplicationRecord
     end
   end
 
+  # 3個以上（デフォルトの項目に加えて1個上追加）の項目があるか
   def team_has_profile_values_more_than_three?
     profile_fields.count >= 3
   end

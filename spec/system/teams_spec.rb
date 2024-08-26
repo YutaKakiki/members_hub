@@ -23,7 +23,7 @@ RSpec.describe 'Teams', type: :system do
       created_team = Team.last
       expect(created_team.admin_user.name).to eq user.name
     end
-    it 'プロフィールの登録ページに遷移する' do
+    it 'プロフィールの設定ページに遷移する' do
       click_button '次へ'
       expect(current_path).to eq new_teams_profile_field_path
     end
