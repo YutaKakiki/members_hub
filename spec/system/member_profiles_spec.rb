@@ -36,6 +36,19 @@ RSpec.describe "MemberProfiles", type: :system do
       expect(current_path).to eq users_members_teams_path
       expect(page).to have_content team.name
     end
+
+    it '記入せずに登録すると、エラーメッセージが表示される' do
+      # 5つフィールドがあるが、1つだけ記入
+      fill_in "profile_value_content_1", with: "項目内容"
+      member=user.members.last
+      expect{click_button "登録"}.not_to change{member.profile_values.count}
+      expect(current_path).to eq new_users_members_profile_value_path
+      expect(page).to have_selector('input[name="profile_value[content_1]"]')
+      expect(page).to have_selector('input[name="profile_value[content_5]"]')
+      # フォームのvalueは保持されている
+      expect(page).to have_selector ('input[value="項目内容"]')
+      expect(page).to have_content ("プロフィール項目を全て入力してください")
+    end
   end
 
 end

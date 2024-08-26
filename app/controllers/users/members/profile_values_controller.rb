@@ -8,25 +8,27 @@ class Users::Members::ProfileValuesController < ApplicationController
   end
 
   def create
+    uuid = session[:team_id]
+    team = Team.find_by(uuid:)
+    field_and_content_pairs_arr= ProfileValue.create_field_and_content_pairs_arr(member_profile_params,team)
     # MembersController#createでsessionに格納した情報
     member=Member.find_by(id:session[:member_id])
-    # TODO: 以下のロジックはモデルに切り出す
-    member_profile_params_count=member_profile_params.keys.count
-    contents=[]
-    member_profile_params_count.times do |i|
-      contents.push(member_profile_params["content_#{i+1}"])
+    return false unless member
+    profile_values=member.build_profile_values(field_and_content_pairs_arr)
+    # validationに引っ掛からなければ、保存
+    if member.has_valid_content?
+      member.save_profile_values
+      flash[:notice]=I18n.t("notice.members.join_team_successfully",team:team.name)
+      redirect_to users_members_teams_path
+      # contentのセッション情報は削除
+      ProfileValue.reset_content_from_session(self)
+    else
+      # 空だった場合、リダイレクトする（renderではうまくいかなかったため）
+      # 他のフィールドに書き込んでいた場合、それは保持しておきたいために、セッションに値を格納しておく
+      ProfileValue.set_content_in_session(member_profile_params,self)
+      flash[:alert]=I18n.t("alert.profile_values.not_empty_content")
+      redirect_to new_users_members_profile_value_path
     end
-    uuid = session[:team_id]
-    @team = Team.find_by(uuid:)
-    profile_field_ids=@team.profile_field_ids
-    if contents.size==profile_field_ids.size
-      field_contents=contents.zip(profile_field_ids)
-      field_contents.each do |content,profile_field_id|
-        member.profile_values.create({content:,profile_field_id:})
-      end
-    end
-    flash[:notice]=I18n.t("notice.members.join_team_successfully",team:@team.name)
-    redirect_to users_members_teams_path
   end
 
   private

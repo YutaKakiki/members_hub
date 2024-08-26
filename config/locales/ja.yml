@@ -201,6 +201,8 @@ ja:
       invalid_team_id/password_combination: "チームID/パスワードの組み合わせに誤りがあります" 
     members:
       prevent_dup_member: "既に参加しているチームです"
+    profile_values:
+      not_empty_content: "プロフィール項目を全て入力してください"
   notice:
     teams:
       authentication_succeed: "%{team} への認証に成功しました"

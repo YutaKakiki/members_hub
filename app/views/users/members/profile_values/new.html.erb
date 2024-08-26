@@ -11,10 +11,12 @@
 </div>
 
 <% if @profile_value %>
+
     <%= form_with(model: @profile_value,url:users_members_profile_values_path, local: true) do |f| %>
         <%= render 'shared/error_messages', resource: @profile_value %>
         <%= render "users/members/profile_values/profile_field_form",f:f,profile_fields:@profile_fields%>
 
         <%= f.submit "登録", class: "bg-blue-500 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-10" %>
     <% end %> 
+
 <% end %>
