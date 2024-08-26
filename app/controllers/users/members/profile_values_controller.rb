@@ -3,6 +3,7 @@ class Users::Members::ProfileValuesController < ApplicationController
   def new
     uuid = session[:team_id]
     @team = Team.find_by(uuid:)
+    @member = current_user.members.last
     @profile_value=ProfileValue.new
     @profile_fields=@team.profile_fields
   end
@@ -18,6 +19,7 @@ class Users::Members::ProfileValuesController < ApplicationController
     # validationに引っ掛からなければ、保存
     if member.has_valid_content?
       member.save_profile_values
+      member.save_image(member_profile_params)
       flash[:notice]=I18n.t("notice.members.join_team_successfully",team:team.name)
       redirect_to users_members_teams_path
       # contentのセッション情報は削除
@@ -25,7 +27,7 @@ class Users::Members::ProfileValuesController < ApplicationController
     else
       # 空だった場合、リダイレクトする（renderではうまくいかなかったため）
       # 他のフィールドに書き込んでいた場合、それは保持しておきたいために、セッションに値を格納しておく
-      ProfileValue.set_content_in_session(member_profile_params,self)
+      ProfileValue.set_content_in_session(team,member_profile_params,self)
       flash[:alert]=I18n.t("alert.profile_values.not_empty_content")
       redirect_to new_users_members_profile_value_path
     end
@@ -33,7 +35,6 @@ class Users::Members::ProfileValuesController < ApplicationController
 
   private
     def member_profile_params
-      params.require(:profile_value).permit(:content_1,:content_2,:content_3,:content_4,:content_5)
+      params.require(:profile_value).permit(:content_1,:content_2,:content_3,:content_4,:content_5,:image)
     end
-
 end

@@ -20,8 +20,8 @@ class ProfileValue < ApplicationRecord
     field_and_content_pairs_arr=profile_field_ids.zip(contents)
   end
 
-  def self.set_content_in_session(params,controller)
-    content_count=params.keys.count
+  def self.set_content_in_session(team,params,controller)
+    content_count=team.profile_fields.count
     content_count.times do |i|
       controller.session["content_#{i+1}"] = params["content_#{i+1}"]
     end
