@@ -7,7 +7,7 @@ class Users::MembersController < ApplicationController
   def create
     if (@team = Team.authenticate_team(params))
       # 既にメンバーとなっていれば、ここで脱出する
-      return prevent_dup_member if Member.member_of_team?(current_user,@team)
+      return prevent_dup_member if Member.member_of_team?(current_user, @team)
 
       current_user.members.create(team_id: @team.id)
       # EnsureProfileExistsコールバックオブジェクトにて使用
@@ -17,7 +17,7 @@ class Users::MembersController < ApplicationController
       session[:team_id] = @team.uuid
       # プロフィール登録画面へ遷移させる
       redirect_to new_users_members_profile_value_path
-      flash[:notice] = I18n.t('notice.teams.authentication_succeed',team:@team.name)
+      flash[:notice] = I18n.t('notice.teams.authentication_succeed', team: @team.name)
     else
       flash[:alert] = I18n.t('alert.teams.invalid_team_id/password_combination')
       render :new, status: :unprocessable_entity
@@ -29,9 +29,9 @@ class Users::MembersController < ApplicationController
   end
 
   private
-   def prevent_dup_member
-      flash[:alert]=I18n.t('alert.members.prevent_dup_member')
-      render :new,status: :unprocessable_entity
-   end
 
+  def prevent_dup_member
+    flash.now[:alert] = I18n.t('alert.members.prevent_dup_member')
+    render :new, status: :unprocessable_entity
+  end
 end

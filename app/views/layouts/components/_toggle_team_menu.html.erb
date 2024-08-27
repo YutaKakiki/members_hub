@@ -5,21 +5,21 @@
         メンバーを閲覧
     </div>
     <div data-toggle-target="toggleable" class="hidden text-white">
-        <div class="p-4 flex justify-end mr-4">
-                <div class="grid gap-4">
+        <div class="p-4 flex justify-start ml-5">
+            <div class="grid gap-4">
+                <% unless current_user.members.present? %>
+                   <p class="text-xs">
+                        <i class="fa-solid fa-caret-right pr-1"></i>
+                            参加しているチームはありません  
+                    </p>
+                <% end %>
+                <%current_user.members.map do |member|%>
                     <p class="hover:text-blue-500 hover:font-bold  transition-colors duration-300">
                         <i class="fa-solid fa-caret-right pr-1"></i>
-                        テストテストサークル
+                            <%=member.team.name%>    
                     </p>
-                    <p class="hover:text-blue-500 hover:font-bold  transition-colors duration-300">
-                        <i class="fa-solid fa-caret-right pr-1"></i>
-                        テストテストサークル
-                    </p>
-                    <p class="hover:text-blue-500 hover:font-bold  transition-colors duration-300">
-                        <i class="fa-solid fa-caret-right pr-1"></i>
-                        テストテストサークル
-                    </p>
-                </div>
+                <% end %>
+            </div>
         </div>
     </div>
 </div>

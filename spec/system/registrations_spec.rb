@@ -8,7 +8,6 @@ RSpec.describe 'Registrations', type: :system do
       click_link '新規登録'
       fill_in '名前',	with: '仮ユーザー'
       fill_in 'メールアドレス', with: 'example-1@example.com'
-      fill_in '生年月日', with: '2002-12-24'
       fill_in 'パスワード', with: 'password'
       fill_in '確認用パスワード', with: 'password'
     end
@@ -37,7 +36,6 @@ RSpec.describe 'Registrations', type: :system do
       click_link '新規登録'
       fill_in '名前',	with: '仮ユーザー'
       fill_in 'メールアドレス', with: 'invalid email'
-      fill_in '生年月日', with: '2002-12-24'
       fill_in 'パスワード', with: 'password'
       fill_in '確認用パスワード', with: 'password'
     end

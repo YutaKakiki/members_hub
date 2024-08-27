@@ -11,10 +11,9 @@ class Teams::ProfileFieldsController < ApplicationController
     return false unless @team
 
     @profile_field = @team.profile_fields.build(team_profile_params)
-    if @profile_field.save
-    else
-      render :new, status: :unprocessable_entity
-    end
+    return if @profile_field.save
+
+    render :new, status: :unprocessable_entity
   end
 
   def destroy
