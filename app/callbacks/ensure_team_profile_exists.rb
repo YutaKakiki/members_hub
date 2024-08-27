@@ -4,7 +4,7 @@ class EnsureTeamProfileExists
     @session = session
   end
 
-  def callback
+  def call
     team = Team.find_by(id: @session)
     return unless team
     return if team.team_has_profile_values_more_than_three?

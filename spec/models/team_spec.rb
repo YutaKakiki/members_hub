@@ -14,6 +14,9 @@ RSpec.describe Team, type: :model do
         user.members.create({ team_id: team.id })
       end
     end
+    after do
+      User.destroy_all
+    end
     it 'そのユーザーをすべて取得できる' do
       members = team.member_users
       members.each_with_index do |member, i|

@@ -32,10 +32,13 @@ RSpec.describe 'Members', type: :system do
   end
 
   context '既に参加しているチームの認証を行うと' do
-    before do
+    before(:each) do
       5.times do
         create(:profile_field, team:)
       end
+    end
+    after do
+      ProfileField.destroy_all
     end
     it '参加に失敗する' do
       click_button '次へ'

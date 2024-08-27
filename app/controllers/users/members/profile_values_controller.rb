@@ -11,12 +11,16 @@ class Users::Members::ProfileValuesController < ApplicationController
   def create
     uuid = session[:team_id]
     team = Team.find_by(uuid:)
-    field_and_content_pairs_arr = ProfileValue.create_field_and_content_pairs_arr(member_profile_params, team)
+
+    # paramsから抽出したcontentとチームのprofile_fieldのidのペア配列を返す
+    service=ReturnProfileAttributePairsService.new(team,params:member_profile_params)
+    field_id_and_value_content_pairs_arr=service.call
+
     # MembersController#createでsessionに格納した情報
     member = Member.find_by(id: session[:member_id])
     return false unless member
 
-    member.build_profile_values(field_and_content_pairs_arr)
+    member.build_profile_values(field_id_and_value_content_pairs_arr)
     # validationに引っ掛からなければ、保存
     if member.has_valid_content?
       member.save_profile_values

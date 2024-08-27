@@ -14,27 +14,26 @@
   </head>
 
   <body class="bg-stone-50">
-    <%=render "layouts/header"%>
-      <%#ログインしているかどうかでレイアウトを変更%>
-      <% if user_signed_in? %>
-        <div class="flex flex-wrap">
-          <div class="w-1/6">
-            <%=render "layouts/sidebar"%>
-          </div> 
-          <div class="w-5/6">
-            <div id="flash"> 
-             <%= render "shared/flash"%>
-            </div>
-            <main class="container mx-auto mt-5 px-5">
-              <%= yield %>
-            </main>
-          </div>
+  <%= render "layouts/header" %>
+  <% if user_signed_in? %>
+    <div class="flex h-screen">
+      <!-- サイドバー -->
+      <div class="w-1/6 bg-gray-200">
+        <%= render "layouts/sidebar" %>
+      </div>
+      
+      <!-- メインコンテンツ -->
+      <div class="w-5/6 overflow-auto">
+        <div id="flash">
+          <%= render "shared/flash" %>
         </div>
-      <% else %>
-          <%= render "shared/flash"%>
-          <main class="container mx-auto mt-16 px-5">
-            <%= yield %>
-          </main>
-      <% end %>
-  </body>
+        <%= render 'layouts/main_content' %>
+      </div>
+    </div>
+  <% else %>
+    <%= render "shared/flash" %>
+    <%= render 'layouts/main_content' %>
+  <% end %>
+</body>
+
 </html>

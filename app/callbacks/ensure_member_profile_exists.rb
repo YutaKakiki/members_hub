@@ -8,7 +8,7 @@ class EnsureMemberProfileExists
     @session = session
   end
 
-  def callback
+  def call
     member = Member.find_by(id: @session)
     return unless member
     return if member_has_profile_values?(member)

@@ -1,0 +1,9 @@
+<div class="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex mt-3">
+    <% if member.image.attached? %>    
+        <%= image_tag member.image.variant(resize_to_limit:[100,100]),class:"rounded-full" %>
+    <% end %>
+    <%field_name_and_value_content_pairs_arr(@team,member).each do |field_name,value_content|%>
+        <p><%= field_name %></p>
+        <p><%= value_content %></p>
+    <% end %>
+</div>

@@ -8,10 +8,13 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+
   namespace :teams do
     resources :profile_fields
   end
-  resources :teams
+  resources :teams do
+    resources :members, only: %i[index show], module: :teams
+  end
   namespace :users do
     namespace :admins do
       resources :teams,only: :index

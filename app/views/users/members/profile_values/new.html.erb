@@ -1,14 +1,6 @@
 <h1 class="text-2xl font-bold mb-6">プロフィールを登録</h1>
 
-<div class="flex items-center bg-white  rounded-lg p-2 border border-gray-200 w-3/6 mb-10">
-    <% if @team %>
-        <% if @team.logo.attached? %>
-            <%= image_tag @team.logo.variant(resize_to_limit:[80,80]),class:"rounded-md mr-5" %>
-        <% end %>
-
-        <p class="text-2xl font-semibold"><%= @team.name %></p>
-    <% end %>
-</div>
+<%= render "shared/simple_team_card",size:"large" %>
 
 <% if @profile_value %>
 

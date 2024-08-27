@@ -1,6 +1,6 @@
 <div data-controller="toggle">
     <div class="text-gray-100 text-xl p-7 hover:bg-zinc-500 transition-colors duration-300"
-         data-action='click->toggle#toggle touch->toggle#toggle'>
+         data-action='click->toggle#toggle touch->toggle#toggle' id="member_viewing_button">
         <i class="fa-solid fa-users-viewfinder pr-2"></i>
         メンバーを閲覧
     </div>
@@ -14,10 +14,10 @@
                     </p>
                 <% end %>
                 <%current_user.members.map do |member|%>
-                    <p class="hover:text-blue-500 hover:font-bold  transition-colors duration-300">
-                        <i class="fa-solid fa-caret-right pr-1"></i>
-                            <%=member.team.name%>    
-                    </p>
+                    <%= link_to team_members_path(member.team.uuid) ,class:"hover:text-blue-500 hover:font-bold  transition-colors duration-300" do%>
+                         <i class="fa-solid fa-caret-right pr-1"></i>
+                        <%=member.team.name%>
+                    <% end %> 
                 <% end %>
             </div>
         </div>

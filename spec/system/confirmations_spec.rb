@@ -6,7 +6,7 @@ RSpec.describe 'Confirmations', type: :system do
   end
 
   context '有効化メールのリンクを押した時' do
-    let(:user) { FactoryBot.create(:user) }
+    let(:user) { create(:user) }
     let(:mail) { Devise::Mailer.confirmation_instructions(user, user.confirmation_token).deliver_now }
     it 'アカウントが有効化される' do
       # まだ有効化されていない
