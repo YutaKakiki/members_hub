@@ -44,7 +44,7 @@ RSpec.describe 'Members', type: :system do
       click_button '次へ'
       # 一度、通常通りチームに参加してから、
       5.times do |n|
-        fill_in "profile_value_content_#{n + 1}", with: '項目内容'
+        fill_in "profile_value_content#{n + 1}", with: '項目内容'
       end
       click_button '登録'
       expect(page).to have_content('Example Team に参加しました')

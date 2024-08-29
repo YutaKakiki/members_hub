@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Myapp</title>
+    <title>Members Hub</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,7 @@
     <%= javascript_importmap_tags %>
     <%# FontAwesomeを使うためのコード%>
     <script src="https://kit.fontawesome.com/001a14c1b8.js" crossorigin="anonymous"></script>
+    <%= favicon_link_tag 'favicon.ico' %>
   </head>
 
   <body class="bg-stone-50">
@@ -29,6 +30,7 @@
         </div>
         <%= render 'layouts/main_content' %>
       </div>
+        <%= turbo_frame_tag "modal" %>
     </div>
   <% else %>
     <%= render "shared/flash" %>

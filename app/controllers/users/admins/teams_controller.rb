@@ -1,7 +1,7 @@
 class Users::Admins::TeamsController < ApplicationController
   before_action :notify_team_completion
   def index
-    @teams = current_user.admin_teams
+    @teams = current_user.admin_teams.includes(logo_attachment: :blob)
   end
 
   private
@@ -16,6 +16,6 @@ class Users::Admins::TeamsController < ApplicationController
 
     flash[:notice] = "#{team_created_now.name} がチームとして正常に作成されました"
     # チームを参照することはなく、情報を維持する必要がないため、sessionを空にする
-    session[:team_id] = ''
+    session[:team_id] = nil
   end
 end

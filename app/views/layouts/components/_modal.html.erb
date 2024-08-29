@@ -1,12 +1,9 @@
 <%=turbo_frame_tag "modal" do%>
-    <div data-controller="modal" data-modal-open-value>
-        <div>
-            <dialog data-modal-target="dialog" class="animate-fade-in-down bg-white rounded-lg">
-                    <div class="inline-block align-bottom  p-8 text-left  shadow-xl">
-                        <%=yield%>
-                        <button data-action="modal#close">close</button>
-                    </div>
-            </dialog>
-        </div>
+    <div data-controller="modal" data-modal-open-value >
+        <dialog data-modal-target="dialog" class="animate-fade-in-up bg-white rounded-lg ">
+                <div class="inline-block align-bottom  p-4 text-left  shadow-xl">
+                    <%=yield%>
+                </div>
+        </dialog>
     </div>
 <% end %>

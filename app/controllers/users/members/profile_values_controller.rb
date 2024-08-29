@@ -13,8 +13,8 @@ class Users::Members::ProfileValuesController < ApplicationController
     team = Team.find_by(uuid:)
 
     # paramsから抽出したcontentとチームのprofile_fieldのidのペア配列を返す
-    service=ReturnProfileAttributePairsService.new(team,params:member_profile_params)
-    field_id_and_value_content_pairs_arr=service.call
+    service = ReturnProfileAttributePairsService.new(team, params: member_profile_params)
+    field_id_and_value_content_pairs_arr = service.call
 
     # MembersController#createでsessionに格納した情報
     member = Member.find_by(id: session[:member_id])
@@ -41,6 +41,6 @@ class Users::Members::ProfileValuesController < ApplicationController
   private
 
   def member_profile_params
-    params.require(:profile_value).permit(:content_1, :content_2, :content_3, :content_4, :content_5, :image)
+    params.require(:profile_value).permit(:content1, :content2, :content3, :content4, :content5, :image)
   end
 end

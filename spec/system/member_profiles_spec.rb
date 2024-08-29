@@ -21,8 +21,8 @@ RSpec.describe 'MemberProfiles', type: :system do
     it 'チームに設定されたプロフィール項目のフォームが表示されている' do
       expect(current_path).to eq new_users_members_profile_value_path
       expect(team.profile_fields.count).to eq 5
-      expect(page).to have_selector('input[name="profile_value[content_1]"]')
-      expect(page).to have_selector('input[name="profile_value[content_5]"]')
+      expect(page).to have_selector('input[name="profile_value[content1]"]')
+      expect(page).to have_selector('input[name="profile_value[content5]"]')
 
       5.times do |n|
         expect(page).to have_content("項目#{n + 1}")
@@ -30,7 +30,7 @@ RSpec.describe 'MemberProfiles', type: :system do
     end
     it '記入して「登録」を押すと、正常に登録される' do
       5.times do |n|
-        fill_in "profile_value_content_#{n + 1}", with: '項目内容'
+        fill_in "profile_value_content#{n + 1}", with: '項目内容'
       end
       expect { click_button '登録' }.to change { ProfileValue.count }.by(5)
       # 参加中のチーム　へリダイレクト
@@ -39,11 +39,11 @@ RSpec.describe 'MemberProfiles', type: :system do
     end
     it '記入せずに登録すると、エラーメッセージが表示される' do
       # 5つフィールドがあるが、1つだけ記入
-      fill_in 'profile_value_content_1', with: '項目内容'
-      expect { click_button '登録' }.not_to(change { ProfileValue.count })
+      fill_in 'profile_value_content1', with: '項目内容'
+      expect { click_button '登録' }.not_to change { ProfileValue.count }
       expect(current_path).to eq new_users_members_profile_value_path
-      expect(page).to have_selector('input[name="profile_value[content_1]"]')
-      expect(page).to have_selector('input[name="profile_value[content_5]"]')
+      expect(page).to have_selector('input[name="profile_value[content1]"]')
+      expect(page).to have_selector('input[name="profile_value[content5]"]')
       # フォームのvalueは保持されている
       expect(page).to have_selector('input[value="項目内容"]')
       expect(page).to have_content('プロフィール項目を全て入力してください')

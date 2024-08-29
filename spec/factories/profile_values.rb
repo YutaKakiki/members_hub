@@ -4,10 +4,10 @@ FactoryBot.define do
     association :member
     association :profile_field
     trait :name do
-      sequence(:content){|n| "Example User#{n}"}
+      sequence(:content) { |n| "Example User#{n}" }
     end
     trait :birth do
-      sequence(:content){|n| "199#{n}-01-01"}
+      content {Faker::Date.between(from: 50.years.ago, to: 18.years.ago)}
     end
   end
 end
