@@ -29,6 +29,10 @@ FactoryBot.create(:profile_field,:birth,team:)
 FactoryBot.create(:profile_field,team:,name:"大学名")
 FactoryBot.create(:profile_field,team:,name:"学部名")
 FactoryBot.create(:profile_field,team:,name:"出身地")
+FactoryBot.create(:profile_field,team:,name:"高校名")
+FactoryBot.create(:profile_field,team:,name:"好きな曲")
+FactoryBot.create(:profile_field,team:,name:"あなたの夢")
+FactoryBot.create(:profile_field,team:,name:"コメント")
 
 # 30人のメンバーにプロフィールを登録させる
 members.each do |member|
@@ -38,9 +42,13 @@ members.each do |member|
     FactoryBot.create(:profile_value,content:"同志社大学",profile_field:,member:)
     FactoryBot.create(:profile_value,content:"経済学部",profile_field:,member:)
     FactoryBot.create(:profile_value,content:"奈良県",profile_field:,member:)
+    FactoryBot.create(:profile_value,content:"平城高校",profile_field:,member:)
+    FactoryBot.create(:profile_value,content:"ウルトラソウル",profile_field:,member:)
+    FactoryBot.create(:profile_value,content:"世界で活躍するエンジニア",profile_field:,member:)
+    FactoryBot.create(:profile_value,content:"初めまして、#{member.user.name}です。まだまだ未熟者ですが、みなさんと一緒に成長していきたいです。よろしくお願いします。",profile_field:,member:)
   end
 end
 
-#カレントユーザーを生成し、サンプルチームの管理者に設定
-current_user=FactoryBot.create(:user,name:"example",email:"example@gmail.com",confirmed_at:Time.zone.now)
-Admin.set_as_admin(current_user,team)
+#管理者ユーザーを生成し、サンプルチームの管理者に設定
+admin_user=FactoryBot.create(:user,name:"サンプルユーザー",email:"sample@sample.com",confirmed_at:Time.zone.now)
+Admin.set_as_admin(admin_user,team)

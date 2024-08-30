@@ -10,10 +10,16 @@ class Teams::ProfileFieldsController < ApplicationController
     @team = Team.find_by(id: session[:team_id])
     return false unless @team
 
-    @profile_field = @team.profile_fields.build(team_profile_params)
-    return if @profile_field.save
+    # プロフィール項目の上限に達していれば、エラーメッセージ
+    if ProfileField.limit_profile_fields?(@team)
+      flash[:alert] = I18n.t('alert.profile_fields.already_reached_limit', limit: 7)
+      redirect_to new_teams_profile_field_path
+    else
+      @profile_field = @team.profile_fields.build(team_profile_params)
+      return if @profile_field.save
 
-    render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def destroy

@@ -16,11 +16,6 @@ class Member < ApplicationRecord
     end
   end
 
-  def has_valid_content?
-    # 全てが正常な値（presence）かどうか
-    true if profile_values.all?(&:valid?)
-  end
-
   def save_profile_values
     profile_values.each(&:save)
   end

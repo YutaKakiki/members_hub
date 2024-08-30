@@ -8,7 +8,7 @@ RSpec.describe 'TeamMembersViewings', type: :system do
       # チームのプロフィール項目を作成
       name_field = create(:profile_field, :name, team:)
       birth_field = create(:profile_field, :birth, team:)
-      3.times do
+      7.times do
         create(:profile_field, team:)
       end
       custom_profile_fields = ProfileField.limit(3).offset(2)
@@ -53,14 +53,24 @@ RSpec.describe 'TeamMembersViewings', type: :system do
       click_link team.name
       expect(current_path).to eq team_members_path(team.uuid)
       expect(page).to have_content team.name
-      members = Member.limit(30)
-      members.count.times do |i|
-        expect(page).to have_content "Example User#{i + 1}"
+      # ページネーションにより最初の10件のみ表示される
+      members = Member.limit(10)
+      members.each do |member|
+        expect(page).to have_content member.profile_values.first.content
       end
-      expect(page).to have_content 'Example User'
     end
     it 'チームメンバー個々の詳細を確認できる' do
-      click_link ""
+      find("div[id='member_viewing_button']", text: 'メンバーを閲覧')
+      click_link team.name
+      member=Member.first
+      # 名前の部分をクリック（正確にはカード内のどこででもいい）
+      click_link "member-link-#{member.id}"
+      # プロフィール項目が全て表示されている
+      team.profile_fields.each  do |profile_field|
+        unless profile_field.name == "名前"
+         expect(page).to have_content(profile_field.name)
+        end
+      end
     end
   end
 end

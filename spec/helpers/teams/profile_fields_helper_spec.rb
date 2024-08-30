@@ -10,6 +10,6 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe Teams::ProfilesHelper, type: :helper do
+RSpec.describe Teams::ProfileFieldsHelper, type: :helper do
   pending "add some examples to (or delete) #{__FILE__}"
 end

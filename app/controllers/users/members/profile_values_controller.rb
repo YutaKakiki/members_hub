@@ -22,7 +22,7 @@ class Users::Members::ProfileValuesController < ApplicationController
 
     member.build_profile_values(field_id_and_value_content_pairs_arr)
     # validationに引っ掛からなければ、保存
-    if member.has_valid_content?
+    if ProfileValue.valid_content?(member)
       member.save_profile_values
       member.save_image(member_profile_params)
       flash[:notice] = I18n.t('notice.members.join_team_successfully', team: team.name)
@@ -41,6 +41,7 @@ class Users::Members::ProfileValuesController < ApplicationController
   private
 
   def member_profile_params
-    params.require(:profile_value).permit(:content1, :content2, :content3, :content4, :content5, :image)
+    params.require(:profile_value).permit(:content1, :content2, :content3, :content4, :content5, :content6, :content7, :content8,
+                                          :content9, :image)
   end
 end

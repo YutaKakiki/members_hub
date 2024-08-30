@@ -7,7 +7,7 @@ FactoryBot.define do
       sequence(:content) { |n| "Example User#{n}" }
     end
     trait :birth do
-      content {Faker::Date.between(from: 50.years.ago, to: 18.years.ago)}
+      content { Faker::Date.between(from: 50.years.ago, to: 18.years.ago) }
     end
   end
 end

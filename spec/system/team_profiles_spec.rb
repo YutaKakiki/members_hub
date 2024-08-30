@@ -9,10 +9,10 @@ RSpec.describe 'TeamProfiles', type: :system do
     fill_in 'チーム名',	with: 'Example Team'
     fill_in 'チームパスワード', with: 'password'
     fill_in '確認用パスワード', with: 'password'
-    click_button '次へ'
   end
   context 'チームのプロフィール項目を追加すると' do
     it '項目＆チームを正常に作成できる' do
+      click_button '次へ'
       # プロフィール設定ページにリダイレクト
       expect(current_path).to eq new_teams_profile_field_path
       expect(page).to have_content 'プロフィール項目を設定'
@@ -23,16 +23,19 @@ RSpec.describe 'TeamProfiles', type: :system do
       expect(page).to have_button '追加'
       # 項目を追加していないと、「完了」ボタンがない
       expect(page).to have_no_link '完了'
+      # 何も追加していないとカウンターは０
+      expect(page).to have_content "追加した項目数：\n0"
       # 上記項目以外は追加項目として設定
       fill_in '項目', with: 'ニックネーム'
       click_button '追加'
       expect(page).to have_content 'ニックネーム'
-      team_profile_field_count = Team.last.profile_fields.count
+      expect(page).to have_content '追加した追加した項目数: 1'
       # 実際は、turbo_streamによりリアルタイムに追加されるが、
       # テストだとうまく表示されていないのでリロードして確認することにする
       visit new_teams_profile_field_path
       expect(page).to have_content 'ニックネーム'
       expect(page).to have_link('削除', count: 1)
+      team_profile_field_count = Team.last.profile_fields.count
       expect(team_profile_field_count).to eq 3
       click_link '完了'
       # 「管理しているチーム」画面に遷移する
@@ -42,6 +45,7 @@ RSpec.describe 'TeamProfiles', type: :system do
   end
   context 'チームのプロフィールを追加せずに中断すると' do
     it 'チームの作成は取り消される' do
+      click_button '次へ'
       fill_in '項目', with: '後から削除する項目'
       click_button '追加'
       visit new_teams_profile_field_path
@@ -56,10 +60,28 @@ RSpec.describe 'TeamProfiles', type: :system do
   end
   context '空文字で追加ボタンを押した時' do
     it 'プロフィール項目は保存されない' do
+      click_button '次へ'
       fill_in '項目', with: ''
       expect { click_button '追加' }.not_to change(ProfileField, :count)
       expect(page).to have_content 'エラーが発生したため プロフィール項目 は保存されませんでした。'
       expect(page).to have_content '項目を入力してください'
+    end
+  end
+  context '8つ目の項目を追加しようとした時' do
+    it 'エラーメッセージが表示され、追加できない' do
+      click_button '次へ'
+      team = Team.last
+      7.times do
+        create(:profile_field, team:)
+      end
+      # データ操作を後からしたのでリロード
+      visit new_teams_profile_field_path
+      # 項目に付随する削除リンクの数を数える
+      # なお、削除ボタンはデフォルト項目には表示されない
+      expect(page).to have_link('削除', count: 7)
+      fill_in '項目',	with: 'この項目は追加できない'
+      expect { click_button '追加' }.not_to change(ProfileField, :count)
+      expect(page).to have_content '追加できる項目は7個までです'
     end
   end
 end

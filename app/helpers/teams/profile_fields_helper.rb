@@ -1,4 +1,4 @@
-module Teams::ProfilesHelper
+module Teams::ProfileFieldsHelper
   # 引数の項目がデフォルト（名前、生年月日）以外であれば、trueを返す
   def default_field?(profile_field)
     true if profile_field.name == '名前' || profile_field.name == '生年月日'

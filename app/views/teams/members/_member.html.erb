@@ -1,5 +1,5 @@
 
-<%= link_to team_member_path(@team.uuid,member.id),data:{turbo_frame:"modal"} do %>
+<%= link_to team_member_path(@team.uuid,member.id),data:{turbo_frame:"modal"},id: "member-link-#{member.id}" do %>
     <div class="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex mb-3 items-start space-x-6">
     <% if member.image.attached? %>
         <%= image_tag member.image.variant(resize_to_limit: [100, 100]), class: "rounded-full w-24 h-24" %>

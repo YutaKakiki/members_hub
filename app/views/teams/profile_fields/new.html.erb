@@ -1,24 +1,32 @@
 <h1 class="text-2xl font-bold mb-6">チームのプロフィール項目を設定</h1>
 
-
-<%= render 'teams/profile_fields/form' %>
-
-
-<div id="profile_fields" class="mt-10">
-   <div class="bg-white border border-gray-200 rounded-lg p-4 w-2/5 mt-2">
-        <p class="text-lg font-semibold text-gray-800">
-            <div class="flex items-center justify-between">
-               プロフィール画像
-            </div>
-        </p>
+<div class="flex">
+  <div class="w-1/2">
+    <div class="mb-10">
+      <%=turbo_frame_tag "fields_counter" do%>
+        <%= render 'teams/profile_fields/fields_counter'%>
+      <% end %>
     </div>
-  <% if @team %>
-    <%= render @team.profile_fields %>
-  <% end %>
-</div>
-
-<div class="mt-40">
-<%= turbo_frame_tag "complete-button" do %> 
-  <%= render 'teams/profile_fields/complete_button' %>
-<% end %>
+    <%= render 'teams/profile_fields/form' %>
+    <div class="mt-10">
+      <%= turbo_frame_tag "complete-button" do %> 
+        <%= render 'teams/profile_fields/complete_button' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="w-1/2 ml-2">
+    <div id="profile_fields" class="mt-5">
+      <div class="bg-white border border-gray-200 rounded-lg p-3 w-96 mt-2">
+          <p class="text-lg font-semibold text-gray-800">
+              <div class="flex items-center justify-between">
+                  プロフィール画像
+              </div>
+          </p>
+      </div>
+        <% if @team %>
+          <%= render @team.profile_fields %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

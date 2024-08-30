@@ -1,5 +1,5 @@
 module ApplicationHelper
   include FormHelper
-  include Teams::ProfilesHelper
+  include Teams::ProfileFieldsHelper
   include Teams::MembersHelper
 end

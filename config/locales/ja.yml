@@ -1,5 +1,12 @@
 ---
 ja:
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: "..."
   activerecord:
     models:
       team: "チーム"
@@ -203,6 +210,8 @@ ja:
       prevent_dup_member: "既に参加しているチームです"
     profile_values:
       not_empty_content: "プロフィール項目を全て入力してください"
+    profile_fields:
+      already_reached_limit: "追加できる項目は%{limit}個までです"
   notice:
     teams:
       authentication_succeed: "%{team} への認証に成功しました"

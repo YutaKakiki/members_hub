@@ -1,7 +1,15 @@
 <%=turbo_stream.append "profile_fields" do%>
-    <%= render "teams/profile_fields/profile_field",profile_field:@profile_field %>
+  <%= render "teams/profile_fields/profile_field",profile_field:@profile_field %>
 <% end %>
 
 <%= turbo_stream.update "complete-button" do %>
   <%= render 'teams/profile_fields/complete_button'%>
+<% end %>s
+
+<%= turbo_stream.update "error-msgs"%>
+
+<%= turbo_stream.update "flash", partial: "shared/flash" %>
+
+<%=turbo_stream.update "fields_counter" do%>
+  <%= render 'teams/profile_fields/fields_counter'%>
 <% end %>

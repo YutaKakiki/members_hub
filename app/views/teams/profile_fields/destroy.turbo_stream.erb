@@ -4,3 +4,8 @@
   <%= render 'teams/profile_fields/complete_button'%>
 <% end %>
 
+<%=turbo_stream.update "fields_counter" do%>
+  <%= render 'teams/profile_fields/fields_counter'%>
+<% end %>
+
+

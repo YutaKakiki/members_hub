@@ -1,0 +1,11 @@
+<%# Link to the "Next" page
+  - available local variables
+    url:           url to the next page
+    current_page:  a page object for the currently displayed page
+    total_pages:   total number of pages
+    per_page:      number of items to fetch per page
+    remote:        data-remote
+-%>
+<% if current_page < total_pages %>
+  <%= link_to raw(t('views.pagination.next')), url, class: "inline-block px-4 py-2 border border-gray-300  bg-gray-200 hover:bg-gray-300 text-gray-600 text-lg w-14 text-center" %>
+<% end %>

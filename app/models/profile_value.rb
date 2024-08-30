@@ -10,6 +10,11 @@ class ProfileValue < ApplicationRecord
     end
   end
 
+  def self.valid_content?(member)
+    # 全てが正常な値（presence）かどうか
+    true if member.profile_values.all?(&:valid?)
+  end
+
   def self.reset_content_from_session(controller)
     5.times do |i|
       controller.session["content#{i}"] = nil
