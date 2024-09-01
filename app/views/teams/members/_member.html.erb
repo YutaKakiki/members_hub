@@ -1,6 +1,7 @@
 
+
 <%= link_to team_member_path(@team.uuid,member.id),data:{turbo_frame:"modal"},id: "member-link-#{member.id}" do %>
-    <div class="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex mb-3 items-start space-x-6">
+    <div class="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex mb-2 items-start space-x-6">
     <% if member.image.attached? %>
         <%= image_tag member.image.variant(resize_to_limit: [100, 100]), class: "rounded-full w-24 h-24" %>
     <% end %>
@@ -17,11 +18,11 @@
                     <% if field_name && value_content&& i <= 4 %>
                             <% if field_name != "名前" %>
                                 <div class="flex-1 xl:w-[126px] 2xl:w-36 ">
-                                    <p class="font-semibold  rounded-sm px-2 py-1 text-start inline-block bg-gray-500 text-stone-50 text-sm"><%=truncate(field_name,length:6,ommission:"..." ) %></p>
+                                    <p class="font-semibold   px-2 py-1 text-start inline-block bg-gray-500 text-stone-50 text-xs"><%=truncate(field_name,length:6,ommission:"..." ) %></p>
                                     <% if field_name == "生年月日" %>
                                         <p class="text-gray-500"><%= Date.parse(value_content).strftime("%Y/%m/%d")%></p>
                                     <% else %>
-                                        <p class="text-gray-500"><%=truncate(value_content,length:6,ommission:"..." )%></p>
+                                        <p class="text-gray-500"><%=truncate(value_content,length:7,ommission:"..." )%></p>
                                     <% end %>
                                 </div>
                             <% end %>    

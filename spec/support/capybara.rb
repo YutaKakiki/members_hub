@@ -14,6 +14,7 @@ Capybara.register_driver :selenium_chrome_headless do |_app|
   options.add_argument('--disable-dev-shm-usage')
   options.add_argument('--window-size=1400,1400')
 end
+
 # jsを使用するテストには自動でヘッドレスモードのChromeが使用される
 Capybara.javascript_driver = :selenium_chrome_headless
 

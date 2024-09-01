@@ -1,0 +1,14 @@
+<div data-form-target="field">
+    <div class="flex items-center my-3" data-field-id="<%= SecureRandom.uuid %>"> 
+        <div class="flex">
+            <i class="fa-solid fa-circle-plus text-3xl mr-2 text-blue-500" data-action="click->form#addField" id="plus-button"></i>
+            <div class="mx-[19px] margin" ></div>
+            <div class="hidden">
+             <i class="fa-solid fa-circle-minus text-3xl mr-2 text-red-500" data-action="click->form#removeField"></i>
+            </div>
+        </div>
+        <%= f.collection_select "field1", @profile_fields, :id, :name, prompt: "プロフィール項目を選択",class:"block border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500  w-96"%>
+        <i class="fa-solid fa-equals text-xl font-bold mx-2"></i>
+        <%= f.text_field "value1",class: "block border border-gray-300 rounded-sm shadow-sm focus:border-blue-500 focus:ring-blue-500 w-50", placeholder: "検索ワードを入力" %>   
+    </div>
+</div>

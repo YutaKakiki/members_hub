@@ -4,6 +4,11 @@
 # ❷メンバー一覧ページにて、表示するためのProfileField.nameとProfileValue.contentの２つをペアで返す場合
 # 　=>contentはMemberのインスタンスが持つprofile_valuesから抽出
 class ReturnProfileAttributePairsService
+
+  def self.call (team,params:nil,member:nil)
+    new(team,params,member).call
+  end
+
   def initialize(team, params: nil, member: nil)
     @team = team
     @params = params

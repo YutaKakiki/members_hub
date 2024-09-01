@@ -1,0 +1,12 @@
+
+<%=turbo_frame_tag "team-members" do%>
+    <div class="grid grid-cols-2 grid-flow-row gap-4">
+        <%= render partial: 'teams/members/member',collection: @members %> 
+    </div>
+    <div class="my-20">
+        <% if @members %>
+           <%=paginate(@members)%>
+        <% end %>
+    </div>
+<% end %>
+

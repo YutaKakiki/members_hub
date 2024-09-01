@@ -76,4 +76,7 @@ RSpec.configure do |config|
 
   # 各プロバイダのモックを作成するモジュールを読み込む
   config.include OmniauthMock, type: :system
+
+  # テストヘルパーを読み込む
+  config.include TestHelpers
 end

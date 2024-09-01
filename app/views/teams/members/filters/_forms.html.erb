@@ -1,0 +1,15 @@
+
+<div class="bg-white  rounded-lg px-8 py-1 border border-gray-200  mb-10 w-3/5 ">
+    <h2 class="text-xl font-bold my-2">メンバーを検索</h1>
+    <div class="flex justify-start">
+        <%=form_with(url:team_members_filters_path(@team.uuid),method: :get,class:"w-full",data:{turbo_frame:"filtered-team-members"}) do |f|%>
+            <div data-controller="form" data-form-target="container">
+                <%= render 'teams/members/filters/field',f:f %>
+            </div>
+            <div class="flex justify-end  mb-2">
+                <%= f.submit "検索", class: "p-10 bg-blue-500 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ml-2 h-9.5" %>  
+            </div>
+        <% end %>
+    </div>
+</div>
+
