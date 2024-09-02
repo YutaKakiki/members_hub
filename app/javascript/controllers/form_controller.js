@@ -59,4 +59,11 @@ export default class extends Controller {
       textField.name = `value${this.currentIndexValue+1}`;
     }
   }
+
+  submit(){
+    clearTimeout(this.timeout)
+    this.timeout=setTimeout(()=>{
+      this.element.requestSubmit()
+    },200)
+  }
 }

@@ -67,7 +67,7 @@ RSpec.configure do |config|
 
   # jsを使用するテストの場合は、chromeのヘッドレスドライバ使用
   config.before(:each, type: :system, js: true) do
-    driven_by :remote_chrome
+    driven_by :selenium_chrome
   end
 
   # deviseのヘルパーメソッドを呼び出せるようにする

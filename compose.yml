@@ -12,6 +12,11 @@ services:
     # 無くても動くが指定しておくとコンテナ停止時にサービスが再起動してくれる
     # https://docs.docker.jp/v19.03/config/container/start-containers-automatically.html
     restart: always
+  selenium_chrome:
+    image: selenium/standalone-chrome:latest
+    platform: linux/amd64
+    ports:
+      - 4444:4444
   web:
     build: .
     # tmp/pids/server.pidが残ってたら `A server is already running. ~~` のエラーでrailsを起動できないので事前に消してから、`rails sever` する
@@ -32,10 +37,5 @@ services:
     depends_on:
       - db
       - selenium_chrome
-  selenium_chrome:
-    image: selenium/standalone-chrome:latest
-    platform: linux/amd64
-    ports:
-      - 4444:4444
 volumes:
   postgres_volume:

@@ -8,9 +8,6 @@
     <div class="my-10">
       <%= render 'teams/members/filters/found_members_counter' %>
     </div>
-    <% unless @members.any? %> 
-        <%= render 'teams/members/filters/not_found' %>
-    <% end %>  
     <%= render 'teams/members/shared/members' %>
 <% end %>
 
