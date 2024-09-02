@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :profile_value do
-    sequence(:content) { |n| "項目内容#{n}" }
+    sequence(:content) { |n| "内容#{n}" }
     association :member
     association :profile_field
     trait :name do

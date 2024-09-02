@@ -24,8 +24,8 @@ RSpec.describe 'MemberProfiles', type: :system do
       expect(page).to have_selector('input[name="profile_value[content1]"]')
       expect(page).to have_selector('input[name="profile_value[content9]"]')
 
-      9.times do |n|
-        expect(page).to have_content("項目")
+      9.times do |_n|
+        expect(page).to have_content('項目')
       end
     end
     it '記入して「登録」を押すと、正常に登録される' do

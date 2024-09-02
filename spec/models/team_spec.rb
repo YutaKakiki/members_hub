@@ -16,6 +16,7 @@ RSpec.describe Team, type: :model do
     end
     after do
       User.destroy_all
+      Member.destroy_all
     end
     it 'そのユーザーをすべて取得できる' do
       members = team.member_users

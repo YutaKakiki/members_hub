@@ -62,14 +62,12 @@ RSpec.describe 'TeamMembersViewings', type: :system do
     it 'チームメンバー個々の詳細を確認できる' do
       find("div[id='member_viewing_button']", text: 'メンバーを閲覧')
       click_link team.name
-      member=Member.first
+      member = Member.first
       # 名前の部分をクリック（正確にはカード内のどこででもいい）
       click_link "member-link-#{member.id}"
       # プロフィール項目が全て表示されている
-      team.profile_fields.each  do |profile_field|
-        unless profile_field.name == "名前"
-         expect(page).to have_content(profile_field.name)
-        end
+      team.profile_fields.each do |profile_field|
+        expect(page).to have_content(profile_field.name) unless profile_field.name == '名前'
       end
     end
   end

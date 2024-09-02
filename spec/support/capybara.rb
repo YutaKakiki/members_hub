@@ -1,25 +1,29 @@
-require 'capybara/rspec'
-require 'selenium-webdriver'
+RSpec.configure do |config|
+  config.before(:each, type: :system) do
+    driven_by :remote_chrome
+    Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+    Capybara.server_port = 4444
+    Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+  end
 
-# selenium_chrome_headlessという名前でCapybaraドライバ登録
-Capybara.register_driver :selenium_chrome_headless do |_app|
-  # Chromeオプション設定のためのオブジェクト
-  options = Selenium::WebDriver::Chrome::Options.new
-  # GUI使わずに実行
-  options.add_argument('--headless')
-  # コンテナ内でChrome実行するのに必要
-  # サンドボックス:ブラウザを他のシステムプロセスから隔離された環境で実行すること
-  options.add_argument('--no-sandbox')
-  # コンテナ内でChrome実行するのに必要
-  options.add_argument('--disable-dev-shm-usage')
-  options.add_argument('--window-size=1400,1400')
+  config.before(:each, type: :system, js: true) do
+    driven_by :remote_chrome
+    Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+    Capybara.server_port = 4444
+    Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+  end
 end
 
-# jsを使用するテストには自動でヘッドレスモードのChromeが使用される
-Capybara.javascript_driver = :selenium_chrome_headless
-
-Capybara.configure do |config|
-  config.default_driver = :selenium_chrome
-  # または
-  # config.default_driver = :rack_test
+# Chrome
+Capybara.register_driver :remote_chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--headless')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-gpu')
+  options.add_argument('--disable-dev-shm-usage')
+  options.add_argument('--window-size=1200,800')
+  options.add_argument('--user-agent=Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko)
+                      Chrome/17.0.963.79 Safari/535.11')
+  options.add_argument('--lang=ja')
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
 end
