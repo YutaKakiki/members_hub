@@ -217,3 +217,5 @@ ja:
       authentication_succeed: "%{team} への認証に成功しました"
     members:
       join_team_successfully: "%{team} に参加しました"
+    profile_values:
+      update_successfully: "%{team} のプロフィールを更新しました"

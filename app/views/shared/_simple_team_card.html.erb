@@ -1,21 +1,14 @@
-<% if size == "large" %>
-    <div class="flex items-center bg-white  rounded-lg p-2 border border-gray-200 w-2/5 mb-10">
-        <% if @team %>
-            <% if @team.logo.attached? %>
-                <%= image_tag @team.logo.variant(resize_to_limit:[80,80]),class:"rounded-md mr-5" %>
-            <% end %>
-
-            <p class="text-2xl font-semibold"><%= @team.name %></p>
-        <% end %>
-    </div>
-<% else %>
+<% if @team %>
     <div class="flex items-center bg-white  rounded-lg p-2 pr-7 border border-gray-200 w-auto mb-10">
-        <% if @team %>
+        <div class="w-auto">
             <% if @team.logo.attached? %>
                 <%= image_tag @team.logo.variant(resize_to_limit:[60,60]),class:"rounded-md mr-5" %>
             <% end %>
-
+        </div>
+        <div class="w-auto">
             <p class="text-xl font-semibold"><%= @team.name %></p>
-        <% end %>
+        </div>
     </div>
 <% end %>
+
+

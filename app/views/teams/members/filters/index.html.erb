@@ -1,13 +1,15 @@
 <div class="flex justify-between -mb-7">
     <h1 class="text-2xl font-bold">メンバーを閲覧</h1>
-    <%= render "shared/simple_team_card",size:"small" %>
+    <%= render "shared/simple_team_card" %>
 </div>
-<%= render 'teams/members/filters/forms' %>
+<%= render 'teams/members/filters/forms'%>
 
 <%=turbo_frame_tag "filtered-team-members" do%>
-    <div class="my-10">
+    <div class="my-10 flex items-center  justify-start">
       <%= render 'teams/members/filters/found_members_counter' %>
+      <%= link_to "検索条件をリセット", team_members_path(@team.uuid), class: "ml-20 inline-flex text-lg font-semibold rounded-md bg-blue-500 p-2 text-white duration-100 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2" %>
+
     </div>
     <%= render 'teams/members/shared/members' %>
-<% end %>
 
+<% end %>

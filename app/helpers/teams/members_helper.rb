@@ -4,4 +4,8 @@ module Teams::MembersHelper
     service = ReturnProfileAttributePairsService.new(team, member:)
     service.call
   end
+
+  def current_member?(member)
+    member.user_id == current_user.id
+  end
 end

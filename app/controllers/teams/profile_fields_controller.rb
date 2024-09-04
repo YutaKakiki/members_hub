@@ -3,6 +3,7 @@ class Teams::ProfileFieldsController < ApplicationController
   before_action :create_default_fields, only: :new
 
   def new
+    @team = Team.find_by(id: session[:team_id])
     @profile_field = ProfileField.new
   end
 

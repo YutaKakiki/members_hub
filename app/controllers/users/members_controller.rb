@@ -26,6 +26,15 @@ class Users::MembersController < ApplicationController
 
   # チームから退会する（メンバーとしての登録を削除）
   def destroy
+    member=Member.find_by(id:params[:id])
+    team=member.team
+    if member.destroy
+      redirect_to users_members_path
+      flash[:notice]="#{team.name} を退会しました"
+    else
+      redirect_to users_members_path
+      flash[:alert]="#{team.name} の退会に失敗しました"
+    end
   end
 
   private

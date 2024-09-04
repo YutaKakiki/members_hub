@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :filters, only: %i[create index],controller:"teams/members/filters",as: :members_filters
     resources :members, only: %i[index show], module: :teams
   end
+  resources :users,only: %i[edit destroy]
   namespace :users do
     namespace :admins do
       resources :teams,only: :index

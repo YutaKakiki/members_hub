@@ -1,35 +1,11 @@
 <%= render 'layouts/components/modal' do%>
-    <div class="flex justify-between items-start">
-        <div class="flex justify-start items-start m-2">
-            <% if @member.image.attached? %>
-                <%= image_tag @member.image.variant(resize_to_limit: [100, 100]), class: "rounded-full  w-24 h-24" %>
-            <% end %>
-            <p class="text-3xl font-bold text-gray-800 w-96 ml-4"><%=@member.profile_values.first.content%></p>
-        </div> 
-        <button data-action="modal#close" class="text-3xl">
-            <i class="fa-solid fa-square-xmark"></i>
-        </button>
-    </div>
-   <div class="flex -mt-5 items-start space-x-6 p-10 ml-20">
-    <div class="flex">
-        <div class="grid grid-cols-2 grid-flow-row gap-2">
-            <% field_name_and_value_content_pairs_arr(@team, @member).each do |field_name, value_content| %>
-                    <% if field_name && value_content%>
-                            <% if field_name != "名前" %>
-                                <div class="flex-1 p-1">
-                                    <p class="font-semibold text-md -mt-4 mb-1  px-2 py-1 inline-block bg-gray-500 text-stone-50"><%=field_name%></p>
-                                    <div class="overflow-auto h-20"> 
-                                        <% if field_name == "生年月日" %>
-                                            <p class="text-gray-500 text-xl"><%= Date.parse(value_content).strftime("%Y/%m/%d")%></p>
-                                        <% else %>
-                                            <p class="text-gray-500 text-xl w-64 break-words"><%=value_content%></p>
-                                        <% end %>
-                                    </div>
-                                </div>
-                            <% end %>    
-                    <% end %>
+   <%= render '/teams/members/member_detail'%> 
+   <% if current_member?(@member) %>
+        <div class="flex justify-end">
+            <%= link_to  edit_users_members_profile_value_path(@member.id),data:{turbo:false},class:"border-b border-black hover:font-semibold hover:border-b-2" do%>  
+                <i class="fa-solid fa-pen-to-square"></i>
+                編集する
             <% end %>
         </div>
-    </div>
-   </div>
+   <% end %>
 <% end %>

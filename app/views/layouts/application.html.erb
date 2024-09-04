@@ -19,12 +19,11 @@
   <% if user_signed_in? %>
     <div class="flex h-screen">
       <!-- サイドバー -->
-      <div class="w-1/6 bg-gray-200">
+      <div class="w-1/6 2xl:w-60 bg-gray-200">
         <%= render "layouts/sidebar" %>
       </div>
-      
       <!-- メインコンテンツ -->
-      <div class="w-5/6 overflow-auto">
+      <div class="w-5/6 2xl:w-7/8 overflow-auto">
         <div id="flash">
           <%= render "shared/flash" %>
         </div>

@@ -1,0 +1,58 @@
+<div class="flex justify-between">
+    <h1 class="text-2xl font-bold">プロフィールを編集</h1>
+    <%= render "shared/simple_team_card" %>
+</div>
+<div class="">
+    <%= form_with(url: users_members_profile_value_path, method: :patch) do |f| %>
+        <div>
+            <div class="grid grid-cols-2 grid-flow-row gap-3">
+                
+                <% if @profile_values %>
+                    <% @profile_values.each do |profile_value| %>
+                        <%=fields_for "profile_values[]", profile_value do |v| %>
+                        <%= render 'shared/error_messages', resource: profile_value %>
+                        <div>
+                            <%= v.label profile_value.profile_field.name, class: "block text-gray-700 text-sm font-medium" %>
+                            <% if profile_value.profile_field.name == "生年月日" %>
+                                <%= v.date_field :content, value: profile_value.content, class: "block border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 w-96" %>
+                            <% else %>
+                                <%= v.text_field :content, value: profile_value.content, class: "block border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 w-96" %>
+                            <% end %>
+                        </div>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                
+                <% if @member %>
+                    <%=fields_for @member do |m|%>
+                        <div class="flex">
+                            <div class="flex items-start">
+                                <div class="mr-5">
+                                    <%= f.label "プロフィール画像", class: "block text-gray-700 text-sm font-medium mb-1" %>
+                                    <%= f.file_field :image, class: "mt-1 block w-60 border border-gray-300 rounded-md py-2 px-3 bg-white shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm", direct_upload: true, data: { previews_target: "input", action: "change->previews#preview" } %>     
+                                </div>
+                            <div class="mt-5">
+                            <% if @member.image.attached? %>
+                                <%= image_tag @member.image.variant(resize_to_limit:[200,200]) ,data: { preview_target: "preview" } %>
+                            <% end %>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+        <div>
+            <%= f.submit "更新", class: "bg-blue-500 text-white py-2 px-4 rounded-md shadow-sm mt-10 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+        </div>
+    <% end %>
+</div>
+
+
+
+
+
+
+
+
+
+

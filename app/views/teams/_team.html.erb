@@ -1,9 +1,30 @@
-<div class="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex">
-  <% if team.logo.attached? %>
-     <%= image_tag team.logo.variant(resize_to_limit:[100,100]),class:"rounded-md mr-5" %>
-  <% end %>
-  <div>
-    <p class="text-xl font-semibold mb-2"><%= team.name %></p>
-    <p class="text-gray-600">ID: <%= team.uuid %></p>
+<div class="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex mb-4 w-4/5 h-32">
+  <div class="flex w-3/5">
+    <div class="w-1/4">
+      <% if team.logo.attached? %>
+        <%= image_tag team.logo.variant(resize_to_limit:[100,100]),class:"rounded-md mr-5" %>
+      <% end %>
+    </div>
+    <div>
+      <p class="text-xl font-semibold mb-2"><%= team.name %></p>
+      <p class="text-gray-600">ID: <%= team.uuid %></p>
+    </div>
   </div>
+  <div class="border-l-2 border-gray-400"></div>
+    <% if member_teams %>
+      <div class="ml-4">
+        <%= link_to "プロフィールを確認" ,team_member_path(team.uuid,current_member(team).id),data:{turbo_frame:"modal"},class:"border bg-gray-500 text-white text-md p-1.5 rounded-md font-semibold hover:bg-gray-600" %>
+        <div class="mt-4">
+          <%= link_to users_member_path(current_member(team).id),data:{turbo_method: :delete,turbo_confirm:"本当にチームを退会してよろしいですか？"},class:"border bg-rose-500 text-md text-white p-1.5 rounded-md font-semibold mt-4 hover:bg-rose-600" do%>
+            <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
+            退会
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="ml-4">
+        <p>チームを編集</p>
+        <p>チームを削除</p>
+      </div>
+    <% end %>
 </div>
