@@ -5,8 +5,7 @@
         <%=form_with(url:team_members_filters_path(@team.uuid),method: :get,class:"w-full",data:{turbo_frame:"filtered-team-members",controller:"form",action:"input->form#submit"}) do |f|%>
             <div data-form-target="container">
                 <%= render 'teams/members/filters/field',f:f %>
-            </div>
-                
+            </div>  
         <% end %>
     </div>
 </div>

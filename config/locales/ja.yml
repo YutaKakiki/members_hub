@@ -206,6 +206,7 @@ ja:
       team_has_profile_fields_less_than_two: "プロフィール項目を設定しなかったため、チームの作成を取消しました"
     teams:
       invalid_team_id/password_combination: "チームID/パスワードの組み合わせに誤りがあります" 
+      delete_failed: "%{team} の削除に失敗しました"
     members:
       prevent_dup_member: "既に参加しているチームです"
     profile_values:
@@ -215,6 +216,7 @@ ja:
   notice:
     teams:
       authentication_succeed: "%{team} への認証に成功しました"
+      successfully_deleted: "%{team} を削除しました"
     members:
       join_team_successfully: "%{team} に参加しました"
     profile_values:

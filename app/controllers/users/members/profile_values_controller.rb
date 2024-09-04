@@ -45,12 +45,11 @@ class Users::Members::ProfileValuesController < ApplicationController
   end
 
   def update
-    member=Member.find_by(id:params[:id])
-    team=member.team
 
     # profile_valueをそれぞれ更新
+    # params:{profile_values=>{23=>{content:"〇〇"},{21=>{〇〇},,,,}}}
     update_profile_params[:profile_values].each do |id,value|
-      # 空の場合は何もしないので、メソッドを脱出
+      # 空の場合は更新を行わないので、メソッドを脱出
       if value[:content].blank?
         redirect_to edit_users_members_profile_value_path
         flash[:alert] = I18n.t('alert.profile_values.not_empty_content')
@@ -60,12 +59,14 @@ class Users::Members::ProfileValuesController < ApplicationController
       profile_value.update(content:value[:content])
     end
 
-    # 画像は、この条件をとると、空のparamsを受け入れて画像が消えます
+    member=Member.find_by(id:params[:id])
+    # 画像は、この条件をとると、空のparamsを受け入れてしまい画像が消えます
     if update_image_params[:image]
       member.image.attach(update_image_params[:image])
     end
 
     redirect_to users_members_teams_path
+    team=member.team
     flash[:notice]=I18n.t("notice.profile_values.update_successfully",team:team.name)
   end
 

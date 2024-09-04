@@ -19,6 +19,17 @@ class TeamsController < ApplicationController
     end
   end
 
+  def destroy
+    team=Team.find_by(id:params[:id])
+    if team.destroy
+      flash[:notice]=I18n.t("notice.teams.successfully_deleted",team:team.name)
+      redirect_to users_admins_teams_path
+    else
+      flash[:alert]=I18n.t("alert.teams.delete_failed",team:team.name)
+      redirect_to users_admins_teams_path
+    end
+  end
+
   private
 
   def team_params
