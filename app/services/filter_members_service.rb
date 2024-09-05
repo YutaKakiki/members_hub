@@ -49,7 +49,7 @@ class FilterMembersService
       content = value[:value]
 
       # 生年月日は「2002/12/24」などの入力を2002-12-24に変更する
-      content=change_date_format(field,content)
+      content = change_date_format(field, content)
 
       # 異なるprofile_field_idの条件でAND検索するため、項目条件の個数分membersとprofile_valuesを内部結合する
       alias_name_of_profile_values = "profile_values#{i + 1}" # 複数回結合する際、テーブルを識別する必要があるため
@@ -83,12 +83,12 @@ class FilterMembersService
     query.distinct
   end
 
-
-  def change_date_format(profile_field_id,content)
+  def change_date_format(profile_field_id, content)
     return false unless profile_field_id && content
-    profile_field=ProfileField.find_by(id:profile_field_id)
-    if profile_field && profile_field.name == "生年月日"
-      content.gsub("/","-")
+
+    profile_field = ProfileField.find_by(id: profile_field_id)
+    if profile_field && profile_field.name == '生年月日'
+      content.gsub('/', '-')
     else
       content
     end

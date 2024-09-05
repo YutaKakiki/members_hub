@@ -218,6 +218,7 @@ ja:
     teams:
       authentication_succeed: "%{team} への認証に成功しました"
       successfully_deleted: "%{team} を削除しました"
+      updated_successfully: "チームの情報を更新しました"
     members:
       join_team_successfully: "%{team} に参加しました"
     profile_values:

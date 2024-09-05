@@ -17,8 +17,8 @@ module TestHelpers
     end
     # 30人のメンバープロフィールを登録
     members = Member.limit(30)
-    members.map.with_index(1) do |member,i|
-      create(:profile_value, content:"Example User#{i}", member:, profile_field: name_field)
+    members.map.with_index(1) do |member, i|
+      create(:profile_value, content: "Example User#{i}", member:, profile_field: name_field)
       create(:profile_value, :birth, member:, profile_field: birth_field)
       custom_profile_fields.map do |custom_profile_field|
         # 内容には、「内容１」など、フィルタリング検索がうまくいくように区別する

@@ -8,9 +8,9 @@ class ProfileField < ApplicationRecord
     true if team.profile_fields.count == 9
   end
 
-  def self.unfilled_profile_field(team,member)
-    profile_values=member.profile_values.pluck(:profile_field_id)
-    profile_fields=team.profile_fields
+  def self.unfilled_profile_field(team, member)
+    profile_values = member.profile_values.pluck(:profile_field_id)
+    profile_fields = team.profile_fields
     profile_fields.reject do |field|
       profile_values.include?(field.id)
     end

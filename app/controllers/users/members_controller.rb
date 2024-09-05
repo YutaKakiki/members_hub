@@ -14,7 +14,7 @@ class Users::MembersController < ApplicationController
       # 遷移先で直近で作成したmemberを取得するため
       session[:member_id] = current_user.members.last.id
       # プロフィール登録画面へ遷移させる
-      redirect_to new_users_members_profile_value_path(team_id:@team.uuid)
+      redirect_to new_users_members_profile_value_path(team_id: @team.uuid)
       flash[:notice] = I18n.t('notice.teams.authentication_succeed', team: @team.name)
     else
       flash[:alert] = I18n.t('alert.teams.invalid_team_id/password_combination')
@@ -24,14 +24,13 @@ class Users::MembersController < ApplicationController
 
   # チームから退会する（メンバーとしての登録を削除）
   def destroy
-    member=Member.find_by(id:params[:id])
-    team=member.team
+    member = Member.find_by(id: params[:id])
+    team = member.team
+    redirect_to users_members_path
     if member.destroy
-      redirect_to users_members_path
-      flash[:notice]="#{team.name} を退会しました"
+      flash[:notice] = "#{team.name} を退会しました"
     else
-      redirect_to users_members_path
-      flash[:alert]="#{team.name} の退会に失敗しました"
+      flash[:alert] = "#{team.name} の退会に失敗しました"
     end
   end
 

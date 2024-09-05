@@ -32,7 +32,7 @@ RSpec.describe 'TeamProfiles', type: :system do
       expect(page).to have_content '追加した追加した項目数: 1'
       # 実際は、turbo_streamによりリアルタイムに追加されるが、
       # テストだとうまく表示されていないのでリロードして確認することにする
-      visit new_teams_profile_field_path(team_id:Team.last.uuid)
+      visit new_teams_profile_field_path(team_id: Team.last.uuid)
       expect(page).to have_content 'ニックネーム'
       expect(page).to have_link('削除', count: 1)
       team_profile_field_count = Team.last.profile_fields.count
@@ -48,11 +48,11 @@ RSpec.describe 'TeamProfiles', type: :system do
       click_button '次へ'
       fill_in '項目', with: '後から削除する項目'
       click_button '追加'
-      visit new_teams_profile_field_path(team_id:Team.last.uuid)
+      visit new_teams_profile_field_path(team_id: Team.last.uuid)
       # 作った項目を削除する
       expect { click_link '削除' }.to change(ProfileField, :count).from(3).to(2)
       # 例の如くリロード
-      visit new_teams_profile_field_path(team_id:Team.last.uuid)
+      visit new_teams_profile_field_path(team_id: Team.last.uuid)
       expect(page).to have_no_content '後から削除する項目'
       visit root_path
       expect(page).to have_content 'プロフィール項目を設定しなかったため、チームの作成を取消しました'
@@ -75,7 +75,7 @@ RSpec.describe 'TeamProfiles', type: :system do
         create(:profile_field, team:)
       end
       # データ操作を後からしたのでリロード
-      visit new_teams_profile_field_path(team_id:Team.last.uuid)
+      visit new_teams_profile_field_path(team_id: Team.last.uuid)
       # 項目に付随する削除リンクの数を数える
       # なお、削除ボタンはデフォルト項目には表示されない
       expect(page).to have_link('削除', count: 7)

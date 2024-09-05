@@ -15,10 +15,10 @@ class ProfileValue < ApplicationRecord
     true if member.profile_values.all?(&:valid?)
   end
 
-  def self.reset_content_from_session(team,controller)
+  def self.reset_content_from_session(team, controller)
     content_count = team.profile_fields.count
     content_count.times do |i|
-      controller.session["content#{i+1}"] = nil
+      controller.session["content#{i + 1}"] = nil
     end
   end
 end

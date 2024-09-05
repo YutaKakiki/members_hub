@@ -19,14 +19,17 @@ class Users::Admins::TeamsController < ApplicationController
     # チームを参照することはなく、情報を維持する必要がないため、sessionを空にする
     session[:team_id] = nil
   end
+
   # 上と同じく、項目の編集が完了すれば、indexアクションにリダイレクトする
   # チームの新規作成時を除いて、更新があった場合はフラッシュを出す。
   def notify_profile_field_updated
-    return  if session[:team_id] #チーム新規作成時は脱出
-    puts "コオコアbほv"
-    return unless session[:team_of_profile_field_updated_now] #更新していなかった場合も脱出
-    team=Team.find_by(uuid:session[:team_of_profile_field_updated_now]).name
-    flash[:notice]=I18n.t("notice.profile_fields.update_successfully",team:)
-    session[:team_of_profile_field_updated_now]=nil
+    return if session[:team_id] # チーム新規作成時は脱出
+
+    Rails.logger.debug 'コオコアbほv'
+    return unless session[:team_of_profile_field_updated_now] # 更新していなかった場合も脱出
+
+    team = Team.find_by(uuid: session[:team_of_profile_field_updated_now]).name
+    flash[:notice] = I18n.t('notice.profile_fields.update_successfully', team:)
+    session[:team_of_profile_field_updated_now] = nil
   end
 end
