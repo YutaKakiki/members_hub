@@ -13,10 +13,8 @@ class Users::MembersController < ApplicationController
       # EnsureProfileExistsコールバックオブジェクトにて使用
       # 遷移先で直近で作成したmemberを取得するため
       session[:member_id] = current_user.members.last.id
-      # リダイレクト先でteamを参照するため
-      session[:team_id] = @team.uuid
       # プロフィール登録画面へ遷移させる
-      redirect_to new_users_members_profile_value_path
+      redirect_to new_users_members_profile_value_path(team_id:@team.uuid)
       flash[:notice] = I18n.t('notice.teams.authentication_succeed', team: @team.name)
     else
       flash[:alert] = I18n.t('alert.teams.invalid_team_id/password_combination')

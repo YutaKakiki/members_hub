@@ -1,5 +1,4 @@
-
-<%= form_with(model: @profile_field, url: teams_profile_fields_path, local: true,data: { controller: "form", action: "turbo:submit-end->form#clearForm"}) do |f| %>
+<%= form_with(model: @profile_field, url: teams_profile_fields_path(team_id:@team.uuid), local: true,data: { controller: "form", action: "turbo:submit-end->form#clearForm"}) do |f| %>
     <div id="error-msgs">
         <%= render 'shared/error_messages', resource: @profile_field %>
     </div>
@@ -9,4 +8,7 @@
         <%= f.submit "追加", class: "bg-blue-500 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ml-2 h-9.5" %>  
     </div>
 <% end %>
+
+
+
 

@@ -12,7 +12,7 @@
 <div class="flex -mt-5 items-start p-5">
     <div class="flex">
         <div class="grid grid-cols-2 grid-flow-row gap-2">
-            <% field_name_and_value_content_pairs_arr(@team, @member).each do |field_name, value_content| %>
+            <% field_name_and_value_content_pairs_arr(@team,@member).each do |field_name, value_content| %>
                     <% if field_name && value_content%>
                             <% if field_name != "名前" %>
                                 <div class="flex-1 p-1">

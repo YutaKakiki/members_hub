@@ -3,7 +3,7 @@
     <%= render "shared/simple_team_card" %>
 </div>
 <% if @profile_value %>
-    <%= form_with(model: @profile_value,url:users_members_profile_values_path, local: true) do |f| %>
+    <%= form_with(model: @profile_value,url:users_members_profile_values_path(team_id:@team.uuid), local: true) do |f| %>
         <%= render 'shared/error_messages', resource: @profile_value %>
         <div class="grid grid-cols-2 grid-flow-row">
             <%= render "users/members/profile_values/profile_value_forms",f:f,profile_fields:@profile_fields%>

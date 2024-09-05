@@ -2,11 +2,11 @@
     <h1 class="text-2xl font-bold">プロフィールを編集</h1>
     <%= render "shared/simple_team_card" %>
 </div>
-<div class="">
+<div>
     <%= form_with(url: users_members_profile_value_path, method: :patch) do |f| %>
         <div>
             <div class="grid grid-cols-2 grid-flow-row gap-3">
-                
+
                 <% if @profile_values %>
                     <% @profile_values.each do |profile_value| %>
                         <%=fields_for "profile_values[]", profile_value do |v| %>
@@ -19,6 +19,18 @@
                                 <%= v.text_field :content, value: profile_value.content, class: "block border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 w-96" %>
                             <% end %>
                         </div>
+                        <% end %>
+                    <% end %>
+                <% end %>
+
+                <%if @unfilled_profile_fields %>
+                    <%@unfilled_profile_fields.each do |profile_field|%>
+                        <%=fields_for "unfilled_profile_values[]" do |u|%>
+                            <div>
+                                <%= u.label profile_field.name, class: "block text-gray-700 text-sm font-medium" %>
+                                <%=u.hidden_field :profile_field_id,value:profile_field.id%>
+                                <%= u.text_field :content, class: "block border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 w-96" %>
+                            </div>
                         <% end %>
                     <% end %>
                 <% end %>
@@ -46,7 +58,6 @@
         </div>
     <% end %>
 </div>
-
 
 
 

@@ -2,14 +2,19 @@
 <% if profile_field_present?(profile_field) %>
     <%= turbo_frame_tag profile_field do %>
         <div class="flex">
-            <div class="bg-white border border-gray-200 rounded-lg p-3 w-96 mt-2">
+            <div class="bg-white border border-gray-200 rounded-lg p-3 w-96 mt-1 mb-1">
                 <p class="text-lg font-semibold text-gray-800">
                     <div class="flex items-center justify-between">
                         <%= profile_field.name %>
-                        <%#デフォルトの項目以外は削除できる  %>
-                        <%unless default_field?(profile_field)%>
-                            <%= link_to '削除', teams_profile_field_path(profile_field), data: { turbo_method: :delete }, class: "bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 font-medium "%>
-                        <% end %> 
+                        <div>
+                            <%#デフォルトの項目以外は削除できる  %>
+                            <%unless default_field?(profile_field)%>
+                                <%= link_to '編集',edit_teams_profile_field_path(profile_field), class: "bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 font-medium "%>
+                            <% end %> 
+                            <%unless default_field?(profile_field)%>
+                                <%= link_to '削除', teams_profile_field_path(profile_field,team_id:profile_field.team.uuid), data: { turbo_method: :delete }, class: "bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 font-medium "%>
+                            <% end %> 
+                        </div>
                     </div>
                 </p>
             </div>

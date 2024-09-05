@@ -213,6 +213,7 @@ ja:
       not_empty_content: "プロフィール項目を全て入力してください"
     profile_fields:
       already_reached_limit: "追加できる項目は%{limit}個までです"
+      not_update_to_blank: "項目名を空欄のまま更新することはできません"
   notice:
     teams:
       authentication_succeed: "%{team} への認証に成功しました"
@@ -221,3 +222,5 @@ ja:
       join_team_successfully: "%{team} に参加しました"
     profile_values:
       update_successfully: "%{team} のプロフィールを更新しました"
+    profile_fields:
+      update_successfully: "%{team} のプロフィール項目を更新しました"

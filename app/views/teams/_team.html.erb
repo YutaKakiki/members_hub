@@ -43,7 +43,7 @@
         </div>
         <div class="mt-8 flex items-center">
           <div>
-            <%= link_to edit_teams_profile_field_path(team.uuid),class:"border  text-white bg-gray-500 text-md p-1.5 rounded-md font-semibold hover:bg-gray-600 " do%>
+            <%= link_to teams_profile_fields_path(team_id:team.uuid),class:"border  text-white bg-gray-500 text-md p-1.5 rounded-md font-semibold hover:bg-gray-600 " do%>
               <i class="fa-solid fa-list"></i>
                プロフィール項目を編集
             <% end %>

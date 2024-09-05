@@ -24,27 +24,27 @@ members.map do |member|
 end
 
 # チームのプロフィール項目を設定
-FactoryBot.create(:profile_field,:name,team:)
-FactoryBot.create(:profile_field,:birth,team:)
-FactoryBot.create(:profile_field,team:,name:"大学名")
-FactoryBot.create(:profile_field,team:,name:"学部名")
-FactoryBot.create(:profile_field,team:,name:"出身地")
-FactoryBot.create(:profile_field,team:,name:"高校名")
-FactoryBot.create(:profile_field,team:,name:"好きな曲")
-FactoryBot.create(:profile_field,team:,name:"あなたの夢")
-FactoryBot.create(:profile_field,team:,name:"コメント")
+ profile_field1= FactoryBot.create(:profile_field,:name,team:)
+ profile_field2= FactoryBot.create(:profile_field,:birth,team:)
+ profile_field3= FactoryBot.create(:profile_field,team:,name:"大学名")
+ profile_field4= FactoryBot.create(:profile_field,team:,name:"学部名")
+ profile_field5= FactoryBot.create(:profile_field,team:,name:"出身地")
+ profile_field6= FactoryBot.create(:profile_field,team:,name:"高校名")
+ profile_field7= FactoryBot.create(:profile_field,team:,name:"好きな曲")
+ profile_field8= FactoryBot.create(:profile_field,team:,name:"あなたの夢")
+ profile_field9= FactoryBot.create(:profile_field,team:,name:"コメント")
 
 # 30人のメンバーにプロフィールを登録させる
 members.each do |member|
-  FactoryBot.create(:profile_value, :name, content: member.user.name, profile_field_id: 1, member: member)
-  FactoryBot.create(:profile_value, :birth, content: Faker::Date.birthday(min_age: 18, max_age: 65), profile_field_id: 2, member: member)
-  FactoryBot.create(:profile_value, content: Faker::University.name, profile_field_id: 3, member: member)
-  FactoryBot.create(:profile_value, content: Faker::Educator.degree, profile_field_id: 4, member: member)
-  FactoryBot.create(:profile_value, content: Faker::Address.state, profile_field_id: 5, member: member)
-  FactoryBot.create(:profile_value, content: Faker::Educator.secondary_school, profile_field_id: 6, member: member)
-  FactoryBot.create(:profile_value, content: Faker::Music::RockBand.song, profile_field_id: 7, member: member)
-  FactoryBot.create(:profile_value, content: Faker::Job.title, profile_field_id: 8, member: member)
-  FactoryBot.create(:profile_value, content: "初めまして、#{member.user.name}です。#{Faker::Lorem.sentence}", profile_field_id: 9, member: member)
+  FactoryBot.create(:profile_value, :name, content: member.user.name, profile_field:profile_field1, member: member)
+  FactoryBot.create(:profile_value, :birth, content: Faker::Date.birthday(min_age: 18, max_age: 65), profile_field: profile_field2, member: member)
+  FactoryBot.create(:profile_value, content: Faker::University.name, profile_field: profile_field3, member: member)
+  FactoryBot.create(:profile_value, content: Faker::Educator.degree, profile_field:profile_field4, member: member)
+  FactoryBot.create(:profile_value, content: Faker::Address.state, profile_field:profile_field5, member: member)
+  FactoryBot.create(:profile_value, content: Faker::Educator.secondary_school, profile_field:profile_field6, member: member)
+  FactoryBot.create(:profile_value, content: Faker::Music::RockBand.song, profile_field:profile_field7, member: member)
+  FactoryBot.create(:profile_value, content: Faker::Job.title, profile_field:profile_field8, member: member)
+  FactoryBot.create(:profile_value, content: "初めまして、#{member.user.name}です。#{Faker::Lorem.sentence}", profile_field:profile_field9, member: member)
 end
 
 #管理者ユーザーを生成し、サンプルチームの管理者に設定

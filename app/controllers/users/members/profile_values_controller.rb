@@ -1,17 +1,14 @@
 class Users::Members::ProfileValuesController < ApplicationController
   skip_before_action :ensure_member_profile_exists
   def new
-    uuid = session[:team_id]
-    @team = Team.find_by(uuid:)
+    @team = Team.find_by(uuid:params["team_id"])
     @member = current_user.members.last
     @profile_value = ProfileValue.new
-    @profile_fields = @team.profile_fields
+    @profile_fields = @team.profile_fields if @team
   end
 
   def create
-    uuid = session[:team_id]
-    team = Team.find_by(uuid:)
-
+    team = Team.find_by(uuid:params["team_id"])
     # paramsから抽出したcontentとチームのprofile_fieldのidのペア配列を返す
     service = ReturnProfileAttributePairsService.new(team, params: create_profile_params)
     field_id_and_value_content_pairs_arr = service.call
@@ -34,7 +31,7 @@ class Users::Members::ProfileValuesController < ApplicationController
       # 他のフィールドに書き込んでいた場合、それは保持しておきたいために、セッションに値を格納しておく
       ProfileValue.set_content_in_session(team, create_profile_params, self)
       flash[:alert] = I18n.t('alert.profile_values.not_empty_content')
-      redirect_to new_users_members_profile_value_path
+      redirect_to new_users_members_profile_value_path(team_id:team.uuid)
     end
   end
 
@@ -42,9 +39,14 @@ class Users::Members::ProfileValuesController < ApplicationController
     @member=Member.find_by(id:params[:id])
     @team=@member.team
     @profile_values=@member.profile_values
+    # Teamが新たに追加したプロフィール項目を取得（かつ、メンバーが記入していない項目）
+    @unfilled_profile_fields=ProfileField.unfilled_profile_field(@team,@member)
+    # 新たに追加された項目を作成するための新規インスタンスを用意
+    @unfilled_profile_values=ProfileValue.new
   end
 
   def update
+    member=Member.find_by(id:params[:id])
 
     # profile_valueをそれぞれ更新
     # params:{profile_values=>{23=>{content:"〇〇"},{21=>{〇〇},,,,}}}
@@ -59,7 +61,14 @@ class Users::Members::ProfileValuesController < ApplicationController
       profile_value.update(content:value[:content])
     end
 
-    member=Member.find_by(id:params[:id])
+    # unfilled_profile_valuesがパラメータに含まれていた場合は、新たにその項目をcreateする
+    if create_unfilled_profile_params[:unfilled_profile_values]
+      create_unfilled_profile_params[:unfilled_profile_values].each do |params|
+        member.profile_values.build(profile_field_id:params[:profile_field_id],content:params[:content])
+        member.save_profile_values
+      end
+    end
+
     # 画像は、この条件をとると、空のparamsを受け入れてしまい画像が消えます
     if update_image_params[:image]
       member.image.attach(update_image_params[:image])
@@ -78,13 +87,17 @@ class Users::Members::ProfileValuesController < ApplicationController
                                           :content9, :image)
   end
 
-  def update_profile_params
-    # ネストされたprofile_values内のハッシュはcontentキーのみ持てる
-    params.permit(profile_values: [:content])
+  def create_unfilled_profile_params
+    params.permit(unfilled_profile_values: [:profile_field_id,:content])
   end
 
   def update_image_params
     params.permit(:image)
+  end
+
+  def update_profile_params
+    # ネストされたprofile_values内のハッシュはcontentキーのみ持てる
+    params.permit(profile_values: [:content])
   end
 
 end

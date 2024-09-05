@@ -1,0 +1,12 @@
+<%= turbo_frame_tag @profile_field do %>
+    <div class="flex">
+        <div class="rounded-lg w-96 mt-1 mb-1">
+            <%=form_with(model:@profile_field,url:teams_profile_field_path(@profile_field.id)) do |f|%>
+                <div class="flex items-center justify-between">
+                    <%= f.text_field :name, class: "block border border-gray-300 h-14 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm w-96 min-w-72"%>
+                    <%= f.submit "更新", class: "bg-gray-500 text-white py-2 px-4 h-12 rounded-md shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 ml-2 h-9.5" %>  
+                </div>
+            <% end %>
+        </div>
+    </div>
+<% end %>

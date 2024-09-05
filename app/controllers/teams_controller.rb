@@ -13,7 +13,7 @@ class TeamsController < ApplicationController
       # EnsureTeamProfileExistsコールバックオブジェクトにて使用
       # 遷移先でチームを参照できるようにするため
       session[:team_id] = @team.id
-      redirect_to new_teams_profile_field_path
+      redirect_to new_teams_profile_field_path(team_id:@team.uuid)
     else
       render :new, status: :unprocessable_entity
     end

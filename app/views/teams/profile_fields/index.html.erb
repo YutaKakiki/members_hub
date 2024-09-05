@@ -10,7 +10,7 @@
         <%= render 'teams/profile_fields/fields_counter'%>
       <% end %>
     </div>
-    <%= render 'teams/profile_fields/form' %>
+    <%= render 'teams/profile_fields/form',setup:false %>
     <div class="mt-10">
       <%= turbo_frame_tag "complete-button" do %> 
         <%= render 'teams/profile_fields/complete_button' %>
@@ -27,7 +27,7 @@
           </p>
       </div>
         <% if @team %>
-          <%= render @team.profile_fields %>
+          <%= render partial:@team.profile_fields %>
         <% end %>
       </div>
     </div>
