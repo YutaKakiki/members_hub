@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   end
   resources :users,only: %i[edit destroy]
   namespace :users do
+    resource :admin,only: :update
     namespace :admins do
       resources :teams,only: :index
     end

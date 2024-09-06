@@ -6,4 +6,8 @@ class Admin < ApplicationRecord
   def self.set_as_admin(user, team)
     user.admins.create({ team_id: team.id })
   end
+
+  def self.revoke_admin(team)
+    team.admin.destroy
+  end
 end

@@ -13,7 +13,7 @@ ja:
       profile_field: "プロフィール項目"
     errors:
       messages:
-        record_invalid: 'バリデーションに失敗しました: %{errors}'
+        record_invalid: "バリデーションに失敗しました: %{errors}"
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
@@ -28,57 +28,57 @@ ja:
         name: "項目"
   date:
     abbr_day_names:
-    - 日
-    - 月
-    - 火
-    - 水
-    - 木
-    - 金
-    - 土
+      - 日
+      - 月
+      - 火
+      - 水
+      - 木
+      - 金
+      - 土
     abbr_month_names:
-    - 
-    - 1月
-    - 2月
-    - 3月
-    - 4月
-    - 5月
-    - 6月
-    - 7月
-    - 8月
-    - 9月
-    - 10月
-    - 11月
-    - 12月
+      -
+      - 1月
+      - 2月
+      - 3月
+      - 4月
+      - 5月
+      - 6月
+      - 7月
+      - 8月
+      - 9月
+      - 10月
+      - 11月
+      - 12月
     day_names:
-    - 日曜日
-    - 月曜日
-    - 火曜日
-    - 水曜日
-    - 木曜日
-    - 金曜日
-    - 土曜日
+      - 日曜日
+      - 月曜日
+      - 火曜日
+      - 水曜日
+      - 木曜日
+      - 金曜日
+      - 土曜日
     formats:
       default: "%Y/%m/%d"
       long: "%Y年%m月%d日(%a)"
       short: "%m/%d"
     month_names:
-    - 
-    - 1月
-    - 2月
-    - 3月
-    - 4月
-    - 5月
-    - 6月
-    - 7月
-    - 8月
-    - 9月
-    - 10月
-    - 11月
-    - 12月
+      -
+      - 1月
+      - 2月
+      - 3月
+      - 4月
+      - 5月
+      - 6月
+      - 7月
+      - 8月
+      - 9月
+      - 10月
+      - 11月
+      - 12月
     order:
-    - :year
-    - :month
-    - :day
+      - :year
+      - :month
+      - :day
   datetime:
     distance_in_words:
       about_x_hours: 約%{count}時間
@@ -118,7 +118,7 @@ ja:
       invalid: は不正な値です
       less_than: は%{count}より小さい値にしてください
       less_than_or_equal_to: は%{count}以下の値にしてください
-      model_invalid: 'バリデーションに失敗しました: %{errors}'
+      model_invalid: "バリデーションに失敗しました: %{errors}"
       not_a_number: は数値で入力してください
       not_an_integer: は整数で入力してください
       odd: は奇数にしてください
@@ -165,9 +165,9 @@ ja:
           quadrillion: 千兆
           thousand: 千
           trillion: 兆
-          unit: ''
+          unit: ""
       format:
-        delimiter: ''
+        delimiter: ""
         precision: 3
         significant: true
         strip_insignificant_zeros: true
@@ -183,11 +183,11 @@ ja:
           tb: TB
     percentage:
       format:
-        delimiter: ''
+        delimiter: ""
         format: "%n%"
     precision:
       format:
-        delimiter: ''
+        delimiter: ""
   support:
     array:
       last_word_connector: "、"
@@ -205,7 +205,7 @@ ja:
       member_without_profile: "プロフィールを登録しなかったため、チームへの参加を取消しました"
       team_has_profile_fields_less_than_two: "プロフィール項目を設定しなかったため、チームの作成を取消しました"
     teams:
-      invalid_team_id/password_combination: "チームID/パスワードの組み合わせに誤りがあります" 
+      invalid_team_id/password_combination: "チームID/パスワードの組み合わせに誤りがあります"
       delete_failed: "%{team} の削除に失敗しました"
     members:
       prevent_dup_member: "既に参加しているチームです"
@@ -214,6 +214,8 @@ ja:
     profile_fields:
       already_reached_limit: "追加できる項目は%{limit}個までです"
       not_update_to_blank: "項目名を空欄のまま更新することはできません"
+    admin:
+      ransfer_admin_role_failed: "管理者の変更に失敗しました"
   notice:
     teams:
       authentication_succeed: "%{team} への認証に成功しました"
@@ -225,3 +227,5 @@ ja:
       update_successfully: "%{team} のプロフィールを更新しました"
     profile_fields:
       update_successfully: "%{team} のプロフィール項目を更新しました"
+    admin:
+      transfer_admin_role_successfully: "%{team} の管理者を %{member} に変更しました"

@@ -35,7 +35,7 @@ RSpec.describe 'FilterMembers', type: :system do
       # 検索条件をフォームに書き込むと、検索条件に合ったメンバーが表示される
       puts Member.first.user.name
       select '名前', from: 'field1'
-      fill_in 'value1',	with: 'エベs'
+      fill_in 'value1',	with: 'Example User30'
       expect(page).to have_content 'Example User30'
       other_members = Member.all.reject { |member| member.user.name == 'Example User30' }
       other_members.each do |member|
