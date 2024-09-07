@@ -79,4 +79,7 @@ RSpec.configure do |config|
 
   # テストヘルパーを読み込む
   config.include TestHelpers
+
+  # travel_toを使うため
+  config.include ActiveSupport::Testing::TimeHelpers
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_05_061404) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_07_065329) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -84,6 +84,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_05_061404) do
     t.index ["profile_field_id"], name: "index_profile_values_on_profile_field_id"
   end
 
+  create_table "team_invitations", force: :cascade do |t|
+    t.integer "team_id", null: false
+    t.string "invitation_digest", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invitation_digest"], name: "index_team_invitations_on_invitation_digest"
+    t.index ["team_id"], name: "index_team_invitations_on_team_id"
+  end
+
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
@@ -123,4 +133,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_05_061404) do
   add_foreign_key "profile_values", "members"
   add_foreign_key "profile_values", "profile_fields"
   add_foreign_key "profile_values", "profile_fields", on_delete: :cascade
+  add_foreign_key "team_invitations", "teams"
 end

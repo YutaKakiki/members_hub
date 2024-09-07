@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   namespace :teams do
     resources :profile_fields
+    resource :invitations,only: %i[show]
   end
   resources :teams do
     resources :filters, only: %i[create index],controller:"teams/members/filters",as: :members_filters
@@ -21,6 +22,9 @@ Rails.application.routes.draw do
     resource :admin,only: :update
     namespace :admins do
       resources :teams,only: :index
+      namespace :teams do
+        resource :invitations,only: %i[show create]
+      end
     end
     namespace :members do
       resources :teams,only: :index
