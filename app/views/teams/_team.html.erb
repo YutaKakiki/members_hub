@@ -5,8 +5,8 @@
         <%= image_tag team.logo.variant(resize_to_limit:[100,100]),class:"rounded-md" %>
       <% end %>
     </div>
-    <div>
-      <p class="text-xl font-semibold mb-2"><%= team.name %></p>
+    <div class="">
+      <p class="text-xl font-semibold mb-2 w-80"><%= team.name %></p>
       <p class="text-gray-600">ID: <%= team.uuid %></p>
     </div>
   </div>
@@ -39,7 +39,6 @@
               招待リンクを生成
             <% end %>
           </div>
-          
         </div>
         <div class="mt-8 flex items-center">
           <div>

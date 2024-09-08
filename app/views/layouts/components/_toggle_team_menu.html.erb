@@ -10,7 +10,7 @@
                 <% unless current_user.members.present? %>
                    <p class="text-xs">
                         <i class="fa-solid fa-caret-right pr-1"></i>
-                            参加しているチームはありません  
+                            参加チームはありません 
                     </p>
                 <% end %>
                 <%current_user.members.map do |member|%>

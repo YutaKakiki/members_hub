@@ -8,7 +8,7 @@ class Team < ApplicationRecord
   # Teamは、単一の管理者（ユーザー）を所有する
   has_one :admin_user, through: :admin, source: :user
 
-  has_one :team_invitation
+  has_one :team_invitation,dependent: :destroy
 
   has_one_attached :logo, dependent: :destroy
 
