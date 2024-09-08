@@ -34,7 +34,7 @@
             <% end %>
           </div>
           <div class="ml-16">
-            <%= link_to users_admins_teams_invitations_path(team_id:team.uuid),data:{turbo_frame:"modal"},class:"border text-white bg-blue-400 text-md p-1.5 rounded-md font-semibold hover:bg-blue-500 " do %>
+            <%= link_to users_admins_teams_invitation_path(team_id:team.uuid),data:{turbo_frame:"modal"},class:"border text-white bg-blue-400 text-md p-1.5 rounded-md font-semibold hover:bg-blue-500 " do %>
               <i class="fa-solid fa-link"></i>
               招待リンクを生成
             <% end %>

@@ -16,7 +16,6 @@ class TeamInvitation < ApplicationRecord
       invitation=team.create_team_invitation(invitation_digest:digest,expires_at:24.hours.from_now) unless invitation.present?
       return invitation,token
     end
-
   end
 
   def expires?
@@ -31,6 +30,12 @@ class TeamInvitation < ApplicationRecord
   # インスタンスのトークンをハッシュ化
   def self.to_digest(token)
     BCrypt::Password.create(token)
+  end
+
+  def self.authenticated?(team,token)
+    team_invitation=team.team_invitation
+    invitation_digest=team_invitation.invitation_digest
+    BCrypt::Password.new(invitation_digest).is_password?(token)
   end
 
 

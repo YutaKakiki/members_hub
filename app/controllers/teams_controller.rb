@@ -11,7 +11,7 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     # teamにユニークなIDを付与
     @team.uuid = SecureRandom.uuid
-    @team.logo.attach(params[:logo]) if params[:logo]
+    @team.logo.attach(params[:logo])if params[:logo]
     if @team.save
       Admin.set_as_admin(current_user, @team)
       # EnsureTeamProfileExistsコールバックオブジェクトにて使用

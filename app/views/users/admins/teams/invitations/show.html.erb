@@ -22,7 +22,7 @@
 
         <div class="border bg-white shadow-md rounded-lg p-3 border-gray-200 w-full mb-5 text-center">
           <% if @token %>
-            <%= link_to teams_invitations_url(token:@token)%>
+            <%= link_to teams_invitation_url(token:@token,team_id:@team.uuid)%>
           <% end %>
         </div>
 

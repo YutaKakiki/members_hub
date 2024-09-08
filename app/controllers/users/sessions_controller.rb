@@ -22,7 +22,18 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+  protected
+
+  # deviseのメソッドをオーバーライドしている
+  # セッション情報にinvitation_utlがあればそちらにリダイレクトさせるようurlを返す
+  def after_sign_in_path_for(resource)
+    if  invitation_url=session[:invitation_url]
+      session[:invitation_url]=nil
+      return invitation_url
+    else
+      super(resource)
+    end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
