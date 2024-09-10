@@ -15,4 +15,15 @@ class ProfileField < ApplicationRecord
       profile_values.include?(field.id)
     end
   end
+
+  def self.params_blank?(params)
+    params[:name].blank?
+  end
+
+  def self.create_default_fields(team)
+    return false unless team
+    return if team.profile_fields.exists?(name: '名前') && team.profile_fields.exists?(name: '生年月日')
+    team.profile_fields.create(name: '名前')
+    team.profile_fields.create(name: '生年月日')
+  end
 end

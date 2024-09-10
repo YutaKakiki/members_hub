@@ -1,7 +1,6 @@
 class Users::Members::ProfileValuesController < ApplicationController
-  # HACK: もっとskinnyにすべき
-
   skip_before_action :ensure_member_profile_exists
+
   def new
     @team = Team.find_by(uuid: params['team_id'])
     @member = current_user.members.last
@@ -21,14 +20,12 @@ class Users::Members::ProfileValuesController < ApplicationController
 
   def create
     team = Team.find_by(uuid: params['team_id'])
-    # paramsから抽出したcontentとチームのprofile_fieldのidのペア配列を返す
-    service = ReturnProfileAttributePairsService.new(team, params: create_profile_params)
-    field_id_and_value_content_pairs_arr = service.call
-
     # MembersController#createでsessionに格納した情報
     member = Member.find_by(id: session[:member_id])
     return false unless member
-
+    # paramsから抽出したcontentとチームのprofile_fieldのidのペア配列を返す
+    service=ReturnProfileAttributePairsService.new(team, params: create_profile_params)
+    field_id_and_value_content_pairs_arr = service.call
     member.build_profile_values(field_id_and_value_content_pairs_arr)
     # validationに引っ掛からなければ、保存
     if ProfileValue.valid_content?(member)
@@ -37,63 +34,77 @@ class Users::Members::ProfileValuesController < ApplicationController
       flash[:notice] = I18n.t('notice.members.join_team_successfully', team: team.name)
       redirect_to users_members_teams_path
       # contentのセッション情報は削除
-      ProfileValue.reset_content_from_session(team, self)
+      reset_content_from_session(team)
     else
       # 空だった場合、リダイレクトする（renderではうまくいかなかったため）
       # 他のフィールドに書き込んでいた場合、それは保持しておきたいために、セッションに値を格納しておく
-      ProfileValue.set_content_in_session(team, create_profile_params, self)
+      set_content_in_session(team, create_profile_params)
       flash[:alert] = I18n.t('alert.profile_values.not_empty_content')
       redirect_to new_users_members_profile_value_path(team_id: team.uuid)
     end
   end
 
   def update
-    member = Member.find_by(id: params[:id])
-
-    # profile_valueをそれぞれ更新
-    # params:{profile_values=>{23=>{content:"〇〇"},{21=>{〇〇},,,,}}}
-    update_profile_params[:profile_values].each do |id, value|
-      # 空の場合は更新を行わないので、メソッドを脱出
-      if value[:content].blank?
-        redirect_to edit_users_members_profile_value_path
-        flash[:alert] = I18n.t('alert.profile_values.not_empty_content')
-        return
-      end
-      profile_value = ProfileValue.find_by(id:)
-      profile_value.update(content: value[:content])
+    # 空のcontentがあれば更新しない
+    if params_content_blank?(update_profile_params) == :content_blank
+      redirect_to edit_users_members_profile_value_path
+      flash[:alert] = I18n.t('alert.profile_values.not_empty_content')
+      return
+    else
+      ProfileValue.update_profile_values(update_profile_params)
     end
 
     # unfilled_profile_valuesがパラメータに含まれていた場合は、新たにその項目をcreateする
-    create_unfilled_profile_params[:unfilled_profile_values]&.each do |params|
-      member.profile_values.build(profile_field_id: params[:profile_field_id], content: params[:content])
-      member.save_profile_values
-    end
+    member = Member.find_by(id: params[:id])
+    ProfileValue.create_unfilled_profile(create_unfilled_profile_params,member)
 
     # 画像は、このif条件をとると、空のparamsを受け入れてしまい画像が消えます
-    member.image.attach(update_image_params[:image]) if update_image_params[:image]
+    member.save_image(update_image_params)
 
-    redirect_to users_members_teams_path
     team = member.team
-    flash.now[:notice] = I18n.t('notice.profile_values.update_successfully', team: team.name)
+    flash[:notice] = I18n.t('notice.profile_values.update_successfully', team: team.name)
+    redirect_to users_members_teams_path
   end
 
   private
 
-  def create_profile_params
-    params.require(:profile_value).permit(:content1, :content2, :content3, :content4, :content5, :content6, :content7, :content8,
-                                          :content9, :image)
-  end
+    def create_profile_params
+      params.require(:profile_value).permit(:content1, :content2, :content3, :content4, :content5, :content6, :content7, :content8,
+                                            :content9, :image)
+    end
 
-  def create_unfilled_profile_params
-    params.permit(unfilled_profile_values: [:profile_field_id, :content])
-  end
+    def create_unfilled_profile_params
+      params.permit(unfilled_profile_values: [:profile_field_id, :content])
+    end
 
-  def update_image_params
-    params.permit(:image)
-  end
+    def update_image_params
+      params.permit(:image)
+    end
 
-  def update_profile_params
-    # ネストされたprofile_values内のハッシュはcontentキーのみ持てる
-    params.permit(profile_values: [:content])
-  end
+    def update_profile_params
+      # ネストされたprofile_values内のハッシュはcontentキーのみ持てる
+      params.permit(profile_values: [:content])
+    end
+
+    def params_content_blank?(params)
+      params[:profile_values].each do |id,value|
+        if value[:content].blank?
+          return :content_blank
+        end
+      end
+    end
+
+    def reset_content_from_session(team)
+      content_count = team.profile_fields.count
+      content_count.times do |i|
+        session["content#{i + 1}"] = nil
+      end
+    end
+
+    def set_content_in_session(team, params)
+      content_count = team.profile_fields.count
+      content_count.times do |i|
+        session["content#{i + 1}"] = params["content#{i + 1}"]
+      end
+    end
 end

@@ -36,4 +36,28 @@ class Team < ApplicationRecord
   def team_has_profile_values_more_than_three?
     profile_fields.count >= 3
   end
+
+  def self.create_team(params)
+    team=self.new(params)
+    team.uuid=SecureRandom.uuid
+    team.attach_logo(params)
+    team
+  end
+
+  def attach_logo(params)
+    return unless params[:logo]
+    self.logo.attach(params[:logo])
+  end
+
+  def self.admin_teams(user)
+    user.admin_teams.includes(logo_attachment: :blob)
+  end
+
+  def self.joined_teams(user)
+    user.teams.includes(logo_attachment: :blob)
+  end
+
+  def self.this_is_created_team_now?(user,team)
+    team.name == user.admin_teams.last.name
+  end
 end

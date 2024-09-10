@@ -29,7 +29,6 @@ class Teams::ProfileFieldsController < ApplicationController
     else
       @profile_field = @team.profile_fields.build(team_profile_params)
       return if @profile_field.save
-
       render :new, status: :unprocessable_entity
     end
   end
@@ -37,7 +36,7 @@ class Teams::ProfileFieldsController < ApplicationController
   def update
     @profile_field = ProfileField.find_by(id: params[:id])
     team = @profile_field.team
-    if team_profile_params[:name].blank?
+    if ProfileField.params_blank?(team_profile_params)
       flash.now[:alert] = I18n.t('alert.profile_fields.not_update_to_blank')
     else
       @profile_field.update(team_profile_params)
@@ -53,18 +52,13 @@ class Teams::ProfileFieldsController < ApplicationController
 
   private
 
-  def team_profile_params
-    params.require(:profile_field).permit(:name)
-  end
+    def team_profile_params
+      params.require(:profile_field).permit(:name)
+    end
 
-  # 最初の項目追加
-  def create_default_fields
-    @team = Team.find_by(id: session[:team_id])
-    return false unless @team
-
-    return if @team.profile_fields.exists?(name: '名前') && @team.profile_fields.exists?(name: '生年月日')
-
-    @team.profile_fields.create(name: '名前')
-    @team.profile_fields.create(name: '生年月日')
-  end
+    # 最初の項目追加
+    def create_default_fields
+      @team = Team.find_by(id: session[:team_id])
+      ProfileField.create_default_fields(@team)
+    end
 end

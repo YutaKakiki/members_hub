@@ -8,9 +8,9 @@ RSpec.describe 'OmniauthSignins', type: :system do
     end
     it 'ログインに成功する' do
       visit new_user_session_path
-      expect(page).to have_button 'Googleで登録/ログイン'
+      expect(page).to have_button 'google'
 
-      expect { click_button 'Googleで登録/ログイン' }.to change(User, :count).from(0).to(1)
+      expect { click_button 'google' }.to change(User, :count).from(0).to(1)
       # rootパスにリダイレクトされている
       expect(page).to have_current_path(root_path, wait: 10)
       expect(page).to have_http_status(:success)
@@ -30,9 +30,9 @@ RSpec.describe 'OmniauthSignins', type: :system do
     end
     it 'ログインに成功する' do
       visit new_user_session_path
-      expect(page).to have_button 'LINEで登録/ログイン'
+      expect(page).to have_button 'line'
 
-      expect { click_button 'LINEで登録/ログイン' }.to change(User, :count).from(0).to(1)
+      expect { click_button 'line' }.to change(User, :count).from(0).to(1)
       # rootパスにリダイレクトされている
       expect(page).to have_current_path(root_path, wait: 10)
       expect(page).to have_http_status(:success)
