@@ -1,11 +1,14 @@
-<div class="flex justify-between">
-    <h1 class="text-2xl font-bold">プロフィールを登録</h1>
-    <%= render "shared/simple_team_card" %>
+<div class="xl:flex justify-between -mb-7">
+    <h1 class="text-2xl font-bold xl:mb-6 mb-2">プロフィールを登録</h1>
+    <div class="flex justify-start xl:justify-end xl:flex-none ">
+      <%= render "shared/simple_team_card" %>
+    </div>
 </div>
+
 <% if @profile_value %>
     <%= form_with(model: @profile_value,url:users_members_profile_values_path(team_id:@team.uuid), local: true) do |f| %>
         <%= render 'shared/error_messages', resource: @profile_value %>
-        <div class="grid grid-cols-2 grid-flow-row">
+        <div class="grid xl:grid-cols-2 grid-cols-1 grid-flow-row">
             <%= render "users/members/profile_values/profile_value_forms",f:f,profile_fields:@profile_fields%>
             <%= render 'users/members/profile_values/image_preview',f:f %>
         </div>

@@ -1,25 +1,29 @@
-<div class="flex justify-between -mb-7">
-    <h1 class="text-2xl font-bold mb-6">チームのプロフィール項目を設定</h1>
-    <%= render "shared/simple_team_card" %>
+<div class="xl:flex justify-between -mb-7">
+    <h1 class="text-2xl font-bold xl:mb-6 mb-2">プロフィール項目を設定</h1>
+    <div class="flex justify-end xl:flex-none ">
+      <%= render "shared/simple_team_card" %>
+    </div>
 </div>
 
-<div class="flex">
-  <div class="w-1/2">
-    <div class="mb-10">
+<div class="xl:hidden">
+  <%= render 'teams/profile_fields/note' %>
+</div>
+
+<div class="xl:flex">
+  <div class="xl:w-1/2">
+    <div class="xl:mb-10 xl:mt-0 mt-3 mb-3 ">
       <%=turbo_frame_tag "fields_counter" do%>
         <%= render 'teams/profile_fields/fields_counter'%>
       <% end %>
     </div>
-    <%= render 'teams/profile_fields/form',setup:false %>
-    <div class="mt-10">
-      <%= turbo_frame_tag "complete-button" do %> 
-        <%= render 'teams/profile_fields/complete_button' %>
-      <% end %>
+    <%= render 'teams/profile_fields/form' %>
+    <div class="hidden xl:block">
+      <%= render 'teams/profile_fields/note' %>
     </div>
   </div>
-  <div class="w-1/2 ml-2">
+  <div class="xl:w-1/2 ml-2">
     <div id="profile_fields" class="mt-5">
-      <div class="bg-white border border-gray-200 rounded-lg p-3 w-96 mt-1 mb-1">
+      <div class="bg-white border border-gray-200 rounded-lg p-3 xl:w-96 mt-1 mb-1">
           <p class="text-lg font-semibold text-gray-800">
               <div class="flex items-center justify-between">
                   プロフィール画像
@@ -27,9 +31,14 @@
           </p>
       </div>
         <% if @team %>
-          <%= render partial:@team.profile_fields %>
+          <%= render @team.profile_fields %>
         <% end %>
       </div>
     </div>
+  </div>
+  <div class="my-10">
+    <%= turbo_frame_tag "complete-button" do %> 
+      <%= render 'teams/profile_fields/complete_button' %>
+    <% end %>
   </div>
 </div>

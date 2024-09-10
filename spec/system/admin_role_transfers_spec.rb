@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "AdminRoleTransfers", type: :system do
+RSpec.describe 'AdminRoleTransfers', type: :system do
   let(:team) { create(:team) }
   let(:current_user) { create(:user, :authenticated) }
   before do
@@ -20,7 +20,7 @@ RSpec.describe "AdminRoleTransfers", type: :system do
     # カレントユーザーにログインさせる
     sign_in current_user
     # カレントユーザーにAdminをセットする(本来はチーム作成時にセットされる)
-    Admin.set_as_admin(current_user,team)
+    Admin.set_as_admin(current_user, team)
     visit root_path
     visit team_members_path(team.uuid)
   end
@@ -30,41 +30,39 @@ RSpec.describe "AdminRoleTransfers", type: :system do
     Member.destroy_all
     ProfileValue.destroy_all
   end
-  context "メンバー詳細を閲覧した時" do
+  context 'メンバー詳細を閲覧した時' do
     it '「管理者にする」ボタンが表示されている（自分以外）' do
-
       member = Member.first
-      current_member=Member.find_by(user_id:current_user.id)
+      current_member = Member.find_by(user_id: current_user.id)
       # 名前の部分をクリック（正確にはカード内のどこででもいい）
       click_link "member-link-#{member.id}"
-      expect(page).to have_link "管理者にする"
+      expect(page).to have_link '管理者にする'
       # リロード
       visit team_members_path(team.uuid)
-      click_link "last-page-link"
+      click_link 'last-page-link'
       # 管理者である自分は表示されていない
       click_link "member-link-#{current_member.id}"
-      expect(page).to have_no_link "管理者にする"
+      expect(page).to have_no_link '管理者にする'
     end
-    it "管理者でないユーザーには「管理者にする」ボタンが表示されない" do
-
+    it '管理者でないユーザーには「管理者にする」ボタンが表示されない' do
       not_admin_user = User.first
-      not_admin_user.confirmed_at=Time.now
+      not_admin_user.confirmed_at = Time.zone.now
       sign_in not_admin_user
       visit team_members_path(team.uuid)
-      other_member=Member.second
+      other_member = Member.second
       click_link "member-link-#{other_member.id}"
-      expect(page).to have_no_link "管理者にする"
+      expect(page).to have_no_link '管理者にする'
     end
-    it "「管理者にする」ボタンを押すとカレントユーザーの管理者権限が消え、指定したユーザーに権限が譲渡される" do
+    it '「管理者にする」ボタンを押すとカレントユーザーの管理者権限が消え、指定したユーザーに権限が譲渡される' do
       successor_member = Member.first
       # この段階ではカレントユーザーが管理者
       expect(team.admin_user).to eq current_user
       click_link "member-link-#{successor_member.id}"
-      expect{click_link "管理者にする"}.to change{Admin.first.user_id}.from(current_user.id).to(successor_member.user.id)
+      expect { click_link '管理者にする' }.to change { Admin.first.user_id }.from(current_user.id).to(successor_member.user.id)
       expect(current_path).to eq team_members_path(team.uuid)
       expect(page).to have_content "#{team.name} の管理者を #{successor_member.profile_values.first.content} に変更しました"
       visit users_admins_teams_path
-      expect(page).to have_content "現在あなたが管理しているチームはありません"
+      expect(page).to have_content '現在あなたが管理しているチームはありません'
     end
   end
 end

@@ -26,8 +26,10 @@ class Users::Admins::TeamsController < ApplicationController
     return if session[:team_id] # チーム新規作成時は脱出
     return unless session[:team_of_profile_field_updated_now] # 更新していなかった場合も脱出
 
-    team = Team.find_by(uuid: session[:team_of_profile_field_updated_now]).name
-    flash[:notice] = I18n.t('notice.profile_fields.update_successfully', team:)
+    updated_team = Team.find_by(uuid: session[:team_of_profile_field_updated_now])
+    return unless updated_team # セッションに入っていたIDのチームが見つからなかった時も脱出（チームを消した時とかに発生）
+
+    flash[:notice] = I18n.t('notice.profile_fields.update_successfully', team: updated_team.name)
     session[:team_of_profile_field_updated_now] = nil
   end
 end

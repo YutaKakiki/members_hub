@@ -1,40 +1,55 @@
-<div class="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex mb-4 w-5/6 h-32">
-  <div class="flex w-1/2">
-    <div class="w-1/5 mr-3">
-      <% if team.logo.attached? %>
-        <%= image_tag team.logo.variant(resize_to_limit:[100,100]),class:"rounded-md" %>
-      <% end %>
+<div class="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex mb-4 lg:w-5/6 w-6/7 justify-start  xl:max-w-5xl lg:h-40 h-30">
+  <div class="flex lg:w-1/2 w-full">
+    <div class="w-2/5 lg:w-full mr-3">
+      <div class="xl:block hidden w-full">
+        <% if team.logo.attached? %>
+          <%= image_tag team.logo.variant(resize_to_limit:[130,130]),class:"rounded-md" %>
+        <% end %>
+      </div>
+      <div class="xl:hidden w-full">
+        <% if team.logo.attached? %>
+          <%= image_tag team.logo.variant(resize_to_limit:[130,130]),class:"rounded-md w-36 h-20" %>
+        <% end %>
+      </div>
     </div>
-    <div class="">
-      <p class="text-xl font-semibold mb-2 w-80"><%= team.name %></p>
-      <p class="text-gray-600">ID: <%= team.uuid %></p>
+    <div class="lg:w-full">
+      <p class="lg:text-xl text-base  font-semibold mb-2 xl:w-80 w-6/7 "><%= team.name %></p>
+      <p class="text-gray-600 lg:text-base text-sm w-full">ID: <%= team.uuid %></p>
     </div>
   </div>
-  <div class="border-l-2 border-gray-400"></div>
+  <!--スマホサイズでは以下のメニューボタン→メニュー内にて表示-->
+  <div class="lg:hidden">
+    <%= render 'teams/drop_down_menu',team:,member_teams: %>
+  </div>
+  <!--以下の画面は、PC画面サイズでしか表示されない-->
+  <div class="border-l-2 border-gray-400 hidden lg:block"></div>
+  <div class="hidden xl:block">
+    <!--「参加しているチーム」-->
     <% if member_teams %>
       <div class="ml-4 mt-2">
-        <%= link_to team_member_path(team.uuid,current_member(team).id),data:{turbo_frame:"modal"},class:"border bg-gray-500 text-white text-md p-1.5 rounded-md font-semibold hover:bg-gray-600" do%>
+        <%= link_to team_member_path(team.uuid,current_member(team).id),data:{turbo_frame:"modal"},class:"border bg-gray-500 text-white text-base p-1.5 rounded-md font-semibold hover:bg-gray-600" do%>
           <i class="fa-solid fa-address-card"></i>
           プロフィールを確認
         <% end %>
         <div class="mt-8">
-          <%= link_to users_member_path(current_member(team).id),data:{turbo_method: :delete,turbo_confirm:"本当にチームを退会してよろしいですか？"},class:"border bg-rose-500 text-md text-white p-1.5 rounded-md font-semibold mt-4 hover:bg-rose-600" do%>
+          <%= link_to users_member_path(current_member(team).id),data:{turbo_method: :delete,turbo_confirm:"本当にチームを退会してよろしいですか？"},class:"border bg-rose-500 text-base text-white p-1.5 rounded-md font-semibold mt-4 hover:bg-rose-600" do%>
             <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
             退会
-         <% end %>
+        <% end %>
         </div>
       </div>
     <% else %>
+    <!--「管理しているチーム」-->
       <div class="ml-4">
         <div class="mt-2 flex items-start">
           <div>
-            <%= link_to edit_team_path(team.uuid),class:"border text-white bg-gray-500 text-md p-1.5 rounded-md font-semibold hover:bg-gray-600 " do %>
+            <%= link_to edit_team_path(team.uuid),class:"border text-white bg-gray-500 text-base p-1.5 rounded-md font-semibold hover:bg-gray-600 " do %>
               <i class="fa-solid fa-gears"></i>
               チーム情報を編集
             <% end %>
           </div>
           <div class="ml-16">
-            <%= link_to users_admins_teams_invitation_path(team_id:team.uuid),data:{turbo_frame:"modal"},class:"border text-white bg-blue-400 text-md p-1.5 rounded-md font-semibold hover:bg-blue-500 " do %>
+            <%= link_to users_admins_teams_invitation_path(team_id:team.uuid),data:{turbo_frame:"modal"},class:"border text-white bg-blue-400 text-base p-1.5 rounded-md font-semibold hover:bg-blue-500 ", id:"pc_screen_invitation_button" do %>
               <i class="fa-solid fa-link"></i>
               招待リンクを生成
             <% end %>
@@ -42,13 +57,13 @@
         </div>
         <div class="mt-8 flex items-center">
           <div>
-            <%= link_to teams_profile_fields_path(team_id:team.uuid),class:"border  text-white bg-gray-500 text-md p-1.5 rounded-md font-semibold hover:bg-gray-600 " do%>
+            <%= link_to teams_profile_fields_path(team_id:team.uuid),class:"border  text-white bg-gray-500 text-base p-1.5 rounded-md font-semibold hover:bg-gray-600 " do%>
               <i class="fa-solid fa-list"></i>
-               プロフィール項目を編集
+              プロフィール項目を編集
             <% end %>
           </div>
           <div class="ml-5">
-            <%= link_to team_path(team.id),data:{turbo_method: :delete,turbo_confirm:"本当にチームを削除してよろしいですか？"},class:" bg-rose-500 text-md text-white p-1.5 rounded-md font-semibold hover:bg-rose-600" do%>
+            <%= link_to team_path(team.id),data:{turbo_method: :delete,turbo_confirm:"本当にチームを削除してよろしいですか？"},class:" bg-rose-500 text-base text-white p-1.5 rounded-md font-semibold hover:bg-rose-600" do%>
               <i class="fa-solid fa-trash"></i>
               削除
             <% end %>
@@ -56,4 +71,7 @@
         </div>
       </div>
     <% end %>
+  </div>
 </div>
+
+

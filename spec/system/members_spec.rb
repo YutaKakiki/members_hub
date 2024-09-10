@@ -7,7 +7,9 @@ RSpec.describe 'Members', type: :system do
   before do
     sign_in user
     visit root_path
-    click_link 'チームに参加'
+    within '#pc-screen' do
+      click_link 'チームに参加'
+    end
     fill_in 'チームID', with: team.uuid
     fill_in 'パスワード', with: 'password'
   end
@@ -50,7 +52,9 @@ RSpec.describe 'Members', type: :system do
       expect(page).to have_content('Example Team に参加しました')
       # 再度同じチームに参加してみる
       visit root_path
-      click_link 'チームに参加'
+      within '#pc-screen' do
+        click_link 'チームに参加'
+      end
       fill_in 'チームID', with: team.uuid
       fill_in 'パスワード', with: 'password'
       expect { click_button '次へ' }.not_to(change { Member.count })

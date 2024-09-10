@@ -1,27 +1,26 @@
 
-<div class="bg-custom-gray h-screen">
-    <div class="flex flex-col">
-        <%= render 'layouts/components/toggle_team_menu' %>
+<div class="bg-custom-gray h-screen ">
+    <div class="flex flex-col" id="pc-screen">
+        <%= render 'layouts/components/toggle_team_menu',pc:true %>
 
-        <%= link_to users_members_teams_path ,class:"text-gray-100 text-lg p-6 2xl:text-xl   hover:bg-zinc-500 transition-colors duration-300" do %>
+        <%= link_to users_members_teams_path ,class:"text-gray-100 text-base xl:text-lg p-6 2xl:text-xl hover:bg-zinc-500 transition-colors duration-300" do %>
             <i class="fa-solid fa-users pr-2"></i>
             参加中のチーム
         <% end %>
 
-        <%= link_to users_admins_teams_path ,class:"text-gray-100 text-lg p-6 2xl:text-xl  hover:bg-zinc-500 transition-colors duration-300"  do %>
+        <%= link_to users_admins_teams_path ,class:"text-gray-100 text-base xl:text-lg p-6 2xl:text-xl  hover:bg-zinc-500 transition-colors duration-300"  do %>
             <i class="fa-solid fa-user-shield pr-2"></i>
             管理中のチーム
         <% end %>
         
-        <%= link_to new_users_member_path ,class:"text-gray-100 text-lg p-6 2xl:text-xl  hover:bg-zinc-500 transition-colors duration-300",id:"join-team" do %>
+        <%= link_to new_users_member_path ,class:"text-gray-100 text-base xl:text-lg p-6 2xl:text-xl  hover:bg-zinc-500 transition-colors duration-300",id:"join-team" do %>
             <i class="fa-solid fa-people-group pr-2"></i>
             チームに参加
         <% end %>
 
-        <%= link_to new_team_path ,class:"text-gray-100 text-lg p-6 2xl:text-xl  hover:bg-zinc-500 transition-colors duration-300" do %>
+        <%= link_to new_team_path ,class:"text-gray-100 text-base xl:text-lg p-6 2xl:text-xl  hover:bg-zinc-500 transition-colors duration-300" do %>
             <i class="fa-solid fa-circle-plus pr-2"></i>
             チームを作成
         <% end %>
     </div>
 </div>
-

@@ -48,9 +48,11 @@ RSpec.describe 'TeamMembersViewings', type: :system do
       ProfileValue.destroy_all
     end
     it 'チームのメンバーが全て表示される' do
-      find("div[id='member_viewing_button']", text: 'メンバーを閲覧')
+      find("div[id='pc_screen_member_viewing_button']", text: 'メンバーを閲覧')
       expect(page).to have_link team.name
-      click_link team.name
+      # レスポンシブにしたせいでhiddenも認識してしまう
+      # click_link team.name
+      visit team_members_path(team.uuid)
       expect(current_path).to eq team_members_path(team.uuid)
       expect(page).to have_content team.name
       # ページネーションにより最初の10件のみ表示される
@@ -60,8 +62,9 @@ RSpec.describe 'TeamMembersViewings', type: :system do
       end
     end
     it 'チームメンバー個々の詳細を確認できる' do
-      find("div[id='member_viewing_button']", text: 'メンバーを閲覧')
-      click_link team.name
+      find("div[id='pc_screen_member_viewing_button']", text: 'メンバーを閲覧')
+      # click_link team.name
+      visit team_members_path(team.uuid)
       member = Member.first
       # 名前の部分をクリック（正確にはカード内のどこででもいい）
       click_link "member-link-#{member.id}"

@@ -10,7 +10,9 @@ RSpec.describe 'MemberProfiles', type: :system do
       end
       sign_in user
       visit root_path
-      click_link 'チームに参加'
+      within '#pc-screen' do
+        click_link 'チームに参加'
+      end
       fill_in 'チームID', with: team.uuid
       fill_in 'パスワード', with: 'password'
       click_button '次へ'
@@ -24,7 +26,7 @@ RSpec.describe 'MemberProfiles', type: :system do
       expect(page).to have_selector('input[name="profile_value[content1]"]')
       expect(page).to have_selector('input[name="profile_value[content9]"]')
 
-      9.times do |_n|
+      9.times do
         expect(page).to have_content('項目')
       end
     end

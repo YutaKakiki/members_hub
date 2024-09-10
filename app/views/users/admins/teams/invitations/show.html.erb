@@ -1,41 +1,22 @@
 <%= render 'layouts/components/modal' do %>
-  <div class="flex justify-center items-center p-4">
+  <div class="flex justify-center items-center p-2">
     <div class="max-w-2xl w-full">
       <div class="flex justify-between items-start -mb-7">
-        <button data-action="modal#close" class="text-3xl text-gray-700 hover:text-gray-900">
+        <button data-action="modal#close" class="lg:text-3xl text-xl text-gray-700 hover:text-gray-900">
           <i class="fa-solid fa-square-xmark text-gray-500"></i>
         </button>
       </div>
-      <h1 class="text-3xl font-bold text-center mb-6">招待リンク</h1>
+      <h1 class="lg:text-3xl text-xl font-bold text-center mb-6 ">招待リンク</h1>
 
       <div class="flex flex-col items-center">
         <div class="flex items-center mb-4">
-          <div class="font-semibold mr-2">有効期限:</div>
-          <div class="text-gray-700"><%= @expires_at.strftime("%Y/%m/%d %H:%M") %></div>  
+          <div class="font-semibold mr-2 xl:text-base text-sm">有効期限:</div>
+          <div class="text-gray-700 xl:text-base text-sm"><%= @expires_at.strftime("%Y/%m/%d %H:%M") %></div>  
         </div>
 
-        <% if @token %>
-          <div data-controller="clipboard" class="w-full">
-            <textarea readonly data-clipboard-target="source" class="border bg-white shadow-md rounded-lg h-auto border-gray-200 w-full overflow-x-auto whitespace-nowrap">
-  以下のリンクから <%= @team.name %> に参加しましょう！
-  
-  👉 <%= teams_invitation_url(token: @token, team_id: @team.uuid) %>
+        <%= render 'users/admins/teams/invitations/link' %>
 
-  チームID・パスワードによる認証なしで簡単に参加することができます。
-  Members Hub に登録/ログインしていない場合は、登録/ログイン後にチームへの認証が完了します。
-
-  ⚠️この招待リンクの有効期限は<%= @expires_at.strftime("%Y/%m/%d %H:%M") %>です。期限を過ぎたリンクは無効となりますのでご注意ください。
-            </textarea>
-            <div class="flex justify-end mt-2">
-              <button data-clipboard-target="button" data-action="clipboard#copy" class="border text-white bg-gray-500 text-md p-1.5 rounded-md font-semibold hover:bg-gray-600">
-                <i class="fa-solid fa-clipboard"></i> コピーする
-              </button>
-            </div>
-          </div>
-        <% end %>
-
-        <div class="border border-gray-300 rounded-md p-5 w-full text-start text-gray-700 mt-6 text-md font-semibold">
-          <script src="https://www.line-website.com/social-plugins/js/thirdparty/loader.min.js" async="async" defer="defer">LineIt.loadButton()</script>
+        <div class="border border-gray-300 rounded-md p-5 w-full text-start  text-gray-700 mt-6 xl:text-base text-xs font-semibold overflow-x-auto">
           <p>このリンクから、ユーザーはチームID/パスワードによる認証をスキップしてチームに参加することができます。</p>
           <br>
           <p>リンクを共有して、沢山のユーザーをチームに招待しましょう！</p>

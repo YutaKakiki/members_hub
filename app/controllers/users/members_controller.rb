@@ -1,4 +1,6 @@
 class Users::MembersController < ApplicationController
+  # HACK: もっとskinnyにすべき
+
   # メンバーとして登録する画面
   def new
   end

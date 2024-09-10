@@ -207,6 +207,10 @@ ja:
     teams:
       invalid_team_id/password_combination: "チームID/パスワードの組み合わせに誤りがあります"
       delete_failed: "%{team} の削除に失敗しました"
+      invitation:
+        expired_link: "有効期限が切れたリンクです"
+        login_or_registration_required: "ログイン/新規登録してください"
+        invalid_link: "無効なリンクです"
     members:
       prevent_dup_member: "既に参加しているチームです"
     profile_values:
@@ -221,6 +225,8 @@ ja:
       authentication_succeed: "%{team} への認証に成功しました"
       successfully_deleted: "%{team} を削除しました"
       updated_successfully: "チームの情報を更新しました"
+      invitation:
+        authenticated_and_join_successfully: "招待リンクによる %{team} への認証に成功しました"
     members:
       join_team_successfully: "%{team} に参加しました"
     profile_values:

@@ -36,11 +36,11 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
 
   # The path used after confirmation.
   def after_confirmation_path_for(resource_name, resource)
-    if invitation_url=session[:invitation_url]
-      session[:invitation_url]=nil
-      return invitation_url
+    if (invitation_url = session[:invitation_url])
+      session[:invitation_url] = nil
+      invitation_url
     else
-      super(resource_name, resource)
+      super
     end
   end
 end

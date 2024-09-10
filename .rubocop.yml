@@ -81,3 +81,6 @@ Style/FrozenStringLiteralComment:
 # メソッドパラメータ名の最小文字数を設定
 Naming/MethodParameterName:
   MinNameLength: 1
+
+Lint/NonLocalExitFromIterator:
+  Enabled: false

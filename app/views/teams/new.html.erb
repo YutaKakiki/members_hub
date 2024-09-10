@@ -1,7 +1,6 @@
 <h1 class="text-2xl font-bold mb-6">チームを作成</h1>
 
-
-<%= form_with(model: @team, local: true,class:"w-2/5") do |f| %>
+<%= form_with(model: @team, local: true,class:"w-full xl:w-2/5") do |f| %>
     <%= render 'shared/error_messages',resource: @team %>
   <div class="mb-4">
     <%= f.label :name, class: "block text-gray-700 text-sm font-medium mb-1" %>

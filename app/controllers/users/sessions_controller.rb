@@ -27,11 +27,11 @@ class Users::SessionsController < Devise::SessionsController
   # deviseのメソッドをオーバーライドしている
   # セッション情報にinvitation_utlがあればそちらにリダイレクトさせるようurlを返す
   def after_sign_in_path_for(resource)
-    if  invitation_url=session[:invitation_url]
-      session[:invitation_url]=nil
-      return invitation_url
+    if (invitation_url = session[:invitation_url])
+      session[:invitation_url] = nil
+      invitation_url
     else
-      super(resource)
+      super
     end
   end
 

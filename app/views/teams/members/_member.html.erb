@@ -1,25 +1,25 @@
 <%= link_to team_member_path(@team.uuid,member.id),data:{turbo_frame:"modal"},id: "member-link-#{member.id}" do %>
-    <div class="bg-white shadow-md rounded-lg p-4 border border-gray-200 flex mb-2 items-start space-x-6">
+    <div class="bg-white shadow-md rounded-lg xl:p-4 p-2 border border-gray-200 flex mb-2 items-start space-x-2 xl:space-x-6 h-28 xl:h-36">
     <% if member.image.attached? %>
-        <%= image_tag member.image.variant(resize_to_limit: [100, 100]), class: "rounded-full w-24 h-24" %>
+        <%= image_tag member.image.variant(resize_to_limit: [100, 100]), class: "rounded-full xl:w-24 xl:h-24 w-16 h-16" %>
     <% end %>
         <div class="flex">
             <div>   
                 <% if member.profile_values.first %>
-                   <p class="text-2xl font-bold text-gray-800 w-32"><%=member.profile_values.first.content %></p>
+                   <p class="text-xl xl:text-2xl font-bold text-gray-800 w-28 xl:w-32"><%=member.profile_values.first.content %></p>
                 <% end %> 
             </div>
-            <div class="border-l-2 border-gray-400 h-28 xl:mr-5 xl:ml-3 2xl:mr-10 2xl:ml-5"></div>
-            <div class="grid grid-rows-2 grid-flow-col gap-1">
+            <div class="border-l-2 border-gray-400 xl:h-28 h-24  mr-3 ml-1 xl:mr-5 xl:ml-3 2xl:mr-10 2xl:ml-5"></div>
+            <div class="grid grid-rows-2 grid-flow-col gap-4  xl:gap-1">
                 <% field_name_and_value_content_pairs_arr(@team, member).each_with_index do |(field_name, value_content), i| %>
                     <% if field_name && value_content&& i <= 4 %>
                             <% if field_name != "名前" %>
                                 <div class="flex-1 xl:w-[126px] 2xl:w-36 ">
-                                    <p class="font-semibold   px-2 py-1 text-start inline-block bg-gray-500 text-stone-50 text-xs"><%=truncate(field_name,length:6,ommission:"..." ) %></p>
+                                    <p class="font-semibold  px-1 py-0.5  xl:px-2 xl:py-1 text-start inline-block bg-gray-500 text-stone-50 text-xs"><%=truncate(field_name,length:6,ommission:"..." ) %></p>
                                     <% if field_name == "生年月日" %>
-                                        <p class="text-gray-500"><%= Date.parse(value_content).strftime("%Y/%m/%d")%></p>
+                                        <p class="text-gray-500 xl:text-base text-xs"><%= Date.parse(value_content).strftime("%Y/%m/%d")%></p>
                                     <% else %>
-                                        <p class="text-gray-500"><%=truncate(value_content,length:7,ommission:"..." )%></p>
+                                        <p class="text-gray-500 xl:text-base text-xs"><%=truncate(value_content,length:6,ommission:"..." )%></p>
                                     <% end %>
                                 </div>
                             <% end %>    
@@ -29,6 +29,7 @@
         </div>
     </div>
 <% end %>
+
 
 
 

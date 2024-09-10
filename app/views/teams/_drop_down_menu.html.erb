@@ -1,0 +1,45 @@
+<div data-controller="dropdown"
+     data-action="click@window->dropdown#hide touchstart@window->dropdown#hide keydown.up->dropdown#previousItem keydown.down->dropdown#nextItem keydown.esc->dropdown#hide">
+    <button data-action="dropdown#toggle:stop">
+        <i class="fa-solid fa-ellipsis text-gray-500 text-3xl -mt-8 ml-1 "></i>
+    </button>
+    <div class="relative bottom-10">
+        <div data-dropdown-target="menu" class="hidden absolute top-4 right-0 mt-5 w-screen max-w-max">
+            <div class="text-sm bg-white shadow-2xl rounded border overflow-hidden <%=member_teams ? "w-44" : "w-52"%> py-3 p-2">
+                <div class="flex flex-col gap-2">
+                <% if member_teams %>
+                    <%= link_to team_member_path(team.uuid,current_member(team).id),data:{turbo_frame:"modal"},class:"border bg-gray-500 text-white text-sm p-1.5 rounded-md font-semibold hover:bg-gray-600 w-40" do%>
+                        <i class="fa-solid fa-address-card"></i>
+                        プロフィールを確認
+                    <% end %>
+
+                    <%= link_to users_member_path(current_member(team).id),data:{turbo_method: :delete,turbo_confirm:"本当にチームを退会してよろしいですか？"},class:"border bg-rose-500 text-sm text-white p-1.5 rounded-md font-semibold hover:bg-rose-600 w-16" do%>
+                        <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
+                        退会
+                    <% end %>
+                <% else %>
+                    <%= link_to edit_team_path(team.uuid),class:"border text-white bg-gray-500 text-sm p-1.5 rounded-md font-semibold hover:bg-gray-600  w-[150px] " do %>
+                        <i class="fa-solid fa-gears"></i>
+                        チーム情報を編集
+                    <% end %>
+            
+                    <%= link_to users_admins_teams_invitation_path(team_id:team.uuid),data:{turbo_frame:"modal"},class:"border text-white bg-blue-400 text-sm p-1.5 rounded-md font-semibold hover:bg-blue-500 w-[150px] " do %>
+                        <i class="fa-solid fa-link"></i>
+                        招待リンクを生成
+                    <% end %>
+                
+                    <%= link_to teams_profile_fields_path(team_id:team.uuid),class:"border  text-white bg-gray-500 text-sm p-1.5 rounded-md font-semibold hover:bg-gray-600 w-48 " do%>
+                        <i class="fa-solid fa-list"></i>
+                        プロフィール項目を編集
+                    <% end %>
+                
+                    <%= link_to team_path(team.id),data:{turbo_method: :delete,turbo_confirm:"本当にチームを削除してよろしいですか？"},class:" bg-rose-500 text-sm text-white p-1.5 rounded-md font-semibold hover:bg-rose-600 w-14 " do%>
+                        <i class="fa-solid fa-trash"></i>
+                        削除
+                    <% end %>
+                <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

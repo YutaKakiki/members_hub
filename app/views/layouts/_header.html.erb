@@ -1,14 +1,21 @@
-<header class="bg-stone-50 h-20 flex shadow-md justify-between max-w-full">
-    <%= link_to root_path ,class:"flex items-center" do %>
-        <h1 class="text-4xl font-bold text-black inline-flex pl-64">Members Hub</h1>
-    <% end %>   
+<header class="bg-stone-50 flex shadow-md xl:justify-between items-center h-16 xl:h-20 max-w-full sticky">
+    <div class="xl:hidden w-1/6 xl:w-full">
+        <% if user_signed_in? %>
+            <%= render 'layouts/components/slide_menu' %>   
+        <% end %>
+    </div>
+    <div class="flex justify-between w-5/6 xl:w-full">
+        <%= link_to root_path ,class:"flex items-center" do %>
+            <h1 class="font-bold text-black inline-flex text-3xl xl:pl-64 xl:text-4xl">Members Hub</h1>
+        <% end %>   
 
-    <% if user_signed_in? %>
-        <%= render 'layouts/components/icon' %>
-    <% else %>
-        <div class="flex items-center pr-32">
-            <%= link_to 'ログイン', new_user_session_path ,class:"btn bg-blue-500 rounded p-2 px-4 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" ,data: {turbo_frame:"signin/up"}%>
-        </div>
-    <% end %>
+        <% if user_signed_in? %>
+            <%= render 'layouts/components/icon' %>
+        <% else %>
+            <div class="flex items-center xl:pr-32">
+                <%= link_to 'ログイン', new_user_session_path ,class:"btn bg-blue-500 rounded p-2 px-4 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" ,data: {turbo_frame:"signin/up"}%>
+            </div>
+        <% end %>
+    </div>
 </header>
 

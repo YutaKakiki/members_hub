@@ -16,25 +16,28 @@
 
   <body class="bg-stone-50">
   <%= render "layouts/header" %>
-  <% if user_signed_in? %>
-    <div class="flex h-screen">
-      <!-- サイドバー -->
-      <div class="w-1/6 2xl:w-60 bg-gray-200">
-        <%= render "layouts/sidebar" %>
-      </div>
-      <!-- メインコンテンツ -->
-      <div class="w-5/6 2xl:w-7/8 overflow-auto">
-        <div id="flash">
-          <%= render "shared/flash" %>
+  <div>
+    <% if user_signed_in? %>
+      <div class="flex h-screen">
+        <!-- サイドバー -->
+        <div class="w-1/6 2xl:w-60 bg-gray-200 hidden xl:block">
+          <%= render "layouts/sidebar" %>
         </div>
-        <%= render 'layouts/main_content' %>
-      </div>
+        <!-- メインコンテンツ -->
+        <div class="w-screen xl:w-5/6 2xl:w-7/8 overflow-auto">
+          <div id="flash">
+            <%= render "shared/flash" %>
+          </div>
+          <%= render 'layouts/main_content' %>
+        </div>
+        <!--stimulusにアタッチさせるようのモーダルタグ-->
         <%= turbo_frame_tag "modal" %>
-    </div>
-  <% else %>
-    <%= render "shared/flash" %>
-    <%= render 'layouts/main_content' %>
-  <% end %>
+      </div>
+    <% else %>
+      <%= render "shared/flash" %>
+      <%= render 'layouts/main_content' %>
+    <% end %>
+  </div>
 </body>
 
 </html>

@@ -1,4 +1,6 @@
 class Users::Members::ProfileValuesController < ApplicationController
+  # HACK: もっとskinnyにすべき
+
   skip_before_action :ensure_member_profile_exists
   def new
     @team = Team.find_by(uuid: params['team_id'])
@@ -67,7 +69,7 @@ class Users::Members::ProfileValuesController < ApplicationController
       member.save_profile_values
     end
 
-    # 画像は、この条件をとると、空のparamsを受け入れてしまい画像が消えます
+    # 画像は、このif条件をとると、空のparamsを受け入れてしまい画像が消えます
     member.image.attach(update_image_params[:image]) if update_image_params[:image]
 
     redirect_to users_members_teams_path

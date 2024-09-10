@@ -1,7 +1,10 @@
 
-<div class="bg-white  rounded-lg px-8 py-1 border border-gray-200  mb-10 w-3/5 ">
+<div class="bg-white  rounded-lg px-2 xl:px-8 py-1 border border-gray-200  mb-8 xl:w-3/5 w-full">
     <div class="flex justify-between items-center mb-3">
-        <h2 class="text-xl font-bold my-1">メンバーを検索</h1>
+        <h2 class="xl:text-xl text-lg font-bold my-1">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            メンバーを検索
+        </h1>
         <div data-controller="modal">
             <%= render 'teams/members/filters/instruction_modal' %>
             <button class="rounded-full bg-yellow-400 px-2.5 py-1 m-1" data-action="modal#open" >

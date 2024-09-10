@@ -1,19 +1,21 @@
 <%= render 'layouts/components/modal' do%>
-   <%= render '/teams/members/member_detail'%> 
-   <% if current_member?(@member) %>
-        <div class="flex justify-end">
-        <%= link_to  edit_users_members_profile_value_path(@member.id),data:{turbo:false},class:"border-b border-black hover:font-semibold hover:border-b-2" do%>  
-            <i class="fa-solid fa-pen-to-square"></i>
-            編集する
-        <% end %>
-        </div>
-   <% end %>
-   <% if are_you_admin_user?(@team,current_user) && not_admin_member?(@team,@member) %>
-        <div class="flex justify-end">
-            <%= link_to users_admin_path(team_id:@team,member_id:@member), data: { turbo_method: :patch, turbo_confirm: "あなたは管理者ではなくなります。このメンバーに管理者権限を移行してもよろしいですか？",turbo_frame:"_top" }, class:"bg-blue-500 border p-2 text-white rounded-md hover:bg-blue-600" do %>
-                <i class="fa-solid fa-handshake-simple"></i>
-                管理者にする
+   <div>
+    <%= render '/teams/members/member_detail'%> 
+    <% if current_member?(@member) %>
+            <div class="flex justify-end">
+            <%= link_to  edit_users_members_profile_value_path(@member.id),data:{turbo:false},class:"xl:text-base text-sm border-b border-black hover:font-semibold hover:border-b-2" do%>  
+                <i class="fa-solid fa-pen-to-square"></i>
+                編集する
             <% end %>
-        </div>
-   <% end %>
+            </div>
+    <% end %>
+    <% if are_you_admin_user?(@team,current_user) && not_admin_member?(@team,@member) %>
+            <div class="flex justify-end">
+                <%= link_to users_admin_path(team_id:@team,member_id:@member), data: { turbo_method: :patch, turbo_confirm: "あなたは管理者ではなくなります。このメンバーに管理者権限を移行してもよろしいですか？",turbo_frame:"_top" }, class:"xl:text-base text-sm bg-blue-500 border p-2 text-white rounded-md hover:bg-blue-600" do %>
+                    <i class="fa-solid fa-handshake-simple"></i>
+                    管理者にする
+                <% end %>
+            </div>
+    <% end %>
+   </div> 
 <% end %>

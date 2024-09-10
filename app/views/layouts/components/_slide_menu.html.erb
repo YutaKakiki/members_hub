@@ -1,0 +1,58 @@
+<div data-controller="slideover">
+  <!--スライドメニューを開くハンバーガーメニュー-->
+  <button data-action="slideover#open">
+    <div class="pl-5">
+        <i class="fa-solid fa-bars text-3xl"></i>
+    </div>
+  </button>
+
+  <!--スライドメニュー-->
+  <dialog data-slideover-target="dialog" class="slideover h-screen w-1/2 m-0 absolute bottom:0 backdrop:bg-black/80">
+    <div class="flex justify-end bg-custom-gray">
+      <button data-action="slideover#close" class="text-2xl px-2 pt-0">
+          <i class="fa-solid fa-square-xmark text-white"></i>
+      </button>
+    </div>
+    <div class="-mt-1" id="slidebar">
+      <!--sidebarのパーシャルを入れればよかったんだが、テストがhiddenのこいつらも認識してしまう-->
+      <div class="bg-custom-gray h-screen ">
+        <div class="flex flex-col">
+            <%= render 'layouts/components/toggle_team_menu',pc:false %>
+
+            <%= link_to users_members_teams_path ,class:"text-gray-100 text-base xl:text-lg p-6 2xl:text-xl hover:bg-zinc-500 transition-colors duration-300" do %>
+                <i class="fa-solid fa-users pr-2"></i>
+                参加中のチーム
+            <% end %>
+
+            <%= link_to users_admins_teams_path ,class:"text-gray-100 text-base xl:text-lg p-6 2xl:text-xl  hover:bg-zinc-500 transition-colors duration-300"  do %>
+                <i class="fa-solid fa-user-shield pr-2"></i>
+                管理中のチーム
+            <% end %>
+            
+            <%= link_to new_users_member_path ,class:"text-gray-100 text-base xl:text-lg p-6 2xl:text-xl  hover:bg-zinc-500 transition-colors duration-300",id:"join-team" do %>
+                <i class="fa-solid fa-people-group pr-2"></i>
+                チームに参加
+            <% end %>
+
+            <%= link_to new_team_path ,class:"text-gray-100 text-base xl:text-lg p-6 2xl:text-xl  hover:bg-zinc-500 transition-colors duration-300" do %>
+                <i class="fa-solid fa-circle-plus pr-2"></i>
+                チームを作成
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</div>
+
+
+<style>
+  dialog.slideover[open] {
+    animation: slide-in-from-left 250ms forwards ease;
+  }
+
+  @keyframes slide-in-from-left{
+    from {
+      transform: translateX(-100%);
+    }
+  }
+</style>

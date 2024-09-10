@@ -1,6 +1,6 @@
 <div data-controller="toggle">
-    <div class="text-gray-100 text-lg p-6 2xl:text-xl hover:bg-zinc-500 transition-colors duration-300"
-         data-action='click->toggle#toggle touch->toggle#toggle' id="member_viewing_button">
+    <div class="text-gray-100 text-base xl:text-lg p-6 2xl:text-xl hover:bg-zinc-500 transition-colors duration-300"
+         data-action='click->toggle#toggle touch->toggle#toggle' id=<%=pc ? "pc_screen_member_viewing_button" : "member_viewing_button" %>>
         <i class="fa-solid fa-users-viewfinder pr-2"></i>
         メンバーを閲覧
     </div>

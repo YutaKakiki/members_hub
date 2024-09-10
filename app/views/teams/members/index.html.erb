@@ -1,6 +1,8 @@
-<div class="flex justify-between -mb-7">
-    <h1 class="text-2xl font-bold">メンバーを閲覧</h1>
-    <%= render "shared/simple_team_card" %>
+<div class="xl:flex justify-between -mb-7">
+    <h1 class="text-2xl font-bold xl:mb-6 mb-2">メンバーを閲覧</h1>
+    <div class="flex justify-start xl:justify-end xl:flex-none ">
+      <%= render "shared/simple_team_card" %>
+    </div>
 </div>
 <%= render 'teams/members/filters/forms'%>
 

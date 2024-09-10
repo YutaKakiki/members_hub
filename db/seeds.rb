@@ -10,7 +10,7 @@ end
 users=User.limit(30)
 
 # チームを一つ用意
-FactoryBot.create(:team,name:"サンプルチーム",uuid:"uuid")
+FactoryBot.create(:team,name:"サンプルチーム",uuid:SecureRandom.uuid)
 team=Team.last
 team.logo.attach(io:File.open("public/images/logo.png"),filename:"logo.ping")
 

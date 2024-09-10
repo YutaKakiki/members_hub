@@ -1,27 +1,27 @@
 <div class="flex justify-between items-start mb-5">
     <div class="flex justify-start items-start m-2">
         <% if @member.image.attached? %>
-            <%= image_tag @member.image.variant(resize_to_limit: [100, 100]), class: "rounded-full  w-24 h-24" %>
+            <%= image_tag @member.image.variant(resize_to_limit: [100, 100]), class: "rounded-full xl:w-24 xl:h-24 w-24 h-24" %>
         <% end %>
-        <p class="text-3xl font-bold text-gray-800 w-96 ml-4"><%=@member.profile_values.first.content%></p>
+        <p class="xl:text-3xl text-2xl font-bold text-gray-800 xl:w-96 w-40 ml-3"><%=@member.profile_values.first.content%></p>
     </div> 
-    <button data-action="modal#close" class="text-3xl">
+    <button data-action="modal#close" class="text-2xl xl:text-3xl">
         <i class="fa-solid fa-square-xmark text-gray-500"></i>
     </button>
 </div>
-<div class="flex -mt-5 items-start p-5">
+<div class="flex -mt-5 items-start p-2 xl:p-5">
     <div class="flex">
-        <div class="grid grid-cols-2 grid-flow-row gap-2">
+        <div class="grid grid-cols-2 grid-flow-row gap-1 xl:gap-2">
             <% field_name_and_value_content_pairs_arr(@team,@member).each do |field_name, value_content| %>
                     <% if field_name && value_content%>
                             <% if field_name != "名前" %>
                                 <div class="flex-1 p-1">
-                                    <p class="font-semibold text-md -mt-4 mb-1  px-2 py-1 inline-block bg-gray-500 text-stone-50"><%=field_name%></p>
+                                    <p class="font-semibold text-sm xl:text-base -mt-4 mb-1  px-2 py-1 inline-block bg-gray-500 text-stone-50"><%=field_name%></p>
                                     <div class="overflow-auto h-20"> 
                                         <% if field_name == "生年月日" %>
-                                            <p class="text-gray-500 text-xl"><%= Date.parse(value_content).strftime("%Y/%m/%d")%></p>
+                                            <p class="text-gray-500 text-base xl:text-xl"><%= Date.parse(value_content).strftime("%Y/%m/%d")%></p>
                                         <% else %>
-                                            <p class="text-gray-500 text-xl w-64 break-words"><%=value_content%></p>
+                                            <p class="text-gray-500 text-base xl:text-xl w-full xl:w-64 break-words"><%=value_content%></p>
                                         <% end %>
                                     </div>
                                 </div>

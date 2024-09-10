@@ -57,8 +57,8 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-line'
 gem 'omniauth-rails_csrf_protection'
 
+gem 'config'
 gem 'kaminari'
-gem "config"
 
 group :development do
   gem 'rubocop', require: false

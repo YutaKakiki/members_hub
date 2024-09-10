@@ -3,7 +3,7 @@
 </div>
 
 <div class='flex flex-wrap  mb-6'>
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "w-2/5" }, data: { turbo: false }) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "w-full xl:w-2/5" }, data: { turbo: false }) do |f| %>
 
     <%= render "shared/error_messages", resource: resource %>
 

@@ -5,7 +5,9 @@ RSpec.describe 'TeamProfiles', type: :system do
   before do
     sign_in user
     visit root_path
-    click_link 'チームを作成'
+    within '#pc-screen' do
+      click_link 'チームを作成'
+    end
     fill_in 'チーム名',	with: 'Example Team'
     fill_in 'チームパスワード', with: 'password'
     fill_in '確認用パスワード', with: 'password'
