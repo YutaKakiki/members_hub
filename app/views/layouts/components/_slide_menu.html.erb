@@ -1,13 +1,12 @@
-<div data-controller="slideover">
+<div data-controller="slideover" class="h-full">
   <!--スライドメニューを開くハンバーガーメニュー-->
   <button data-action="slideover#open">
     <div class="pl-5">
         <i class="fa-solid fa-bars text-3xl"></i>
     </div>
   </button>
-
   <!--スライドメニュー-->
-  <dialog data-slideover-target="dialog" class="slideover h-screen w-1/2 m-0 absolute bottom:0 backdrop:bg-black/80">
+  <dialog data-slideover-target="dialog" class="slideover h-screen w-1/2 m-0 fixed inset-0 pb-[900px] overflow-hidden backdrop:bg-black/80">
     <div class="flex justify-end bg-custom-gray">
       <button data-action="slideover#close" class="text-2xl px-2 pt-0">
           <i class="fa-solid fa-square-xmark text-white"></i>
@@ -43,16 +42,3 @@
     </div>
   </dialog>
 </div>
-
-
-<style>
-  dialog.slideover[open] {
-    animation: slide-in-from-left 250ms forwards ease;
-  }
-
-  @keyframes slide-in-from-left{
-    from {
-      transform: translateX(-100%);
-    }
-  }
-</style>

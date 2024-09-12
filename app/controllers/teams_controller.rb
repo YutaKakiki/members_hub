@@ -1,4 +1,6 @@
 class TeamsController < ApplicationController
+  before_action -> { AuthenticateAdmin.call(current_user, params[:id], self) }, only: :edit
+
   def new
     @team = Team.new
   end
@@ -8,7 +10,7 @@ class TeamsController < ApplicationController
   end
 
   def create
-    @team=Team.create_team(team_params)
+    @team = Team.create_team(team_params)
     if @team.save
       Admin.set_as_admin(current_user, @team)
       # EnsureTeamProfileExistsコールバックオブジェクトにて使用
@@ -21,8 +23,9 @@ class TeamsController < ApplicationController
   end
 
   def update
-    @team = Team.find_by(id:params[:id])
+    @team = Team.find_by(id: params[:id])
     return unless @team
+
     if @team.update(team_params)
       @team.attach_logo(team_params)
       flash[:notice] = I18n.t('notice.teams.updated_successfully')

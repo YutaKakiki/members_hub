@@ -1,5 +1,6 @@
 class Users::Members::ProfileValuesController < ApplicationController
   skip_before_action :ensure_member_profile_exists
+  before_action :current_user_is_this_member?, only: :edit
 
   def new
     @team = Team.find_by(uuid: params['team_id'])
@@ -18,13 +19,15 @@ class Users::Members::ProfileValuesController < ApplicationController
     @unfilled_profile_values = ProfileValue.new
   end
 
+  # HACKME: ロジックをProfileValueモデルに切り出せる
   def create
     team = Team.find_by(uuid: params['team_id'])
     # MembersController#createでsessionに格納した情報
     member = Member.find_by(id: session[:member_id])
     return false unless member
+
     # paramsから抽出したcontentとチームのprofile_fieldのidのペア配列を返す
-    service=ReturnProfileAttributePairsService.new(team, params: create_profile_params)
+    service = ReturnProfileAttributePairsService.new(team, params: create_profile_params)
     field_id_and_value_content_pairs_arr = service.call
     member.build_profile_values(field_id_and_value_content_pairs_arr)
     # validationに引っ掛からなければ、保存
@@ -39,11 +42,12 @@ class Users::Members::ProfileValuesController < ApplicationController
       # 空だった場合、リダイレクトする（renderではうまくいかなかったため）
       # 他のフィールドに書き込んでいた場合、それは保持しておきたいために、セッションに値を格納しておく
       set_content_in_session(team, create_profile_params)
-      flash[:alert] = I18n.t('alert.profile_values.not_empty_content')
       redirect_to new_users_members_profile_value_path(team_id: team.uuid)
+      flash[:alert] = I18n.t('alert.profile_values.not_empty_content')
     end
   end
 
+  # HACKME: ロジックをProfileValueモデルに切り出せる
   def update
     # 空のcontentがあれば更新しない
     if params_content_blank?(update_profile_params) == :content_blank
@@ -56,7 +60,7 @@ class Users::Members::ProfileValuesController < ApplicationController
 
     # unfilled_profile_valuesがパラメータに含まれていた場合は、新たにその項目をcreateする
     member = Member.find_by(id: params[:id])
-    ProfileValue.create_unfilled_profile(create_unfilled_profile_params,member)
+    ProfileValue.create_unfilled_profile(create_unfilled_profile_params, member)
 
     # 画像は、このif条件をとると、空のparamsを受け入れてしまい画像が消えます
     member.save_image(update_image_params)
@@ -68,43 +72,50 @@ class Users::Members::ProfileValuesController < ApplicationController
 
   private
 
-    def create_profile_params
-      params.require(:profile_value).permit(:content1, :content2, :content3, :content4, :content5, :content6, :content7, :content8,
-                                            :content9, :image)
-    end
+  def create_profile_params
+    params.require(:profile_value).permit(:content1, :content2, :content3, :content4, :content5, :content6, :content7, :content8,
+                                          :content9, :image)
+  end
 
-    def create_unfilled_profile_params
-      params.permit(unfilled_profile_values: [:profile_field_id, :content])
-    end
+  def create_unfilled_profile_params
+    params.permit(unfilled_profile_values: [:profile_field_id, :content])
+  end
 
-    def update_image_params
-      params.permit(:image)
-    end
+  def update_image_params
+    params.permit(:image)
+  end
 
-    def update_profile_params
-      # ネストされたprofile_values内のハッシュはcontentキーのみ持てる
-      params.permit(profile_values: [:content])
-    end
+  def update_profile_params
+    # ネストされたprofile_values内のハッシュはcontentキーのみ持てる
+    params.permit(profile_values: [:content])
+  end
 
-    def params_content_blank?(params)
-      params[:profile_values].each do |id,value|
-        if value[:content].blank?
-          return :content_blank
-        end
-      end
+  def params_content_blank?(params)
+    params[:profile_values].each_value do |value|
+      return :content_blank if value[:content].blank?
     end
+  end
 
-    def reset_content_from_session(team)
-      content_count = team.profile_fields.count
-      content_count.times do |i|
-        session["content#{i + 1}"] = nil
-      end
+  def reset_content_from_session(team)
+    content_count = team.profile_fields.count
+    content_count.times do |i|
+      session["content#{i + 1}"] = nil
     end
+  end
 
-    def set_content_in_session(team, params)
-      content_count = team.profile_fields.count
-      content_count.times do |i|
-        session["content#{i + 1}"] = params["content#{i + 1}"]
-      end
+  def set_content_in_session(team, params)
+    content_count = team.profile_fields.count
+    content_count.times do |i|
+      session["content#{i + 1}"] = params["content#{i + 1}"]
     end
+  end
+
+  def current_user_is_this_member?
+    member = Member.find_by(id: params[:id])
+
+    return false if Member.user_is_this_member?(current_user, member)
+
+    flash[:alert] = I18n.t('alert.profile_values.not_modify_profile_of_other_member')
+    redirect_to root_path
+  end
 end

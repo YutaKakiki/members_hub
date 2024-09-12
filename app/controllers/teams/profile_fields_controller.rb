@@ -1,6 +1,7 @@
 class Teams::ProfileFieldsController < ApplicationController
   skip_before_action :ensure_team_profile_exists
   before_action :create_default_fields, only: :new
+  before_action { AuthenticateAdmin.call(current_user, params[:team_id], self) }
 
   # プロフィール一覧（用途的には編集ページ）
   # 新規作成の時と棲み分けをしたかったためアクションを分けている
@@ -29,6 +30,7 @@ class Teams::ProfileFieldsController < ApplicationController
     else
       @profile_field = @team.profile_fields.build(team_profile_params)
       return if @profile_field.save
+
       render :new, status: :unprocessable_entity
     end
   end
@@ -52,13 +54,13 @@ class Teams::ProfileFieldsController < ApplicationController
 
   private
 
-    def team_profile_params
-      params.require(:profile_field).permit(:name)
-    end
+  def team_profile_params
+    params.require(:profile_field).permit(:name)
+  end
 
-    # 最初の項目追加
-    def create_default_fields
-      @team = Team.find_by(id: session[:team_id])
-      ProfileField.create_default_fields(@team)
-    end
+  # 最初の項目追加
+  def create_default_fields
+    @team = Team.find_by(id: session[:team_id])
+    ProfileField.create_default_fields(@team)
+  end
 end

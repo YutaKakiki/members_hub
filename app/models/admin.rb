@@ -10,4 +10,8 @@ class Admin < ApplicationRecord
   def self.revoke_admin(team)
     team.admin.destroy
   end
+
+  def self.authenticate?(user, team)
+    user.id == team.admin_user.id
+  end
 end

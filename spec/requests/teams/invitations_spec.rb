@@ -7,7 +7,10 @@ RSpec.describe 'Teams::Invitations', type: :request do
   before do
     ActionMailer::Base.deliveries.clear
     allow(TeamInvitation).to receive(:create_token).and_return(expected_token)
+    Admin.set_as_admin(user, team)
+    sign_in user
     get users_admins_teams_invitation_path(team_id: team.uuid)
+    sign_out user
   end
   context '招待するユーザーがすでにサービスに登録している時' do
     it 'リンクを踏むと（リクエストを送ると）チーム認証をスキップしてプロフィール登録ページに遷移する' do
@@ -59,6 +62,7 @@ RSpec.describe 'Teams::Invitations', type: :request do
       # ここでは正規表現を使用してトークンを抽出（キャプチャグループの1つ目）
       confirmation_token = email_body.match(/confirmation_token=(\w+)/)[1]
       get user_confirmation_path(confirmation_token:)
+      # FIXME: 以下の一行が割と不安定...５回に一回はresponseが200OKになる
       expect(response).to redirect_to teams_invitation_path(token: expected_token, team_id: team.uuid)
       follow_redirect!
       expect(response).to redirect_to new_users_members_profile_value_path(team_id: team.uuid)

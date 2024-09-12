@@ -5,7 +5,7 @@ class Member < ApplicationRecord
 
   has_one_attached :image, dependent: :destroy
 
-  def self.joined_team(user,team)
+  def self.join_team(user, team)
     user.members.create(team_id: team.id)
   end
 
@@ -27,16 +27,21 @@ class Member < ApplicationRecord
   # imageは、memberに紐づける
   def save_image(params)
     return unless params[:image]
+
     image.attach(params[:image])
     save
   end
 
   # 次なる管理者
   def self.find_successor(params)
-    self.find_by(id: params[:member_id])
+    find_by(id: params[:member_id])
   end
 
   def self.find_last_joined_team(user)
     user.members.last
+  end
+
+  def self.user_is_this_member?(user, member)
+    member.user_id == user.id
   end
 end

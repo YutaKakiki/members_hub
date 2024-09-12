@@ -38,15 +38,16 @@ class Team < ApplicationRecord
   end
 
   def self.create_team(params)
-    team=self.new(params)
-    team.uuid=SecureRandom.uuid
+    team = new(params)
+    team.uuid = SecureRandom.uuid
     team.attach_logo(params)
     team
   end
 
   def attach_logo(params)
     return unless params[:logo]
-    self.logo.attach(params[:logo])
+
+    logo.attach(params[:logo])
   end
 
   def self.admin_teams(user)
@@ -57,7 +58,7 @@ class Team < ApplicationRecord
     user.teams.includes(logo_attachment: :blob)
   end
 
-  def self.this_is_created_team_now?(user,team)
+  def self.this_is_created_team_now?(user, team)
     team.name == user.admin_teams.last.name
   end
 end

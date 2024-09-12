@@ -213,13 +213,16 @@ ja:
         invalid_link: "無効なリンクです"
     members:
       prevent_dup_member: "既に参加しているチームです"
+      please_join: "チームに参加してください"
     profile_values:
       not_empty_content: "プロフィール項目を全て入力してください"
+      not_modify_profile_of_other_member: "他のメンバーの情報は変更できません"
     profile_fields:
       already_reached_limit: "追加できる項目は%{limit}個までです"
       not_update_to_blank: "項目名を空欄のまま更新することはできません"
     admin:
-      ransfer_admin_role_failed: "管理者の変更に失敗しました"
+      transfer_admin_role_failed: "管理者の変更に失敗しました"
+      require_admin_role: "チームの管理者権限が必要です"
   notice:
     teams:
       authentication_succeed: "%{team} への認証に成功しました"

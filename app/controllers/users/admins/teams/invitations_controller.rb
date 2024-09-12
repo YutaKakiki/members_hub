@@ -1,4 +1,6 @@
 class Users::Admins::Teams::InvitationsController < ApplicationController
+  before_action { AuthenticateAdmin.call(current_user, params[:team_id], self) }
+
   def show
     @team = Team.find_by(uuid: params[:team_id])
     # トークンを生成しなかった場合はトークンに関してはnilを返す

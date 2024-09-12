@@ -9,7 +9,7 @@ class Users::MembersController < ApplicationController
       # 既にメンバーとなっていれば、ここで脱出する
       return prevent_dup_member if Member.member_of_team?(current_user, @team)
 
-      Member.joined_team(current_user,@team)
+      Member.join_team(current_user, @team)
       # EnsureProfileExistsコールバックオブジェクトにて使用
       # 遷移先で直近で作成したmemberを取得するため
       session[:member_id] = Member.find_last_joined_team(current_user).id

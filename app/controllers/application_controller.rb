@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :ensure_member_profile_exists
   before_action :ensure_team_profile_exists
+  before_action :authenticate_user!
 
   private
 

@@ -1,9 +1,9 @@
 class Teams::Members::FiltersController < ApplicationController
   def index
-    @team = Team.find_by(uuid: params[:team_id])
+    @team = Team.where(uuid: params[:team_id]).includes(:profile_fields, :member_users).first
     @profile_fields = @team.profile_fields
     @filtered_members = FilterMembersService.new(filter_params).call
-    @members = @filtered_members.page(params[:page]).per(10) if @filtered_members
+    @members = @filtered_members.page(params[:page]).per(10).includes(:image_attachment, :profile_values) if @filtered_members
   end
 
   private

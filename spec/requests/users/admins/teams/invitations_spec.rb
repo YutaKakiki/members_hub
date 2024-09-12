@@ -5,10 +5,16 @@ RSpec.describe 'Users::Admins::Teams::Invitations', type: :request do
   let(:current_user) { create(:user, :authenticated) }
   let(:expected_token) { 'expected_token_value' }
   let(:expected_updated_token) { 'expected_updated_token_value' }
+
+  before do
+    Admin.set_as_admin(current_user, team)
+  end
+
   context '初めて管理者が招待リンクを生成ボタンを押した時' do
     before do
       # create_tokenは、常にexpected_token
       allow(TeamInvitation).to receive(:create_token).and_return(expected_token)
+      sign_in current_user
     end
     it 'URLが正常に生成される' do
       get users_admins_teams_invitation_path(team_id: team.uuid)
@@ -18,6 +24,7 @@ RSpec.describe 'Users::Admins::Teams::Invitations', type: :request do
   context '有効期限内(24時間以内)に管理者が招待リンクを生成ボタンを押した時' do
     before do
       allow(TeamInvitation).to receive(:create_token).and_return(expected_token)
+      sign_in current_user
       get users_admins_teams_invitation_path(team_id: team.uuid)
     end
     it 'URLが正常に生成されず、同様のURLが表示される' do
@@ -30,6 +37,7 @@ RSpec.describe 'Users::Admins::Teams::Invitations', type: :request do
   context '有効期限を過ぎてから管理者が招待リンクを生成ボタンを押した時' do
     before do
       allow(TeamInvitation).to receive(:create_token).and_return(expected_token)
+      sign_in current_user
       get users_admins_teams_invitation_path(team_id: team.uuid)
     end
 
