@@ -4,15 +4,16 @@
       <%= render "shared/simple_team_card" %>
     </div>
 </div>
+<div class="pb-32">
+    <% if @profile_value %>
+        <%= form_with(model: @profile_value,url:users_members_profile_values_path(team_id:@team.uuid), local: true) do |f| %>
+            <%= render 'shared/error_messages', resource: @profile_value %>
+            <div class="grid xl:grid-cols-2 grid-cols-1 grid-flow-row">
+                <%= render "users/members/profile_values/profile_value_forms",f:f,profile_fields:@profile_fields%>
+                <%= render 'users/members/profile_values/image_preview',f:f %>
+            </div>
+            <%= f.submit "登録", class: "bg-blue-500 text-white text-lg py-2 px-4 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-10 mb-2" %>
+        <% end %> 
 
-<% if @profile_value %>
-    <%= form_with(model: @profile_value,url:users_members_profile_values_path(team_id:@team.uuid), local: true) do |f| %>
-        <%= render 'shared/error_messages', resource: @profile_value %>
-        <div class="grid xl:grid-cols-2 grid-cols-1 grid-flow-row">
-            <%= render "users/members/profile_values/profile_value_forms",f:f,profile_fields:@profile_fields%>
-            <%= render 'users/members/profile_values/image_preview',f:f %>
-        </div>
-        <%= f.submit "登録", class: "bg-blue-500 text-white text-lg py-2 px-4 rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-10 mb-2" %>
-    <% end %> 
-
-<% end %>
+    <% end %>
+</div>

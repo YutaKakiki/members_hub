@@ -2,7 +2,7 @@
     <div class="xl:flex xl:items-start">
         <div class="mr-5 mb-5">
           <%= f.label :logo, class: "block text-gray-700 text-sm font-medium" %>
-          <%= f.file_field :logo, class: "mt-1 block w-full xl:w-2/5 border border-gray-300 rounded-md py-2 px-3 bg-white shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm", direct_upload: true, data: { previews_target: "input", action: "change->previews#preview" } %>
+          <%= f.file_field :logo, class: "mt-1 block w-full  border border-gray-300 rounded-md py-2 px-3 bg-white shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm", direct_upload: true, data: { previews_target: "input", action: "change->previews#preview" } %>
         </div>
         
         <% if team.logo.attached? %>

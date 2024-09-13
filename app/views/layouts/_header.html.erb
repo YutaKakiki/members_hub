@@ -7,7 +7,9 @@
         </div>
         <div class="flex justify-between w-5/6 xl:w-full">
             <%= link_to root_path ,class:"flex items-center" do %>
-                <h1 class="font-bold text-black inline-flex text-3xl xl:pl-64 xl:text-4xl">Members Hub</h1>
+                <h1 class="font-bold text-black inline-flex text-3xl xl:pl-64 xl:text-4xl <%=user_signed_in? ? "" : "-ml-12 xl:ml-0" %>">
+                    Members Hub
+                </h1>
             <% end %>   
 
             <% if user_signed_in? %>

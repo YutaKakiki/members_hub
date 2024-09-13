@@ -20,7 +20,7 @@ users.each do |user|
 end
 members=Member.limit(30)
 members.map do |member|
-  member.image.attach(io:File.open("public/images/image.png"),filename:"image.ping")
+  member.image.attach(io:File.open("public/images/image.png"),filename:"image.png")
 end
 
 # チームのプロフィール項目を設定

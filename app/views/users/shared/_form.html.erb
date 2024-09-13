@@ -4,31 +4,31 @@
     </span>
   </div>
 
-  <div class='flex flex-wrap justify-center mb-6'>
+  <div class='flex flex-wrap justify-center mb-5'>
     <%= form_for(resource, as: resource_name, url: form_path_for(content,resource), html: { class: "w-11/12 md:w-10/12 xl:w-8/12" }, data: { turbo: false } )  do |f| %>
       <%= render "shared/error_messages", resource: resource %>
       
       <% if content == :registration %>
         <div>
-            <div class="mb-6">
+            <div class="mb-4">
                 <%= f.label :name, class: "mb-2 block text-sm text-gray-600" %>
                 <%= f.text_field :name, class: "w-full rounded-md border border-gray-300 py-2 px-3 placeholder:text-gray-300 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-100" %>
             </div>
         </div>
       <% end %>
 
-      <div class="mb-6">
+      <div class="mb-4">
         <%= f.label :email, class: "mb-2 block text-sm text-gray-600" %>
         <%= f.email_field :email, class: "w-full rounded-md border border-gray-300 py-2 px-3 placeholder:text-gray-300 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-100" %>
       </div>
       
-      <div class="mb-6">
+      <div class="mb-4">
         <%= f.label :password, class: "mb-2 block text-sm text-gray-600" %>
         <%= f.password_field :password, class: "w-full rounded-md border border-gray-300 py-2 px-3 placeholder:text-gray-300 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-100" %>
       </div>
       
       <% if content == :registration %>
-        <div class="mb-6">
+        <div class="mb-4">
             <%= f.label :password_confirmation, class: "mb-2 block text-sm text-gray-600" %>
             <%= f.password_field :password_confirmation, class: "w-full rounded-md border border-gray-300 py-2 px-3 placeholder:text-gray-300 focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-100" %>
         </div>

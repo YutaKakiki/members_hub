@@ -1,8 +1,8 @@
 <% if @team %>
-    <div class="flex items-center bg-white rounded-lg p-1 xl:p-2 pr-7 border border-gray-200 w-auto mb-10">
+    <div class="flex items-center bg-white rounded-lg p-1 xl:p-1.5 pr-7 border border-gray-200 w-auto mb-10">
         <div class="w-auto">
             <% if @team.logo.attached? %>
-                <%= image_tag @team.logo.variant(resize_to_limit:[60,60]),class:"rounded-md mr-5 w-12 h-12 xl:h-16 xl:w-16" %>
+                <%= image_tag @team.logo.variant(resize_to_limit:[60,60]),class:"rounded-md mr-5 w-12 h-12 xl:h-14 xl:w-14" %>
             <% end %>
         </div>
         <div class="w-auto">

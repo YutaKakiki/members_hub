@@ -11,11 +11,11 @@ class Teams::InvitationsController < ApplicationController
       flash[:alert] = I18n.t('alert.teams.invitation.invalid_link')
       redirect_to root_path
     when :expired_token
+      flash[:alert] = I18n.t('alert.teams.invitation.expired_link')
       redirect_to root_path
-      flash.now[:alert] = I18n.t('alert.teams.invitation.expired_link')
     when :already_joined
+      flash[:alert] = I18n.t('alert.members.prevent_dup_member')
       redirect_to root_path
-      flash.now[:alert] = I18n.t('alert.members.prevent_dup_member')
     when :join_team_successfully
       session[:member_id] = current_user.members.last.id
       flash[:notice] = I18n.t('notice.teams.invitation.authenticated_and_join_successfully', team: team.name)
