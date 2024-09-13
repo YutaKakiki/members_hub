@@ -6,9 +6,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <!--PWAにするため-->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <%# FontAwesomeを使うためのコード%>
     <script src="https://kit.fontawesome.com/001a14c1b8.js" crossorigin="anonymous"></script>
     <%= favicon_link_tag 'favicon.ico' %>
@@ -24,7 +26,7 @@
             <%= render "layouts/sidebar" %>
           </div>
           <!-- メインコンテンツ -->
-          <div class="w-screen xl:w-5/6 2xl:w-7/8 overflow-auto pb-20">
+          <div class="w-screen xl:w-5/6 2xl:w-7/8 xl:overflow-auto overflow-y-auto overflow-x-hidden pb-20">
             <div id="flash">
               <%= render "shared/flash" %>
             </div>
@@ -39,5 +41,18 @@
       <% end %>
     </div>
   </body>
-
+  <!--PWAにするため-->
+  <script>
+     if ('serviceWorker' in navigator) {
+       window.addEventListener('load', () => {
+         navigator.serviceWorker.register('/service_worker.js')
+           .then((registration) => {
+             console.log('Service Worker registered:', registration);
+           })
+           .catch((error) => {
+             console.error('Service Worker registration failed:', error);
+           });
+       });
+    }
+  </script>
 </html>

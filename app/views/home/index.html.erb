@@ -12,12 +12,12 @@
             </h1>
         </div>
         <div class="flex justify-start items-baseline mt-12 xl:ml-10">
-            <%= image_tag 'pc', class: "w-auto h-40 xl:h-80" %>
-            <%= image_tag 'phone', class: "w-auto h-40 xl:h-80" %>
+            <%= image_tag 'pc', class: "w-auto h-40 2xl:h-80 xl:h-56" %>
+            <%= image_tag 'phone', class: "w-auto h-40 2xl:h-80 xl:h-56" %>
         </div>
     </div>
     <div class="mt-12 xl:mt-20 text-gray-600  xl:text-left text-right flex justify-end xl:justify-start">
-        <div class="w-[280px] xl:w-4/5 text-lg xl:text-2xl">
+        <div class="w-[280px] xl:w-5/6 text-lg xl:text-2xl">
              Members Hubは、チームメンバーのプロフィールを閲覧するためのプラットフォームを提供します
         </div>
     </div>
@@ -38,14 +38,14 @@
             <div class="mt-1 xl:mt-5 font-bold text-[30px] xl:text-5xl text-gray-700">チームを作成する</div>
         </div>
         <div class="font-semibold text-base text-gray-500 mt-4  <%=user_signed_in? ? 'xl:text-[20px]' : 'xl:text-2xl'%>">チーム名、パスワード、ロゴを指定して作成します</div>
-        <%= image_tag 'step1',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80' : 'xl:h-96'}"  %>
+        <%= image_tag 'step1',class:"shadow-xl w-auto h-56 #{user_signed_in? ? '2xl:h-80 xl:h-72' : '2xl:h-96 xl:h-[333px] '}"  %>
     </div>
     <div class="mt-20">
         <div class="xl:ml-4 ">
             <h1 class="bg-blue-400 text-lg xl:text-4xl text-white border rounded-2xl px-4 py-1 font-semibold  inline-block">STEP 2</h1>
             <div class="mt-1 xl:mt-5 font-bold text-[30px] xl:text-5xl text-gray-700">プロフィール項目を設定</div>
         </div>
-        <div class="flex-none xl:flex items-center justify-evenly">
+        <div class="flex-none xl:flex items-center justify-evenly 2xl:ml-0 xl:ml-5">
             <div>
                 <div class="font-semibold text-base text-gray-500 mt-4 <%=user_signed_in? ? 'xl:text-[20px] xl:-ml-2' : 'xl:text-2xl'%>">名前・生年月日に加え７項目を自由に設定できます</div>
                 <%= image_tag 'step2-1', class: "shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80 xl:-ml-2' : 'xl:h-96'}" %>
@@ -54,12 +54,12 @@
             <div class="flex justify-center xl:hidden">
                 <i class="fa-solid fa-caret-down text-6xl text-gray-500"></i>
             </div>
-            <div class="xl:block hidden">
+            <div class="xl:block hidden mx-3">
                 <i class="fa-solid fa-caret-right text-8xl text-gray-500"></i>
             </div>
             <div class="mt-4">
                 <div class="font-semibold text-base text-gray-500 <%=user_signed_in? ? 'xl:text-[20px]' : 'xl:text-2xl'%>">項目を設定後、チームが作成されます</div>
-                <%= image_tag 'step2-2',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80' : 'xl:h-96'}" %>
+                <%= image_tag 'step2-2',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80' : 'xl:h-96   '}" %>
             </div>
         </div>
     </div>
@@ -69,7 +69,7 @@
             <div class="mt-1 xl:mt-5 font-bold text-[30px] xl:text-5xl text-gray-700">メンバーを招待</div>
         </div>
         <div class="font-semibold text-base text-gray-500 mt-4 <%=user_signed_in? ? 'xl:text-[20px]' : 'xl:text-2xl'%>">招待リンクを共有して簡単にメンバーを招待することができます</div>
-        <%= image_tag 'step3',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80' : 'xl:h-96'}"%>
+        <%= image_tag 'step3',class:"shadow-xl w-auto h-56 #{user_signed_in? ? '2xl:h-80 xl:h-72' : '2xl:h-96 xl:h-[333px] '}"%>
         <div class="font-semibold text-sm xl:text-2xl text-gray-500 mt-6 text-right xl:text-start">※チームID・パスワードでチームへ参加することも可能です</div>
     </div>
     <div class="mt-20">
@@ -77,7 +77,7 @@
             <h1 class="bg-blue-400 text-lg xl:text-4xl text-white border rounded-2xl px-4 py-1 font-semibold  inline-block">STEP 4</h1>
             <div class="mt-1 xl:mt-5 font-bold text-[30px] xl:text-5xl text-gray-700">チームに参加</div>
         </div>
-        <div class="xl:flex items-center justify-evenly">
+        <div class="xl:flex items-center justify-evenly 2xl:ml-0 xl:ml-5">
             <div>
                 <div class="font-semibold text-base text-gray-500 mt-4 <%=user_signed_in? ? 'xl:text-[20px] xl:-ml-2' : 'xl:text-2xl'%>">共有されたリンクをクリックしてチームへの認証に成功します</div>
                 <%= image_tag 'step4-1',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80 xl:-ml-2' : 'xl:h-96'} " %>
@@ -85,12 +85,12 @@
             <div class="flex justify-center xl:hidden">
                 <i class="fa-solid fa-caret-down text-6xl text-gray-500"></i>
             </div>
-            <div class="xl:block hidden">
+            <div class="xl:block hidden mx-3">
                 <i class="fa-solid fa-caret-right text-8xl text-gray-500"></i>
             </div>
             <div class="mt-4">
-                <div class="font-semibold text-base text-gray-500 <%=user_signed_in? ? 'xl:text-[20px]' : 'xl:text-2xl'%>">プロフィールを登録します</div>
-                <%= image_tag 'step4-2',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80' : 'xl:h-96'} " %>
+                <div class="font-semibold text-base text-gray-500 <%=user_signed_in? ? 'xl:text-[20px]' : 'xl:text-2xl'%>">設定されたそれぞれの項目に記入してプロフィールを登録します</div>
+                <%= image_tag 'step4-2',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80' : 'xl:h-96   '} " %>
             </div>
         </div>
         <div class="flex justify-center xl:hidden">
@@ -98,7 +98,7 @@
         </div>
         <div class="xl:mt-8 xl:ml-5">
             <div class="font-semibold text-base text-gray-500 <%=user_signed_in? ? 'xl:text-[20px]' : 'xl:text-2xl'%>">登録が完了すると、チームのメンバーになることができます</div>
-            <%= image_tag 'step4-3',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80' : 'xl:h-96'} " %>
+            <%= image_tag 'step4-3',class:"shadow-xl w-auto h-56 #{user_signed_in? ? '2xl:h-80 xl:h-72' : '2xl:h-96 xl:h-[333px]'} " %>
             <div class="font-semibold text-sm text-gray-500 mt-6 text-right xl:text-start xl:text-2xl">※管理者も同様にチームへ参加する必要があります</div>
         </div>
     </div>
@@ -107,7 +107,7 @@
             <h1 class="bg-blue-400 text-lg xl:text-4xl text-white border rounded-2xl px-4 py-1 font-semibold  inline-block">STEP 5</h1>
             <div class="mt-1 xl:mt-5 font-bold text-[30px] xl:text-5xl text-gray-700">メンバーを閲覧＆検索</div>
         </div>
-        <div class="xl:flex flex-none justify-evenly items-center">
+        <div class="xl:flex flex-none justify-evenly items-center 2xl:ml-0 xl:ml-5">
             <div>
                 <div class="font-semibold text-base text-gray-500 mt-4 <%=user_signed_in? ? 'xl:text-[20px] xl:-ml-2' : 'xl:text-2xl'%>">他のメンバーのプロフィールを閲覧することができます</div>
                 <%= image_tag 'step5-1',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80 xl:-ml-2' : 'xl:h-96'}" %>
@@ -115,22 +115,22 @@
             <div class="flex justify-center xl:hidden">
                 <i class="fa-solid fa-caret-down text-6xl text-gray-500"></i>
             </div>  
-            <div class="xl:block hidden">
+            <div class="xl:block hidden mx-3">
                 <i class="fa-solid fa-caret-right text-8xl text-gray-500"></i>
             </div>
             <div class="mt-4">
                 <div class="font-semibold text-base text-gray-500 <%=user_signed_in? ? 'xl:text-[20px]' : 'xl:text-2xl'%>">各メンバーをクリックすると、詳細を見ることができます</div>
-                <%= image_tag 'step5-2',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80' : 'xl:h-96'} " %>
+                <%= image_tag 'step5-2',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80' : 'xl:h-96   '} " %>
             </div>
         </div>
-        <div class="flex justify-center xl:hidden">
-            <i class="fa-solid fa-caret-down text-6xl text-gray-500"></i>
-        </div>
-        <div class="xl:mt-8 xl:ml-5">
-            <div class="font-semibold text-base text-gray-500 <%=user_signed_in? ? 'xl:text-[20px]' : 'xl:text-2xl'%>">項目ごとにキーワードを入力して検索をかけることもできます</div>
-            <div class="xl:flex flex-none justify-between">
+        <div class="xl:flex flex-none justify-evenly items-center 2xl:ml-0 xl:ml-5 mt-8">
+            <div>
+                <div class="font-semibold text-base text-gray-500 <%=user_signed_in? ? 'xl:text-[20px]' : 'xl:text-2xl'%>">項目ごとにキーワードを入力して検索をかけることもできます</div>
                 <%= image_tag 'step5-3',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80' : 'xl:h-96'}" %>
-                <%= image_tag 'step5-4',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80' : 'xl:h-96'} mr-5 mt-10 xl:mt-0" %>
+            </div>
+            <div class="mx-11"></div>
+            <div class="mt-5 2xl:mt-5 xl:mt-16">
+                <%= image_tag 'step5-4',class:"shadow-xl w-auto h-56 #{user_signed_in? ? 'xl:h-80 ' : 'xl:h-96'} mr-5 xl:mt-0" %>
             </div>
         </div>
     </div>
