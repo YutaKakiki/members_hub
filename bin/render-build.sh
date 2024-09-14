@@ -5,4 +5,6 @@ set -o errexit
 bundle install
 bundle exec rake assets:clean
 bundle exec rake assets:precompile
-bundle exec rake db:migrate --trace
+# 以下は、データをリセットするものなので、必要に応じてコメントアウト
+bundle exec rake db:reset --trace
+bundle exec rake db:seed --trace
