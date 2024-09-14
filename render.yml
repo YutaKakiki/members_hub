@@ -1,0 +1,22 @@
+databases:
+  - name: members-hub-db
+    databaseName: members-hub-db
+    user: members_hub_db_user
+    region: singapore
+
+services:
+  - type: web
+    name: members-hub
+    env: ruby
+    region: singapore
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: members_hub_db
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+
