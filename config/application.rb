@@ -44,8 +44,9 @@ module Myapp
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    config.web_console.development_only = false
 
     config.active_storage.variant_processsor = :vips
-    config.hosts << 'members-hub.onrender.com'
+
   end
 end

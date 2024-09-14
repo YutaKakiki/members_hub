@@ -26,12 +26,12 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub 
-      PORT: 3000
+      # PORT: 3000
     # ホストのカレントディレクトリ(.)とイメージ内の/myappディレクトリを同期させている
     volumes:
       - .:/myapp
     ports:
-      - "3000:3000"
+      - 3000:3000
     restart: always # コンテナが停止すると常に再起動
     tty: true # 疑似ターミナル (pseudo-TTY) を割り当て。https://docs.docker.jp/compose/compose-file/index.html#tty
     stdin_open: true # サービス コンテナに標準入力を割り当てて実行するよう設定(https://docs.docker.jp/compose/compose-file/index.html#stdin-open)。

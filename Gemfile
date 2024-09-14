@@ -90,5 +90,3 @@ group :production do
   gem 'pg', '~> 1.1'
   gem 'aws-sdk-s3'
 end
-
-gem "dockerfile-rails", ">= 1.6", :group => :development
