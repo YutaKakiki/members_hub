@@ -77,7 +77,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
    # 認証メール送信に関する記述
    config.action_mailer.default_options = { from: "no-reply@members-hub.com" }
-   config.action_mailer.default_url_options = { host: "https://members-hub.com" }
+   config.action_mailer.default_url_options = { host: "https://members-hub.onrender.com" }
    config.action_mailer.delivery_method = :smtp
    config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
