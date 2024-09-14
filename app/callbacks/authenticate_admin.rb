@@ -10,6 +10,7 @@ class AuthenticateAdmin
   end
 
   def call
+    puts @team_id
     team = Team.find_by(uuid: @team_id)
     return if Admin.authenticate?(@user, team)
 

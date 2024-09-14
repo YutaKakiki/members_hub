@@ -12,6 +12,7 @@ class Admin < ApplicationRecord
   end
 
   def self.authenticate?(user, team)
+    return unless team
     user.id == team.admin_user.id
   end
 end

@@ -1,7 +1,7 @@
 class Teams::ProfileFieldsController < ApplicationController
   skip_before_action :ensure_team_profile_exists
   before_action :create_default_fields, only: :new
-  before_action { AuthenticateAdmin.call(current_user, params[:team_id], self) }
+  before_action { AuthenticateAdmin.call(current_user, params["team_id"], self) }
 
   # プロフィール一覧（用途的には編集ページ）
   # 新規作成の時と棲み分けをしたかったためアクションを分けている

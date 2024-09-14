@@ -1,0 +1,24 @@
+# fly.toml app configuration file generated for members-hub on 2024-09-14T02:12:39+09:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'members-hub'
+primary_region = 'nrt'
+console_command = '/rails/bin/rails console'
+
+[build]
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+  external_port = 80
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
