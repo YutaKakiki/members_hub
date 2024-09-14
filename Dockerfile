@@ -17,3 +17,6 @@ RUN bundle install
 
 # 残りのアプリケーションコードを追加
 ADD . /myapp
+
+# コンテナがリッスンするポートを指定
+EXPOSE 3000
