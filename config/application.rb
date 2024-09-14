@@ -46,5 +46,6 @@ module Myapp
 
 
     config.active_storage.variant_processsor = :vips
+    config.hosts << 'members-hub.onrender.com'
   end
 end
