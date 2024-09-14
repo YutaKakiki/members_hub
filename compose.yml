@@ -26,6 +26,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub 
+      PORT: 3000
     # ホストのカレントディレクトリ(.)とイメージ内の/myappディレクトリを同期させている
     volumes:
       - .:/myapp
