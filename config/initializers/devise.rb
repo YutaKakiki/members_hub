@@ -268,16 +268,17 @@ Devise.setup do |config|
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
 
-  # ==> OmniAuth
-  config.omniauth :google_oauth2,
-                  Rails.application.credentials.google[:client_id],
-                  Rails.application.credentials.google[:client_secret],
-                  skip_jwt: true
+# ==> OmniAuth
+config.omniauth :google_oauth2,
+                ENV['GOOGLE_CLIENT_ID'],
+                ENV['GOOGLE_CLIENT_SECRET'],
+                skip_jwt: true
 
-  config.omniauth :line,
-                  Rails.application.credentials.line[:client_id],
-                  Rails.application.credentials.line[:client_secret],
-                  skip_jwt: true
+config.omniauth :line,
+                ENV['LINE_CLIENT_ID'],
+                ENV['LINE_CLIENT_SECRET'],
+                skip_jwt: true
+
 
 
   # ==> Warden configuration
