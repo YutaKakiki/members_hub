@@ -41,7 +41,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def callback_for(provider)
     auth = request.env['omniauth.auth']
-    @user = AuthProvider.from_omniauth(auth)
+    @user = AuthProvider.from_omniauth(auth)j
     if @user.persisted?
       # チーム招待リンクをリクエストした後のOAuthならば、チーム認証の挙動にリダイレクト
       if (invitation_url = session[:invitation_url])
