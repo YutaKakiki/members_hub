@@ -2,7 +2,7 @@
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   protect_from_forgery
-  skip_before_action: authenticate_user!
+  skip_before_action :authenticate_user!
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
 
