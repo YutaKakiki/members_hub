@@ -2,6 +2,8 @@ class AuthProvider < ApplicationRecord
   belongs_to :user
 
   def self.from_omniauth(auth)
+    puts "---authの中身----"
+    puts auth
     uid = auth['uid']
     provider = auth['provider']
     email = auth['info']['email']

@@ -2,6 +2,7 @@
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   protect_from_forgery
+  skip_before_action: :authenticate_user!
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
 
@@ -39,22 +40,22 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   private
 
-  def callback_for(provider)
-    auth = request.env['omniauth.auth']
-    @user = AuthProvider.from_omniauth(auth)
-    if @user.persisted?
-      # チーム招待リンクをリクエストした後のOAuthならば、チーム認証の挙動にリダイレクト
-      if (invitation_url = session[:invitation_url])
-        sign_in @user
-        session[:invitation_url] = nil
-        redirect_to invitation_url
+    def callback_for(provider)
+      auth = request.env['omniauth.auth']
+      @user = AuthProvider.from_omniauth(auth)
+      if @user.persisted?
+        # チーム招待リンクをリクエストした後のOAuthならば、チーム認証の挙動にリダイレクト
+        if (invitation_url = session[:invitation_url])
+          sign_in @user
+          session[:invitation_url] = nil
+          redirect_to invitation_url
+        else
+          sign_in_and_redirect @user, event: :authentication
+          set_flash_message(:notice, :success, kind: provider.to_s.capitalize) if is_navigational_format?
+        end
       else
-        sign_in_and_redirect @user, event: :authentication
-        set_flash_message(:notice, :success, kind: provider.to_s.capitalize) if is_navigational_format?
+        flash[:alert] = I18n.t('omniauth_callbacks.failure')
+        render template: 'devise/registrations/new'
       end
-    else
-      flash[:alert] = I18n.t('omniauth_callbacks.failure')
-      render template: 'devise/registrations/new'
     end
-  end
 end
