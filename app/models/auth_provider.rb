@@ -41,6 +41,7 @@ class AuthProvider < ApplicationRecord
 
     # メールアドレスがない（line）場合、バリデーションを通したくないのでこの場合のみバリデーション回避
     user.save(validate: false)
+    user
   end
 
   def self.create_user_and_provider(auth)
