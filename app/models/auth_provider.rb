@@ -34,7 +34,7 @@ class AuthProvider < ApplicationRecord
   def self.create_user_via_provider(auth)
     user = User.new({
       name: auth['info']['name'],
-      email: auth['info']['email'] ||  "temporary-#{Devise.friendly_token(5)}@members-hub.com"
+      email: auth['info']['email'] ||  "temporary-#{Devise.friendly_token(5)}@members-hub.com",
       password: Devise.friendly_token(10),
       confirmed_at: Time.zone.now
     })
