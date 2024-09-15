@@ -2,11 +2,10 @@ class AuthProvider < ApplicationRecord
   belongs_to :user
 
   def self.from_omniauth(auth)
-    puts "---authの中身----"
-    puts auth
     uid = auth['uid']
     provider = auth['provider']
-    email = auth['info']['email']
+    # lineがemailを参照できない場合を考慮
+    email = auth['info']['email'] || ""
     auth_provider = AuthProvider.find_by(uid:, provider:)
 
     # providerが既にあって、ユーザーが登録されていない時（あんまりないと思うけど）
@@ -35,7 +34,7 @@ class AuthProvider < ApplicationRecord
   def self.create_user_via_provider(auth)
     User.create({
                   name: auth['info']['name'],
-                  email: auth['info']['email'],
+                  email: auth['info']['email'] || "",
                   password: Devise.friendly_token(10),
                   confirmed_at: Time.zone.now
                 })
