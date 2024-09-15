@@ -32,12 +32,15 @@ class AuthProvider < ApplicationRecord
   end
 
   def self.create_user_via_provider(auth)
-    User.create({
-                  name: auth['info']['name'],
-                  email: auth['info']['email'] || "",
-                  password: Devise.friendly_token(10),
-                  confirmed_at: Time.zone.now
-                })
+    user = User.new({
+      name: auth['info']['name'],
+      email: auth['info']['email'] || "",  # 空のメールアドレス
+      password: Devise.friendly_token(10),
+      confirmed_at: Time.zone.now
+    })
+
+    # メールアドレスがない（line）場合、バリデーションを通したくないのでこの場合のみバリデーション回避
+    user.save(validate: false)
   end
 
   def self.create_user_and_provider(auth)
