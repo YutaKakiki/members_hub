@@ -27,7 +27,7 @@ RSpec.describe 'Members', type: :system do
   context 'チームに参加したがプロフィールを作成しなかった場合' do
     it 'メンバーの登録が削除される' do
       expect { click_button '次へ' }.to change { Member.count }.by(1)
-      click_link 'Members Hub'
+      click_link 'logo'
       expect(Member.count).to eq 0
       expect(page).to have_content 'プロフィールを登録しなかったため、チームへの参加を取消しました'
     end

@@ -7,7 +7,7 @@
         </div>
         <div class="flex justify-between w-5/6 xl:w-full">
             <div class="<%=user_signed_in? ? "m-2 " : '-ml-10 xl:ml-0'%>">
-                <%= link_to root_path ,class:"flex items-center" do %>
+                <%= link_to root_path ,class:"flex items-center",id:"logo" do %>
                     <%= image_tag 'logo.png' ,class:"w-auto h-14 xl:h-16 m-1 xl:pl-64 xl:text-4xl"%>
                 <% end %>   
             </div>

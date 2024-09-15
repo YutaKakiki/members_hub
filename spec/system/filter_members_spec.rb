@@ -33,7 +33,6 @@ RSpec.describe 'FilterMembers', type: :system do
       skip '検索にjsを用いてインスタントサーチをしているが、jsを使用するテストがうまくいかない（js:true）ためこのテストをスキップ '
 
       # 検索条件をフォームに書き込むと、検索条件に合ったメンバーが表示される
-      puts Member.first.user.name
       select '名前', from: 'field1'
       fill_in 'value1',	with: 'Example User30'
       expect(page).to have_content 'Example User30'
@@ -48,7 +47,6 @@ RSpec.describe 'FilterMembers', type: :system do
       visit team_members_path(team.uuid)
       find('#plus-button').click
       find('#plus-button').click
-      puts page.html
       select '名前', from: 'field1'
       select '項目1', from: 'field2'
       # select "項目2", from: "field3"

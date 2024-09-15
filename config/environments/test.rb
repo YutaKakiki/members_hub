@@ -67,5 +67,6 @@ Rails.application.configure do
   # Cannot render console from <IPアドレス>!に対応
   config.web_console.allowed_ips = '0.0.0.0/0'
 
+  config.web_console.development_only = false
 
 end
