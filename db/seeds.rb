@@ -90,13 +90,13 @@ if Rails.env.production?
   end
 
   # チームのプロフィール項目を設定
-  profile_field1 = ProfileField.create!(name: "名前（偽名で構いません）", team: team)
+  profile_field1 = ProfileField.create!(name: "名前", team: team)
   profile_field2 = ProfileField.create!(name: "誕生日", team: team)
-  profile_field3 = ProfileField.create!(name: "大学名(学生の方であれば)", team: team)
+  profile_field3 = ProfileField.create!(name: "大学名", team: team)
   profile_field4 = ProfileField.create!(name: "学部名", team: team)
   profile_field5 = ProfileField.create!(name: "出身地", team: team)
   profile_field6 = ProfileField.create!(name: "高校名", team: team)
-  profile_field7 = ProfileField.create!(name: "職業(社会人の方であれあば)", team: team)
+  profile_field7 = ProfileField.create!(name: "好きな曲", team: team)
   profile_field8 = ProfileField.create!(name: "あなたの夢", team: team)
   profile_field9 = ProfileField.create!(name: "コメント", team: team)
 
