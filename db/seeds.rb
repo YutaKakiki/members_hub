@@ -10,7 +10,7 @@ if !Rails.env.production?
       name: Faker::Name.name,
       email: Faker::Internet.email,
       confirmed_at: Time.zone.now,
-      password: "passwor",                 # 任意のパスワードを設定
+      password: "password",                 # 任意のパスワードを設定
       password_confirmation: "password"     # パスワード確認
     )
   end
