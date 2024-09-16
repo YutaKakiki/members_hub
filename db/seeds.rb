@@ -10,8 +10,6 @@ if !Rails.env.production?
       name: Faker::Name.name,
       email: Faker::Internet.email,
       confirmed_at: Time.zone.now,
-      password: "password",                 # 任意のパスワードを設定
-      password_confirmation: "password"     # パスワード確認
     )
   end
   users=User.limit(30)
@@ -66,7 +64,9 @@ if Rails.env.production?
     User.create!(
       name: Faker::Name.name,
       email: Faker::Internet.email,
-      confirmed_at: Time.zone.now
+      confirmed_at: Time.zone.now,
+      password: "password",                 # 任意のパスワードを設定
+      password_confirmation: "password"     # パスワード確認
     )
   end
   users = User.limit(30)
