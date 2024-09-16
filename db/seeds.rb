@@ -74,7 +74,9 @@ if Rails.env.production?
   # チームを一つ用意
   team = Team.create!(
     name: "サンプルチーム",
-    uuid: SecureRandom.uuid
+    uuid: SecureRandom.uuid,
+    password:"sampleteam",
+    password_confirmation:"sampleteam"
   )
   team.logo.attach(io: File.open("public/images/logo.png"), filename: "logo.png")
 
