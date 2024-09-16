@@ -6,7 +6,13 @@ Team.destroy_all
 if !Rails.env.production?
   # Botユーザーを用意
   30.times do
-    FactoryBot.create(:user,name:Faker::Name.name,email:Faker::Internet.email,confirmed_at:Time.zone.now)
+    User.create!(
+      name: Faker::Name.name,
+      email: Faker::Internet.email,
+      confirmed_at: Time.zone.now,
+      password: "passwor",                 # 任意のパスワードを設定
+      password_confirmation: "password"     # パスワード確認
+    )
   end
   users=User.limit(30)
 
@@ -109,7 +115,9 @@ if Rails.env.production?
   admin_user = User.create!(
     name: "サンプルユーザー",
     email: "sample@sample.com",
-    confirmed_at: Time.zone.now
+    confirmed_at: Time.zone.now,
+    password:"password",
+    password_confirmation:"password",
   )
   Admin.set_as_admin(admin_user, team)
 end
