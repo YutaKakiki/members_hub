@@ -131,6 +131,7 @@ GEM
     devise-i18n (1.12.1)
       devise (>= 4.9.0)
     diff-lcs (1.5.1)
+    docile (1.4.1)
     drb (2.2.1)
     email_spec (2.3.0)
       htmlentities (~> 4.3.3)
@@ -380,6 +381,12 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.13.1)
+    simplecov_json_formatter (0.1.4)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -470,6 +477,7 @@ DEPENDENCIES
   rubocop-rspec
   ruby-vips
   selenium-webdriver
+  simplecov
   sprockets-rails
   sqlite3 (~> 1.4.2)
   stimulus-rails

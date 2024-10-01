@@ -85,6 +85,7 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'simplecov'
 end
 
 group :production do
